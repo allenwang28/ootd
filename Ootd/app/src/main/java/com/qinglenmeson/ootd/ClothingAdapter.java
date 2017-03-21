@@ -18,7 +18,6 @@ public class ClothingAdapter extends PagerAdapter {
 
     private Context context;
 
-    // TODO - will create an arraylist with all clothing from a json file
     private ArrayList<Clothing> closet;
 
     public ClothingAdapter(Context context) {
@@ -27,11 +26,10 @@ public class ClothingAdapter extends PagerAdapter {
         // Below is just for testing/prototyping
         closet = new ArrayList<>();
         closet.add(new Clothing("Blouse", Category.BLOUSE, Warmth.WARM, Occasion.ATHLETIC));
-        closet.add(new Clothing("Shorts", Category.BLOUSE, Warmth.WARM, Occasion.ATHLETIC));
-        closet.add(new Clothing("Pants", Category.BLOUSE, Warmth.WARM, Occasion.ATHLETIC));
+        closet.add(new Clothing("Shorts", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
+        closet.add(new Clothing("Pants", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
         closet.add(new Clothing("Jacket", Category.BLOUSE, Warmth.WARM, Occasion.ATHLETIC));
         closet.add(new Clothing("Jeans", Category.BLOUSE, Warmth.WARM, Occasion.ATHLETIC));
-
     }
 
     @Override

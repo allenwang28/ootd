@@ -8,6 +8,22 @@ public enum Category {
     BLOUSE,
     SHIRT,
     SWEATER,
-    PANTS
+    PANTS;
     // TODO - add more categories
+
+    @Override
+    public String toString() {
+        switch(this) {
+            case BLOUSE:
+                return "Blouse";
+            case SHIRT:
+                return "Shirt";
+            case SWEATER:
+                return "Sweater";
+            case PANTS:
+                return "Pants";
+            default:
+                throw new IllegalArgumentException();
+        }
+    }
 }

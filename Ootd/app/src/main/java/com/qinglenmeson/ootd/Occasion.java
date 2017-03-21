@@ -8,5 +8,21 @@ public enum Occasion {
     CASUAL,
     FORMAL,
     ATHLETIC,
-    SWIM
+    SWIM;
+
+    @Override
+    public String toString() {
+        switch(this) {
+            case CASUAL:
+                return "Casual";
+            case FORMAL:
+                return "Formal";
+            case ATHLETIC:
+                return "Athletic";
+            case SWIM:
+                return "Swim";
+            default:
+                throw new IllegalArgumentException();
+        }
+    }
 }
