@@ -6,6 +6,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -44,18 +45,14 @@ public class ClothingAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        TextView textView = new TextView(context);
-        textView.setPadding(5, 5, 5, 5);
-        textView.setBackgroundColor(Color.BLACK);
-        textView.setTextColor(Color.WHITE);
-
-        textView.setText(closet.get(position).getName());
-        ((ViewPager)container).addView(textView);
-        return textView;
+        ClothingEditView clothingView = new ClothingEditView(context, closet.get(position));
+//        clothingView.setClothing(closet.get(position));
+        ((ViewPager)container).addView(clothingView);
+        return clothingView;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        ((ViewPager)container).removeView((TextView)object);
+        ((ViewPager)container).removeView((ClothingEditView)object);
     }
 }
