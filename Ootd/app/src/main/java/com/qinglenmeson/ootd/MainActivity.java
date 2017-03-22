@@ -17,4 +17,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ArchiveActivity.class);
         startActivity(intent);
     }
+
+    public void openAddClothing(View view) {
+        Intent intent = new Intent(this, )
+    }
 }

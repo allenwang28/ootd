@@ -26,11 +26,12 @@ public class ClothingAdapter extends PagerAdapter {
 
         // Below is just for testing/prototyping
         closet = new ArrayList<>();
-        closet.add(new Clothing("Blouse", Category.BLOUSE, Warmth.WARM, Occasion.ATHLETIC));
-        closet.add(new Clothing("Shorts", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
-        closet.add(new Clothing("Pants", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
-        closet.add(new Clothing("Jacket", Category.BLOUSE, Warmth.WARM, Occasion.ATHLETIC));
-        closet.add(new Clothing("Jeans", Category.BLOUSE, Warmth.WARM, Occasion.ATHLETIC));
+        closet.add(new Clothing("Blouse", Category.BLOUSE, Warmth.WARM, Occasion.CASUAL));
+        closet.add(new Clothing("Nike Shorts", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
+        closet.add(new Clothing("Pants", Category.PANTS, Warmth.WARM, Occasion.CASUAL));
+        closet.add(new Clothing("Jacket", Category.SWEATER, Warmth.WARM, Occasion.CASUAL));
+        closet.add(new Clothing("Swimming Trunks", Category.SWEATER, Warmth.WARM, Occasion.SWIM));
+        closet.add(new Clothing("Jeans", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
     }
 
     @Override

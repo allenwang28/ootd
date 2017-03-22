@@ -1,16 +1,22 @@
 package com.qinglenmeson.ootd;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -28,10 +34,11 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
     private Spinner categorySpinner;
     private Spinner warmthSpinner;
     private Spinner occasionSpinner;
+    private ImageView imageView;
 
+    // TODO - Figure out if there's a better way to not just add the activity Seems very hacky
     public ClothingEditView(Context context, Clothing clothing) {
         super(context);
-        this.clothing = clothing;
         initializeViews(context, clothing);
     }
 
@@ -45,11 +52,14 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
         initializeViews(context, clothing);
     }
 
-    private void initializeViews(Context context, Clothing clothing) {
+    @TargetApi(Build.VERSION_CODES.CUPCAKE)
+    private void initializeViews(final Context context, Clothing clothing) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.clothingedit_view, this);
         Log.d("ClothingEditView", "Initialized View");
+
+        this.clothing = clothing;
 
         // Allow the EditText to change the name of the clothing
         editName = (EditText) this.findViewById(R.id.clothingedit_EditName);
@@ -60,6 +70,9 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     Log.d("ClothingEditView", "Editor Action Done");
                     editClothingName(v.getText().toString());
+                    // Hide Keyboard
+                    InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(editName.getWindowToken(), 0);
                     return true;
                 }
                 return false;
@@ -72,6 +85,7 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
                 R.array.cleanliness_array, android.R.layout.simple_spinner_dropdown_item);
         cleanlinessSpinner.setAdapter(cleanlinessAdapter);
         cleanlinessSpinner.setOnItemSelectedListener(this);
+        cleanlinessSpinner.setSelection(clothing.getCleanliness().ordinal());
 
         // Allows the ability to change the category
         categorySpinner = (Spinner) this.findViewById(R.id.clothingedit_ChangeCategory);
@@ -79,6 +93,7 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
                 R.array.category_array, android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(categoryAdapter);
         categorySpinner.setOnItemSelectedListener(this);
+        categorySpinner.setSelection(clothing.getCategory().ordinal());
 
         // Allows the ability to change the warmth
         warmthSpinner = (Spinner) this.findViewById(R.id.clothingedit_ChangeWarmth);
@@ -86,6 +101,7 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
                 R.array.warmth_array, android.R.layout.simple_spinner_dropdown_item);
         warmthSpinner.setAdapter(warmthAdapter);
         warmthSpinner.setOnItemSelectedListener(this);
+        warmthSpinner.setSelection(clothing.getWarmth().ordinal());
 
         // Allows the ability to change the occasion
         occasionSpinner = (Spinner) this.findViewById(R.id.clothingedit_ChangeOccasion);
@@ -93,6 +109,12 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
                 R.array.occasion_array, android.R.layout.simple_spinner_dropdown_item);
         occasionSpinner.setAdapter(occasionAdapter);
         occasionSpinner.setOnItemSelectedListener(this);
+        occasionSpinner.setSelection(clothing.getOccasion().ordinal());
+
+        // Put the clothing's image on the ImageView
+        imageView = (ImageView) this.findViewById(R.id.clothingedit_Image);
+        imageView.setImageResource(R.drawable.blue_tshirt);
+
     }
 
     // Utility functions

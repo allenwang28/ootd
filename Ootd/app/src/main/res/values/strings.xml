@@ -43,4 +43,5 @@
         <item>@string/occasion3</item>
         <item>@string/occasion4</item>
     </string-array>
+    <string name="title_activity_add_clothing">AddClothing</string>
 </resources>
