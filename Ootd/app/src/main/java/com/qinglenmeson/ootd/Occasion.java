@@ -5,24 +5,28 @@ package com.qinglenmeson.ootd;
  */
 
 public enum Occasion {
-    CASUAL,
-    FORMAL,
-    ATHLETIC,
-    SWIM;
+    CASUAL(R.string.occasion1),
+    FORMAL(R.string.occasion2),
+    ATHLETIC(R.string.occasion3),
+    SWIM(R.string.occasion4);
+
+    private int resourceId;
+
+    Occasion(int id) {
+        resourceId = id;
+    }
 
     @Override
     public String toString() {
-        switch(this) {
-            case CASUAL:
-                return "Casual";
-            case FORMAL:
-                return "Formal";
-            case ATHLETIC:
-                return "Athletic";
-            case SWIM:
-                return "Swim";
-            default:
-                throw new IllegalArgumentException();
+        return App.getContext().getString(resourceId);
+    }
+
+    public static Occasion fromString(String id) {
+        for (Occasion o : values()) {
+            if (o.toString().equalsIgnoreCase(id)) {
+                return o;
+            }
         }
+        return null;
     }
 }

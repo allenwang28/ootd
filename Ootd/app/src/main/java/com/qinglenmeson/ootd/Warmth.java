@@ -5,22 +5,27 @@ package com.qinglenmeson.ootd;
  */
 
 public enum Warmth {
-    // TODO - find better names
-    COLD,
-    WARM,
-    HOT;
+    COLD(R.string.warmth1),
+    WARM(R.string.warmth2),
+    HOT(R.string.warmth3);
+
+    private int resourceId;
+
+    Warmth(int id) {
+        resourceId = id;
+    }
 
     @Override
     public String toString() {
-        switch (this) {
-            case COLD:
-                return "Cold";
-            case WARM:
-                return "Warm";
-            case HOT:
-                return "Hot";
-            default:
-                throw new IllegalArgumentException();
+        return App.getContext().getString(resourceId);
+    }
+
+    public static Warmth fromString(String id) {
+        for (Warmth w : values()) {
+            if (w.toString().equalsIgnoreCase(id)) {
+                return w;
+            }
         }
+        return null;
     }
 }

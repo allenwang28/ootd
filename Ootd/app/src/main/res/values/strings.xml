@@ -5,7 +5,6 @@
     <string name="cleanliness2">Dirty1</string>
     <string name="cleanliness3">Dirty2</string>
     <string name="cleanliness4">Dirty3</string>
-
     <string-array name="cleanliness_array">
         <item>@string/cleanliness1</item>
         <item>@string/cleanliness2</item>
@@ -13,5 +12,35 @@
         <item>@string/cleanliness4</item>
     </string-array>
 
+    <string name="category1">Blouse</string>
+    <string name="category2">Shirt</string>
+    <string name="category3">Sweater</string>
+    <string name="category4">Pants</string>
+    <string-array name="category_array">
+        <item>@string/category1</item>
+        <item>@string/category2</item>
+        <item>@string/category3</item>
+        <item>@string/category4</item>
+    </string-array>
 
+    <string name="warmth1">Cold</string>
+    <string name="warmth2">Warm</string>
+    <string name="warmth3">Hot</string>
+    <string-array name="warmth_array">
+        <item>@string/warmth1</item>
+        <item>@string/warmth2</item>
+        <item>@string/warmth3</item>
+    </string-array>
+
+    <string name="occasion1">Casual</string>
+    <string name="occasion2">Formal</string>
+    <string name="occasion3">Athletic</string>
+    <string name="occasion4">Swim</string>
+
+    <string-array name="occasion_array">
+        <item>@string/occasion1</item>
+        <item>@string/occasion2</item>
+        <item>@string/occasion3</item>
+        <item>@string/occasion4</item>
+    </string-array>
 </resources>

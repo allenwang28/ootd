@@ -6,6 +6,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"/>
         <EditText android:id="@+id/clothingedit_EditName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -13,7 +17,38 @@
             android:inputType="text"
             android:imeOptions="actionDone" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cleanliness"/>
         <Spinner android:id="@+id/clothingedit_ChangeCleanliness"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Category"/>
+        <Spinner android:id="@+id/clothingedit_ChangeCategory"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Warmth"/>
+        <Spinner android:id="@+id/clothingedit_ChangeWarmth"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Occasion"/>
+        <Spinner android:id="@+id/clothingedit_ChangeOccasion"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             />

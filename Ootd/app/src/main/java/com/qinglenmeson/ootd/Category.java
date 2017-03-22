@@ -5,25 +5,29 @@ package com.qinglenmeson.ootd;
  */
 
 public enum Category {
-    BLOUSE,
-    SHIRT,
-    SWEATER,
-    PANTS;
-    // TODO - add more categories
+    BLOUSE(R.string.category1),
+    SHIRT(R.string.category2),
+    SWEATER(R.string.category3),
+    PANTS(R.string.category4);
+    // TODO - add more categories and update strings.xml
+
+    private int resourceId;
+
+    Category(int id) {
+        resourceId = id;
+    }
 
     @Override
     public String toString() {
-        switch(this) {
-            case BLOUSE:
-                return "Blouse";
-            case SHIRT:
-                return "Shirt";
-            case SWEATER:
-                return "Sweater";
-            case PANTS:
-                return "Pants";
-            default:
-                throw new IllegalArgumentException();
+        return App.getContext().getString(resourceId);
+    }
+
+    public static Category fromString(String id) {
+        for (Category c : values()) {
+            if (c.toString().equalsIgnoreCase(id)) {
+                return c;
+            }
         }
+        return null;
     }
 }

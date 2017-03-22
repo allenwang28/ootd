@@ -22,9 +22,12 @@ import android.widget.TextView;
 public class ClothingEditView extends LinearLayout implements AdapterView.OnItemSelectedListener {
     private Clothing clothing;
 
-    // Views held
+    // Views
     private EditText editName;
     private Spinner cleanlinessSpinner;
+    private Spinner categorySpinner;
+    private Spinner warmthSpinner;
+    private Spinner occasionSpinner;
 
     public ClothingEditView(Context context, Clothing clothing) {
         super(context);
@@ -69,6 +72,27 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
                 R.array.cleanliness_array, android.R.layout.simple_spinner_dropdown_item);
         cleanlinessSpinner.setAdapter(cleanlinessAdapter);
         cleanlinessSpinner.setOnItemSelectedListener(this);
+
+        // Allows the ability to change the category
+        categorySpinner = (Spinner) this.findViewById(R.id.clothingedit_ChangeCategory);
+        ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(context,
+                R.array.category_array, android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner.setAdapter(categoryAdapter);
+        categorySpinner.setOnItemSelectedListener(this);
+
+        // Allows the ability to change the warmth
+        warmthSpinner = (Spinner) this.findViewById(R.id.clothingedit_ChangeWarmth);
+        ArrayAdapter<CharSequence> warmthAdapter = ArrayAdapter.createFromResource(context,
+                R.array.warmth_array, android.R.layout.simple_spinner_dropdown_item);
+        warmthSpinner.setAdapter(warmthAdapter);
+        warmthSpinner.setOnItemSelectedListener(this);
+
+        // Allows the ability to change the occasion
+        occasionSpinner = (Spinner) this.findViewById(R.id.clothingedit_ChangeOccasion);
+        ArrayAdapter<CharSequence> occasionAdapter = ArrayAdapter.createFromResource(context,
+                R.array.occasion_array, android.R.layout.simple_spinner_dropdown_item);
+        occasionSpinner.setAdapter(occasionAdapter);
+        occasionSpinner.setOnItemSelectedListener(this);
     }
 
     // Utility functions
@@ -96,6 +120,27 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
                 Log.d("ClothingEdit", String.format("Changing Cleanliness of %s from %s to %s",
                         clothing.getName(), clothing.getCleanliness().toString(), newCleanlinessName));
                 clothing.setCleanliness(newCleanliness);
+                break;
+            case R.id.clothingedit_ChangeCategory:
+                String newCategoryName = (String)parent.getItemAtPosition(position);
+                Category newCategory = Category.fromString(newCategoryName);
+                Log.d("ClothingEdit", String.format("Changing Category of %s from %s to %s",
+                        clothing.getName(), clothing.getCategory().toString(), newCategoryName));
+                clothing.setCategory(newCategory);
+                break;
+            case R.id.clothingedit_ChangeWarmth:
+                String newWarmthName = (String)parent.getItemAtPosition(position);
+                Warmth newWarmth = Warmth.fromString(newWarmthName);
+                Log.d("ClothingEdit", String.format("Changing Warmth of %s from %s to %s",
+                        clothing.getName(), clothing.getWarmth().toString(), newWarmthName));
+                clothing.setWarmth(newWarmth);
+                break;
+            case R.id.clothingedit_ChangeOccasion:
+                String newOccasionName = (String)parent.getItemAtPosition(position);
+                Occasion newOccasion = Occasion.fromString(newOccasionName);
+                Log.d("ClothingEdit", String.format("Changing Occasion of %s from %s to %s",
+                        clothing.getName(), clothing.getOccasion().toString(), newOccasionName));
+                clothing.setOccasion(newOccasion);
                 break;
             default:
                 break;

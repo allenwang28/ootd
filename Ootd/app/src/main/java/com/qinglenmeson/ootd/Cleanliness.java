@@ -11,12 +11,9 @@ public enum Cleanliness {
     DIRTY3(R.string.cleanliness4);
 
     private int resourceId;
-    private Cleanliness(int id) {
-        resourceId = id;
-    }
 
-    public int getResourceId() {
-        return resourceId;
+    Cleanliness(int id) {
+        resourceId = id;
     }
 
     @Override
