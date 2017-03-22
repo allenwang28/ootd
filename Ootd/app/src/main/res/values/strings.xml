@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Ootd</string>
+
+    <string name="cleanliness1">Clean</string>
+    <string name="cleanliness2">Dirty1</string>
+    <string name="cleanliness3">Dirty2</string>
+    <string name="cleanliness4">Dirty3</string>
+
+    <string-array name="cleanliness_array">
+        <item>@string/cleanliness1</item>
+        <item>@string/cleanliness2</item>
+        <item>@string/cleanliness3</item>
+        <item>@string/cleanliness4</item>
+    </string-array>
+
+
 </resources>

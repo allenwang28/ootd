@@ -1,30 +1,35 @@
 package com.qinglenmeson.ootd;
 
-import java.io.StringBufferInputStream;
 
 /**
  * Created by Allen Wang on 3/21/2017.
  */
 public enum Cleanliness {
-    CLEAN,
-    DIRTY1,
-    DIRTY2,
-    DIRTY3;
+    CLEAN(R.string.cleanliness1),
+    DIRTY1(R.string.cleanliness2),
+    DIRTY2(R.string.cleanliness3),
+    DIRTY3(R.string.cleanliness4);
+
+    private int resourceId;
+    private Cleanliness(int id) {
+        resourceId = id;
+    }
+
+    public int getResourceId() {
+        return resourceId;
+    }
 
     @Override
     public String toString() {
-        switch(this) {
-            case CLEAN:
-                return "Clean";
-            case DIRTY1:
-                return "Smells bad";
-            case DIRTY2:
-                return "Sweaty";
-            case DIRTY3:
-                return "Don't wear this";
-            default:
-                throw new IllegalArgumentException();
-        }
+        return App.getContext().getString(resourceId);
     }
 
+    public static Cleanliness fromString(String id) {
+        for (Cleanliness c : values()) {
+            if (c.toString().equalsIgnoreCase(id)) {
+                return c;
+            }
+        }
+        return null;
+    }
 }
