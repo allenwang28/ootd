@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openAddClothing(View view) {
-        Intent intent = new Intent(this, )
+        Intent intent = new Intent(this, ClothingActivity.class);
+        startActivity(intent);
     }
 }

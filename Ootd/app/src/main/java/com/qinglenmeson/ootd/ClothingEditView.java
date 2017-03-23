@@ -36,30 +36,30 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
     private Spinner occasionSpinner;
     private ImageView imageView;
 
+    private Button minusWear;
+    private Button plusWear;
+    private TextView wearIndicator;
+
     // TODO - Figure out if there's a better way to not just add the activity Seems very hacky
+
     public ClothingEditView(Context context, Clothing clothing) {
         super(context);
         initializeViews(context, clothing);
     }
 
-    public ClothingEditView(Context context, AttributeSet attrs, Clothing clothing) {
+    public ClothingEditView(Context context) {
+        super(context);
+    }
+
+    public ClothingEditView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initializeViews(context, clothing);
     }
 
-    public ClothingEditView(Context context, AttributeSet attrs, int defStyleAttr, Clothing clothing) {
+    public ClothingEditView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initializeViews(context, clothing);
     }
 
-    @TargetApi(Build.VERSION_CODES.CUPCAKE)
-    private void initializeViews(final Context context, Clothing clothing) {
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.clothingedit_view, this);
-        Log.d("ClothingEditView", "Initialized View");
-
-        this.clothing = clothing;
+    private void resetViews(final Context context) {
 
         // Allow the EditText to change the name of the clothing
         editName = (EditText) this.findViewById(R.id.clothingedit_EditName);
@@ -76,6 +76,28 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
                     return true;
                 }
                 return false;
+            }
+        });
+
+        // Add or subtract the number of wears
+        wearIndicator = (TextView) this.findViewById(R.id.clothingedit_WearIndicator);
+        wearIndicator.setText(Integer.toString(clothing.getTimesWorn()));
+
+        minusWear = (Button) this.findViewById(R.id.clothingedit_MinusWear);
+        minusWear.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clothing.minusWear();
+                wearIndicator.setText(Integer.toString(clothing.getTimesWorn()));
+            }
+        });
+
+        plusWear = (Button) this.findViewById(R.id.clothingedit_PlusWear);
+        plusWear.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clothing.plusWear();
+                wearIndicator.setText(Integer.toString(clothing.getTimesWorn()));
             }
         });
 
@@ -117,6 +139,17 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
 
     }
 
+    @TargetApi(Build.VERSION_CODES.CUPCAKE)
+    private void initializeViews(final Context context, final Clothing clothing) {
+        LayoutInflater inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater.inflate(R.layout.clothingedit_view, this);
+        Log.d("ClothingEditView", "Initialized View");
+
+        this.clothing = clothing;
+        resetViews(context);
+    }
+
     // Utility functions
     private void editClothingName(String name) {
         Log.d("ClothingEditView", String.format("Changing clothing %s to %s", clothing.getName(), name));
@@ -125,7 +158,14 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
 
     // Getters and Setters
     public void setClothing(Clothing clothing) {
-        this.clothing = clothing;
+        // We need to do this to update everything
+        if (this.clothing == null) {
+            this.clothing = clothing;
+            initializeViews(this.getContext(), this.clothing);
+        } else {
+            this.clothing = clothing;
+            resetViews(this.getContext());
+        }
     }
 
     public Clothing getClothing() {

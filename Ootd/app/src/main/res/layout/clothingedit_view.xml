@@ -1,72 +1,102 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
     <RelativeLayout android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Name"/>
-        <EditText android:id="@+id/clothingedit_EditName"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingRight="40dp"
-            android:inputType="text"
-            android:maxLines="1"
-            android:imeOptions="actionDone" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Name"/>
+                <EditText android:id="@+id/clothingedit_EditName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="40dp"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:imeOptions="actionDone" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cleanliness"/>
-        <Spinner android:id="@+id/clothingedit_ChangeCleanliness"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cleanliness"/>
+                <Spinner android:id="@+id/clothingedit_ChangeCleanliness"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Category"/>
-        <Spinner android:id="@+id/clothingedit_ChangeCategory"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Times worn"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Image"/>
-        <ImageView
-            android:id="@+id/clothingedit_Image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:id="@+id/clothingedit_MinusWear"
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:text="-"/>
+                    <TextView
+                        android:id="@+id/clothingedit_WearIndicator"
+                        android:layout_width="50dp"
+                        android:gravity="center"
+                        android:layout_height="wrap_content" />
+                    <Button
+                        android:id="@+id/clothingedit_PlusWear"
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:text="+"/>
+                </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Color"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Warmth"/>
-        <Spinner android:id="@+id/clothingedit_ChangeWarmth"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Category"/>
+                <Spinner android:id="@+id/clothingedit_ChangeCategory"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Occasion"/>
-        <Spinner android:id="@+id/clothingedit_ChangeOccasion"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Image"/>
+                <ImageView
+                    android:id="@+id/clothingedit_Image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Color"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Warmth"/>
+                <Spinner android:id="@+id/clothingedit_ChangeWarmth"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Occasion"/>
+                <Spinner android:id="@+id/clothingedit_ChangeOccasion"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    />
     </LinearLayout>
+        </ScrollView>
     </RelativeLayout>
 </merge>

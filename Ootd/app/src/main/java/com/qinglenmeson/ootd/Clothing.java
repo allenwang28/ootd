@@ -16,6 +16,16 @@ public class Clothing {
 
     // TODO - need associated color and image
 
+    // Some default constructor
+    public Clothing() {
+        this.name = "";
+        this.category = Category.PANTS;
+        this.warmth = Warmth.COLD;
+        this.occasion = Occasion.ATHLETIC;
+        this.timesWorn = 0;
+        this.cleanliness = Cleanliness.CLEAN;
+    }
+
     public Clothing(String name, Category category, Warmth warmth, Occasion occasion) {
         this.name = name;
         this.category = category;
@@ -25,6 +35,16 @@ public class Clothing {
         this.cleanliness = Cleanliness.CLEAN;
     }
 
+    public void minusWear() {
+        timesWorn--;
+        if (timesWorn <= 0) timesWorn = 0;
+    }
+
+    public void plusWear() {
+        timesWorn++;
+    }
+
+    // Getters/Setters
     public Category getCategory() {
         return category;
     }
