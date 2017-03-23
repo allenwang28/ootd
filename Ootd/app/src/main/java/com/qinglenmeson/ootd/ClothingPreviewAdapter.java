@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class ClothingPreviewAdapter extends RecyclerView.Adapter<ClothingPreview
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
         public TextView nameTextView;
+        public ImageView imageView;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
@@ -30,6 +32,9 @@ public class ClothingPreviewAdapter extends RecyclerView.Adapter<ClothingPreview
             super(itemView);
 
             nameTextView = (TextView) itemView.findViewById(R.id.clothingpreview_Name);
+            imageView = (ImageView) itemView.findViewById(R.id.clothingpreview_Image);
+
+            imageView.setImageResource(R.drawable.blue_jeans);
         }
     }
 
