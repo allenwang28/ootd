@@ -24,6 +24,7 @@ public class ClothingAdapter extends PagerAdapter {
     public ClothingAdapter(Context context) {
         this.context = context;
 
+        // TODO - get the clothing from storage
         // Below is just for testing/prototyping
         closet = new ArrayList<>();
         closet.add(new Clothing("Blouse", Category.BLOUSE, Warmth.WARM, Occasion.CASUAL));
