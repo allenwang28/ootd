@@ -12,6 +12,19 @@
         <item>@string/cleanliness4</item>
     </string-array>
 
+    <string name="fit1">Tight</string>
+    <string name="fit2">Perfect</string>
+    <string name="fit3">Loose</string>
+    <string name="fit4">Long</string>
+    <string name="fit5">Short</string>
+    <string-array name="fit_array">
+        <item>@string/fit1</item>
+        <item>@string/fit2</item>
+        <item>@string/fit3</item>
+        <item>@string/fit4</item>
+        <item>@string/fit5</item>
+    </string-array>
+
     <string name="category1">Blouse</string>
     <string name="category2">Shirt</string>
     <string name="category3">Sweater</string>

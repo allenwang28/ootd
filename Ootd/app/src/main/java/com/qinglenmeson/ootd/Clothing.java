@@ -17,6 +17,8 @@ public class Clothing {
     // TODO - need associated color and image
 
     // Some default constructor
+
+    //If we do factory method, maybe we should remove general constructor so everything is specific
     public Clothing() {
         this.name = "";
         this.category = Category.PANTS;
@@ -92,4 +94,6 @@ public class Clothing {
     public void setCleanliness(Cleanliness cleanliness) {
         this.cleanliness = cleanliness;
     }
+
+    //Make this an interface at some point, with a isMatch() function using Jame's algo, implemented by our little subclasses
 }

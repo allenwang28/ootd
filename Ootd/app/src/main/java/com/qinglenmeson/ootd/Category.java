@@ -4,6 +4,8 @@ package com.qinglenmeson.ootd;
  * Created by Allen Wang on 3/21/2017.
  */
 
+//We won't use this one, instead I'm making subclasses of clothing that essentially replaces this
+
 public enum Category {
     BLOUSE(R.string.category1),
     SHIRT(R.string.category2),
