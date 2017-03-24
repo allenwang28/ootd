@@ -33,8 +33,6 @@ public class ClothingPreviewAdapter extends RecyclerView.Adapter<ClothingPreview
 
             nameTextView = (TextView) itemView.findViewById(R.id.clothingpreview_Name);
             imageView = (ImageView) itemView.findViewById(R.id.clothingpreview_Image);
-
-            imageView.setImageResource(R.drawable.blue_jeans);
         }
     }
 
@@ -77,6 +75,9 @@ public class ClothingPreviewAdapter extends RecyclerView.Adapter<ClothingPreview
         // Set item views based on views and data model...
         TextView view = holder.nameTextView;
         view.setText(clothing.getName());
+
+        ImageView imageView = holder.imageView;
+        imageView.setImageResource(R.drawable.blue_jeans);
         // TODO - fill the rest in
     }
 

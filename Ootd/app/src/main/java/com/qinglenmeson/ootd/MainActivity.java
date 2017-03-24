@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView clothingListView;
     private RecyclerView outfitListView;
 
-    private List<Clothing> closet;
+    private List<Clothing> clothingList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,25 +27,35 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager outfitLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
         // TODO - find the real way to get this list from storage or something...
-        closet = new ArrayList<>();
-        closet.add(new Clothing("Blouse", Category.BLOUSE, Warmth.WARM, Occasion.CASUAL));
-        closet.add(new Clothing("Nike Shorts", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
-        closet.add(new Clothing("Pants", Category.PANTS, Warmth.WARM, Occasion.CASUAL));
-        closet.add(new Clothing("Jacket", Category.SWEATER, Warmth.WARM, Occasion.CASUAL));
-        closet.add(new Clothing("Swimming Trunks", Category.SWEATER, Warmth.WARM, Occasion.SWIM));
-        closet.add(new Clothing("Jeans", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
+        clothingList = new ArrayList<>();
+        for (int i = 0; i < 3; ++i) {
+            clothingList.add(new Clothing("Blouse", Category.BLOUSE, Warmth.WARM, Occasion.CASUAL));
+            clothingList.add(new Clothing("Nike Shorts", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
+            clothingList.add(new Clothing("Pants", Category.PANTS, Warmth.WARM, Occasion.CASUAL));
+            clothingList.add(new Clothing("Jacket", Category.SWEATER, Warmth.WARM, Occasion.CASUAL));
+            clothingList.add(new Clothing("Swimming Trunks", Category.SWEATER, Warmth.WARM, Occasion.SWIM));
+            clothingList.add(new Clothing("Jeans", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
+            clothingList.add(new Clothing("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
+        }
 
-        // Lets the recyclerviews be horizontal
+        // Set up the recyclerviews
         clothingListView = (RecyclerView) findViewById(R.id.main_ClothingList);
         clothingListView.setLayoutManager(clothingLayoutManager);
 
-        ClothingPreviewAdapter clothingPreviewAdapter = new ClothingPreviewAdapter(this, closet);
+        clothingListView.setNestedScrollingEnabled(false);
 
+        ClothingPreviewAdapter clothingPreviewAdapter = new ClothingPreviewAdapter(this, clothingList);
         clothingListView.setAdapter(clothingPreviewAdapter);
+
 
         outfitListView = (RecyclerView) findViewById(R.id.main_OutfitList);
         outfitListView.setLayoutManager(outfitLayoutManager);
 
+        outfitListView.setNestedScrollingEnabled(false);
+
+        // TODO - fill this in after the Outfit class is created
+        //OutfitPreviewAdapter outfitPreviewAdapter = new OutfitPreviewAdapter(this, outfitList);
+        //
     }
 
     public void openArchives(View view) {

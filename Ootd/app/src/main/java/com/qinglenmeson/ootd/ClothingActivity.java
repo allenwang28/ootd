@@ -1,5 +1,6 @@
 package com.qinglenmeson.ootd;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,7 +20,6 @@ public class ClothingActivity extends AppCompatActivity {
         clothing = new Clothing();
 
         clothingEditView.setClothing(clothing);
-
         addButton = (Button)findViewById(R.id.clothing_add_view);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,6 +30,11 @@ public class ClothingActivity extends AppCompatActivity {
                 // list.add(clothing);
                 clothing = new Clothing();
                 clothingEditView.setClothing(clothing);
+
+                // Show notification
+                Snackbar.make(findViewById(R.id.clothing_add_view), "Clothing added",
+                        Snackbar.LENGTH_SHORT)
+                        .show();
             }
         });
 

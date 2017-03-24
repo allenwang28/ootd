@@ -48,7 +48,6 @@ public class ClothingAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         ClothingEditView clothingView = new ClothingEditView(context, closet.get(position));
-//        clothingView.setClothing(closet.get(position));
         ((ViewPager)container).addView(clothingView);
         return clothingView;
     }
