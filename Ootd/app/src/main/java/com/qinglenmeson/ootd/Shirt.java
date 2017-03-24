@@ -20,7 +20,9 @@ public class Shirt extends Clothing {
         this.fit = fit;
     }
 
+    //Realized function from abstract class Clothing
     public boolean isMatch() {
+        //TODO: Implement this using characteristics and outfit algorithm
         return true;
     }
 

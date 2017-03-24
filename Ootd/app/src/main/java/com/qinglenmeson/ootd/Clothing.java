@@ -1,5 +1,6 @@
 package com.qinglenmeson.ootd;
 
+import java.io.File;
 
 /**
  * Created by Allen Wang on 3/21/2017.
@@ -10,6 +11,7 @@ public class Clothing {
     private Category category;
     private Warmth warmth;
     private Occasion occasion;
+    private File photo;
 
     private int timesWorn;
     private Cleanliness cleanliness;
@@ -93,6 +95,10 @@ public class Clothing {
 
     public void setCleanliness(Cleanliness cleanliness) {
         this.cleanliness = cleanliness;
+    }
+
+    public void setPhoto(File file) {
+        this.photo = file;
     }
 
     //Make this an interface at some point, with a isMatch() function using Jame's algo, implemented by our little subclasses

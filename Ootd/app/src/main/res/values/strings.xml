@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Ootd</string>
 
+    <string name="take_picture">Take picture</string>
+
     <string name="cleanliness1">Clean</string>
     <string name="cleanliness2">Dirty1</string>
     <string name="cleanliness3">Dirty2</string>

@@ -1,5 +1,6 @@
 package com.qinglenmeson.ootd;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,10 +30,20 @@ public class ClothingActivity extends AppCompatActivity {
                 // Something like...
                 // list.add(clothing);
                 clothing = new Clothing();
+                //TODO - save the photo into Clothing item
+                //clothing.setPhoto();
                 clothingEditView.setClothing(clothing);
             }
         });
 
     }
+
+
+    public void takePicture(View view) {
+        Intent intent = new Intent(this, AndroidCameraApi.class);
+        startActivity(intent);
+    }
+
+
 
 }
