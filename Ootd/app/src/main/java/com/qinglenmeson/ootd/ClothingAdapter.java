@@ -24,6 +24,7 @@ public class ClothingAdapter extends PagerAdapter {
     public ClothingAdapter(Context context) {
         this.context = context;
 
+        // TODO - get the clothing from storage
         // Below is just for testing/prototyping
         closet = new ArrayList<>();
         closet.add(new Clothing("Blouse", Category.BLOUSE, Warmth.WARM, Occasion.CASUAL));
@@ -47,7 +48,6 @@ public class ClothingAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         ClothingEditView clothingView = new ClothingEditView(context, closet.get(position));
-//        clothingView.setClothing(closet.get(position));
         ((ViewPager)container).addView(clothingView);
         return clothingView;
     }

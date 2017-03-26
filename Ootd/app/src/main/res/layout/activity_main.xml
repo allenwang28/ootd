@@ -12,17 +12,70 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Archives"
-            android:onClick="openArchives" />
-
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <com.qinglenmeson.ootd.RotatedButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dip"
+                android:gravity="center"
+                android:text="Past Outfits"
+                android:onClick="openPastOutfits"
+                android:layout_alignParentRight="true" />
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/main_OutfitList"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </HorizontalScrollView>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@android:color/darker_gray"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <com.qinglenmeson.ootd.RotatedButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dip"
+                android:gravity="center"
+                android:text="Archives"
+                android:onClick="openArchives"
+                android:layout_alignParentRight="true" />
+                <android.support.v4.widget.NestedScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/main_ClothingList"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </android.support.v4.widget.NestedScrollView>
+            </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@android:color/darker_gray"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="+ Clothes"
             android:onClick="openAddClothing" />
-    </LinearLayout>
+        </LinearLayout>
+
 </RelativeLayout>
