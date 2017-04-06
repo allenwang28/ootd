@@ -12,11 +12,10 @@ public class Clothing {
     private Warmth warmth;
     private Occasion occasion;
     private File photo;
+    private int color;
 
     private int timesWorn;
     private Cleanliness cleanliness;
-
-    // TODO - need associated color and image
 
     // Some default constructor
 
@@ -28,6 +27,7 @@ public class Clothing {
         this.occasion = Occasion.ATHLETIC;
         this.timesWorn = 0;
         this.cleanliness = Cleanliness.CLEAN;
+        this.color = -16777216;
     }
 
     public Clothing(String name, Category category, Warmth warmth, Occasion occasion) {
@@ -37,6 +37,7 @@ public class Clothing {
         this.occasion = occasion;
         this.timesWorn = 0;
         this.cleanliness = Cleanliness.CLEAN;
+        this.color = -16777216;
     }
 
     public void minusWear() {
@@ -83,6 +84,13 @@ public class Clothing {
 
     public int getTimesWorn() {
         return timesWorn;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+    public int getColor() {
+        return color;
     }
 
     public void setTimesWorn(int timesWorn) {

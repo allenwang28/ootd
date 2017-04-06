@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Environment;
 import android.util.AttributeSet;
@@ -23,6 +24,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.skydoves.colorpickerview.ColorPickerView;
+
 import java.io.File;
 import java.net.URI;
 
@@ -40,11 +43,14 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
     private Spinner warmthSpinner;
     private Spinner occasionSpinner;
     private ImageView imageView;
+    private ImageView colorView;
+    private ColorPickerView colorPickerView;
 
     private Button minusWear;
     private Button plusWear;
     private TextView wearIndicator;
     private Button takePicture;
+    private Button changeColor;
 
     // TODO - Figure out if there's a better way to not just add the activity Seems very hacky
 
@@ -145,6 +151,19 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
         //TODO - Make this real picture's instead of the last taken
         File testFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/pic.jpg");
         imageView.setImageURI(android.net.Uri.parse(testFile.toURI().toString()));
+
+        // Shows the color
+        colorView = (ImageView) this.findViewById(R.id.clothingedit_Color);
+        colorView.setBackgroundColor(clothing.getColor());
+
+        colorPickerView = (ColorPickerView) this.findViewById(R.id.colorPickerView);
+        colorPickerView.setColorListener(new ColorPickerView.ColorListener() {
+            @Override
+            public void onColorSelected(int color) {
+                clothing.setColor(colorPickerView.getColor());
+                colorView.setBackgroundColor(clothing.getColor());
+            }
+        });
 
     }
 
