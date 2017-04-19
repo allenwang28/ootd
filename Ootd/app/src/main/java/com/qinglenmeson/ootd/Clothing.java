@@ -40,6 +40,16 @@ public class Clothing {
         this.color = -16777216;
     }
 
+    public Clothing(String name, Category category, Warmth warmth, Occasion occasion, Cleanliness cleanliness, int color, File photo) {
+        this.name = name;
+        this.category = category;
+        this.warmth = warmth;
+        this.occasion = occasion;
+        this.timesWorn = 0;
+        this.cleanliness = cleanliness;
+        this.color = color;
+    }
+
     public void minusWear() {
         timesWorn--;
         if (timesWorn <= 0) timesWorn = 0;
@@ -108,6 +118,8 @@ public class Clothing {
     public void setPhoto(File file) {
         this.photo = file;
     }
+
+    public File getPhoto() {return photo;}
 
     //Make this an interface at some point, with a isMatch() function using Jame's algo, implemented by our little subclasses
 }

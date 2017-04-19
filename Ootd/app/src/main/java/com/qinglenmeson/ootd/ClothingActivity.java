@@ -1,11 +1,14 @@
 package com.qinglenmeson.ootd;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import java.io.FileOutputStream;
 
 public class ClothingActivity extends AppCompatActivity {
     private ClothingEditView clothingEditView;
@@ -26,10 +29,18 @@ public class ClothingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 clothing = clothingEditView.getClothing();
-                // TODO - save the clothing somewhere else
-                // Something like...
-                // list.add(clothing);
-                clothing = new Clothing();
+                String filename = "CLOTHES";
+                //TODO: what is format of these toStrings?
+                String string = clothing.getName() + "\n" + clothing.getCategory().toString() + "\n"
+                        + clothing.getWarmth().toString() + "\n" + clothing.getOccasion().toString() + "\n"
+                        + clothing.getCleanliness().toString() + "\n" + clothing.getColor() + "\n"
+                        + clothing.getPhoto().toString() + "\n";
+                try {
+                    FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
+                    fos.write(string.getBytes());
+                    fos.close();
+                } catch(Exception e) {
+                }
                 //TODO - save the photo into Clothing item
                 //clothing.setPhoto();
                 clothingEditView.setClothing(clothing);

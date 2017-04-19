@@ -165,6 +165,8 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
             }
         });
 
+
+        //TODO: Update the database for this piece of clothing, similar to Clothing Activity
     }
 
     @TargetApi(Build.VERSION_CODES.CUPCAKE)
