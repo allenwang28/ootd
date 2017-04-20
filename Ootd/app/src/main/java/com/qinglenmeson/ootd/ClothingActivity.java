@@ -29,20 +29,18 @@ public class ClothingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 clothing = clothingEditView.getClothing();
-                String filename = "CLOTHES";
-                //TODO: what is format of these toStrings?
-                String string = clothing.getName() + "\n" + clothing.getCategory().toString() + "\n"
-                        + clothing.getWarmth().toString() + "\n" + clothing.getOccasion().toString() + "\n"
-                        + clothing.getCleanliness().toString() + "\n" + clothing.getColor() + "\n"
-                        + clothing.getPhoto().toString() + "\n";
+                String filename = "CLOSET.txt";
+                String string = clothing.getName() + "/split/" + clothing.getCategory().toString() + "/split/"
+                        + clothing.getWarmth().toString() + "/split/" + clothing.getOccasion().toString() + "/split/"
+                        + clothing.getCleanliness().toString() + "/split/" + clothing.getColor() + "/split/"
+                        + clothing.getPhoto() + "/split/";
                 try {
                     FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
                     fos.write(string.getBytes());
                     fos.close();
+
                 } catch(Exception e) {
                 }
-                //TODO - save the photo into Clothing item
-                //clothing.setPhoto();
                 clothingEditView.setClothing(clothing);
 
                 // Show notification
@@ -59,6 +57,10 @@ public class ClothingActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goBack(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 
 
 }

@@ -8,8 +8,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,19 +32,38 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager outfitLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
         clothingList = new ArrayList<>();
-        String filename = "CLOSET";
-        String temp = "";
+        String filename = "CLOSET.txt";
+        StringBuffer sbuff = new StringBuffer("");
         String[] tempSplit;
         int c;
+
         try {
             FileInputStream fin = openFileInput(filename);
-            while( (c = fin.read()) != -1){
-                temp = temp + Character.toString((char)c);
+            InputStreamReader isr = new InputStreamReader ( fin ) ;
+            BufferedReader buffreader = new BufferedReader ( isr ) ;
+
+            String readString = buffreader.readLine ( ) ;
+            while ( readString != null ) {
+                sbuff.append(readString);
+                readString = buffreader.readLine ( ) ;
             }
-            tempSplit = temp.split("\n");
+            fin.close();
+            isr.close () ;
+        } catch ( IOException ioe ) {
+            ioe.printStackTrace ( ) ;
+        }
+            tempSplit = sbuff.toString().trim().split("/split/");
 
             int words = 0;
-            while(words < tempSplit.length) {
+
+            /*
+            for(int i = 0; i < tempSplit.length; i++) {
+                clothingList.add(new Clothing(tempSplit[i], Category.BLOUSE, Warmth.WARM, Occasion.CASUAL));
+            }
+            */
+
+
+            while(words+6 < tempSplit.length) {
                 String name = tempSplit[words];
                 String category = tempSplit[words+1];
                 String warmth = tempSplit[words+2];
@@ -49,24 +72,33 @@ public class MainActivity extends AppCompatActivity {
                 String color = tempSplit[words+5];
                 String photo = tempSplit[words+6];
                 words = words + 7;
+
+                System.out.println("Name:" + name);
+                System.out.println("Category: " + category);
+                System.out.println("Warmth: " + warmth);
+                System.out.println("Occasion: " + occasion);
+                System.out.println("Cleanliness: " + cleanliness);
+                System.out.println("Color: " + color);
+                System.out.println(photo);
+
                 //TODO: Photo take from File.toString
-                //clothingList.add(new Clothing(name, Category.fromString(category), Warmth.fromString(warmth), Occasion.fromString(occasion),
-                //        Cleanliness.fromString(cleanliness), Integer.getInteger(color), photo??));
+
+                clothingList.add(new Clothing(name,
+                        Category.fromString(category),
+                        Warmth.fromString(warmth),
+                        Occasion.fromString(occasion),
+                        Cleanliness.fromString(cleanliness),
+                        Integer.parseInt(color),
+                        photo));
             }
-            fin.close();
-        } catch(Exception e) {
-        }
-        /*
-        for (int i = 0; i < 3; ++i) {
-            clothingList.add(new Clothing("Blouse", Category.BLOUSE, Warmth.WARM, Occasion.CASUAL));
-            clothingList.add(new Clothing("Nike Shorts", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
-            clothingList.add(new Clothing("Pants", Category.PANTS, Warmth.WARM, Occasion.CASUAL));
-            clothingList.add(new Clothing("Jacket", Category.SWEATER, Warmth.WARM, Occasion.CASUAL));
-            clothingList.add(new Clothing("Swimming Trunks", Category.SWEATER, Warmth.WARM, Occasion.SWIM));
-            clothingList.add(new Clothing("Jeans", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
-            clothingList.add(new Clothing("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
-        }
-        */
+
+        clothingList.add(new Clothing("Blouse", Category.BLOUSE, Warmth.WARM, Occasion.CASUAL));
+        //clothingList.add(new Clothing("Nike Shorts", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
+        //clothingList.add(new Clothing("Pants", Category.PANTS, Warmth.WARM, Occasion.CASUAL));
+        //clothingList.add(new Clothing("Jacket", Category.SWEATER, Warmth.WARM, Occasion.CASUAL));
+        //clothingList.add(new Clothing("Swimming Trunks", Category.SWEATER, Warmth.WARM, Occasion.SWIM));
+        //clothingList.add(new Clothing("Jeans", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
+        //clothingList.add(new Clothing("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
         // Set up the recyclerviews
         clothingListView = (RecyclerView) findViewById(R.id.main_ClothingList);
         clothingListView.setLayoutManager(clothingLayoutManager);

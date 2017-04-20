@@ -74,6 +74,11 @@
                     android:id="@+id/clothingedit_Image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/clothingedit_SetImage"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Save Image"/>
 
                 <TextView
                     android:layout_width="match_parent"

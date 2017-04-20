@@ -48,9 +48,8 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
 
     private Button minusWear;
     private Button plusWear;
+    private Button setImage;
     private TextView wearIndicator;
-    private Button takePicture;
-    private Button changeColor;
 
     // TODO - Figure out if there's a better way to not just add the activity Seems very hacky
 
@@ -74,6 +73,7 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
     private void resetViews(final Context context) {
 
         // Allow the EditText to change the name of the clothing
+        //TODO: Doesn't set name
         editName = (EditText) this.findViewById(R.id.clothingedit_EditName);
         editName.setText(clothing.getName(), TextView.BufferType.EDITABLE);
         editName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -145,12 +145,23 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
         occasionSpinner.setOnItemSelectedListener(this);
         occasionSpinner.setSelection(clothing.getOccasion().ordinal());
 
-        //TODO: Put the clothing's image on the ImageView
         imageView = (ImageView) this.findViewById(R.id.clothingedit_Image);
-        //imageView.setImageResource(R.drawable.blue_tshirt);
+        if(clothing.getPhoto() != null) {
+            imageView.setImageURI(android.net.Uri.parse(clothing.getPhoto()));
+        }
         //TODO - Make this real picture's instead of the last taken
-        File testFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/pic.jpg");
-        imageView.setImageURI(android.net.Uri.parse(testFile.toURI().toString()));
+        setImage = (Button) this.findViewById(R.id.clothingedit_SetImage);
+        setImage.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                File testFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/pic.jpg");
+                if(testFile.toURI() != null) {
+                    clothing.setPhoto(testFile.toURI().toString());
+                    imageView.setImageURI(android.net.Uri.parse(testFile.toURI().toString()));
+                }
+            }
+        });
+
 
         // Shows the color
         colorView = (ImageView) this.findViewById(R.id.clothingedit_Color);
@@ -164,7 +175,6 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
                 colorView.setBackgroundColor(clothing.getColor());
             }
         });
-
 
         //TODO: Update the database for this piece of clothing, similar to Clothing Activity
     }
