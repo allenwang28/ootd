@@ -134,6 +134,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ClothingActivity.class);
         startActivity(intent);
     }
+
+    public void openGenerateOutfit(View view) {
+        Intent intent = new Intent(this, GenerateOutfitActivity.class);
+        startActivity(intent);
+    }
     
     public void openPastOutfits(View view) {
         // TODO
