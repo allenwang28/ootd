@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Allen Wang on 3/21/2017.
@@ -19,20 +20,12 @@ public class ClothingAdapter extends PagerAdapter {
 
     private Context context;
 
-    private ArrayList<Clothing> closet;
+    private List<Clothing> closet;
 
-    public ClothingAdapter(Context context) {
+    public ClothingAdapter(Context context, List<Clothing> closet) {
         this.context = context;
 
-        // TODO - get the clothing from storage
-        // Below is just for testing/prototyping
-        closet = new ArrayList<>();
-        closet.add(new Clothing("Blouse", Category.BLOUSE, Warmth.WARM, Occasion.CASUAL));
-        closet.add(new Clothing("Nike Shorts", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
-        closet.add(new Clothing("Pants", Category.PANTS, Warmth.WARM, Occasion.CASUAL));
-        closet.add(new Clothing("Jacket", Category.SWEATER, Warmth.WARM, Occasion.CASUAL));
-        closet.add(new Clothing("Swimming Trunks", Category.SWEATER, Warmth.WARM, Occasion.SWIM));
-        closet.add(new Clothing("Jeans", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
+        this.closet = closet;
     }
 
     @Override

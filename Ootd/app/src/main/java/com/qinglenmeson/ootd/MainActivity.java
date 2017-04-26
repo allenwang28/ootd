@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         String[] tempSplit;
         int c;
 
+
+        // TODO - maybe put all of this into the closet class?
+
         try {
             FileInputStream fin = openFileInput(filename);
             InputStreamReader isr = new InputStreamReader ( fin ) ;
@@ -91,6 +94,9 @@ public class MainActivity extends AppCompatActivity {
                         Integer.parseInt(color),
                         photo));
             }
+
+        Closet closet = Closet.getInstance();
+        closet.setClothingList(clothingList);
 
         //clothingList.add(new Clothing("Blouse", Category.BLOUSE, Warmth.WARM, Occasion.CASUAL));
         //clothingList.add(new Clothing("Nike Shorts", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
