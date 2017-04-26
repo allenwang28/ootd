@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -38,11 +39,13 @@ public class ClothingActivity extends AppCompatActivity {
                     FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
                     fos.write(string.getBytes());
                     fos.close();
-
                 } catch(Exception e) {
+                    Log.e("ClothingActivity", e.toString());
                 }
+                Log.d("ClothingActivity", String.format("Added clothing %s \n\n Resetting the clothing object now", clothing.toString()));
+                clothing = new Clothing();
+                Log.d("ClothingActivity", String.format("Clothing is now %s", clothing.toString()));
                 clothingEditView.setClothing(clothing);
-
                 // Show notification
                 Snackbar.make(findViewById(R.id.clothing_add_view), "Clothing added",
                         Snackbar.LENGTH_SHORT)

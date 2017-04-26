@@ -71,9 +71,7 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
     }
 
     private void resetViews(final Context context) {
-
         // Allow the EditText to change the name of the clothing
-        //TODO: Doesn't set name
         editName = (EditText) this.findViewById(R.id.clothingedit_EditName);
         editName.setText(clothing.getName(), TextView.BufferType.EDITABLE);
         editName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -203,6 +201,7 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
             this.clothing = clothing;
             initializeViews(this.getContext(), this.clothing);
         } else {
+            Log.d("ClothingEditView", String.format("Setting clothing %s", clothing.toString()));
             this.clothing = clothing;
             resetViews(this.getContext());
         }
