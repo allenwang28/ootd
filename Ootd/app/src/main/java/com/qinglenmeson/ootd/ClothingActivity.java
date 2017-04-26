@@ -36,7 +36,7 @@ public class ClothingActivity extends AppCompatActivity {
                         + clothing.getCleanliness().toString() + "/split/" + clothing.getColor() + "/split/"
                         + clothing.getPhoto() + "/split/";
                 try {
-                    FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
+                    FileOutputStream fos = openFileOutput(filename, Context.MODE_APPEND);
                     fos.write(string.getBytes());
                     fos.close();
                 } catch(Exception e) {
