@@ -51,8 +51,6 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
     private Button setImage;
     private TextView wearIndicator;
 
-    // TODO - Figure out if there's a better way to not just add the activity Seems very hacky
-
     public ClothingEditView(Context context, Clothing clothing) {
         super(context);
         initializeViews(context, clothing);

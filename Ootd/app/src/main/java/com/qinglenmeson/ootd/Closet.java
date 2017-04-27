@@ -159,11 +159,10 @@ public class Closet {
     }
 
     public void doLaundry() {
-        resetMemory();
         for (Clothing c : mClothingList) {
             c.setTimesWorn(0);
         }
-        saveAllClothingToMemory();
+        update();
     }
 
     public void reset() {
@@ -173,6 +172,11 @@ public class Closet {
         for (Category c : Category.values()) {
             mClothingMap.put(c, new ArrayList<Clothing>());
         }
+    }
+
+    public void update() {
+        resetMemory();
+        saveAllClothingToMemory();
     }
 
     public List<Clothing> getClothingList() {
