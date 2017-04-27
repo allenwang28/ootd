@@ -83,8 +83,8 @@ public class ClothingPreviewAdapter extends RecyclerView.Adapter<ClothingPreview
         //TODO: For some reason getPhoto() returns null here while all other fields filled...?
         //Current solution is a little bit hacky, uses the absolute locations since we know them
         ImageView imageView = holder.imageView;
-        String photo = Environment.getExternalStorageDirectory().getAbsolutePath()+"/" + clothing.getName() + ".jpg";
-        if(clothing.getName().length() >= 1) {
+        String photo = clothing.getPhoto();
+        if(photo != null) {
             imageView.setImageURI(null);
             imageView.setImageURI(android.net.Uri.parse(photo));
         } else {

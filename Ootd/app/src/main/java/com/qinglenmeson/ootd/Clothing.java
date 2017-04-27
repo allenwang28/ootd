@@ -1,5 +1,7 @@
 package com.qinglenmeson.ootd;
 
+import android.graphics.Color;
+
 import java.io.File;
 
 /**
@@ -37,7 +39,7 @@ public class Clothing {
         this.occasion = occasion;
         this.timesWorn = 0;
         this.cleanliness = Cleanliness.CLEAN;
-        this.color = -16777216;
+        this.color = Color.BLACK;
     }
 
     public Clothing(String name, Category category, Warmth warmth, Occasion occasion, Cleanliness cleanliness, int color, String photo) {
@@ -48,6 +50,7 @@ public class Clothing {
         this.timesWorn = 0;
         this.cleanliness = cleanliness;
         this.color = color;
+        this.photo = photo;
     }
 
     public void minusWear() {

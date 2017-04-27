@@ -33,12 +33,6 @@ public class MainActivity extends AppCompatActivity {
         // Set up the recyclerviews
 
 
-
-
-
-
-
-
         clothingListView = (RecyclerView) findViewById(R.id.main_ClothingList);
         clothingListView.setLayoutManager(clothingLayoutManager);
 
@@ -78,6 +72,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void reset(View view) {
         closet.reset();
-        // TODO - reset the preview screen
+        recreate();
     }
 }

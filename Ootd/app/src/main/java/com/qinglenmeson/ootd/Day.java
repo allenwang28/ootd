@@ -15,7 +15,7 @@ import java.io.IOException;
 import static android.R.attr.data;
 
 import java.util.Date;
-import java.time.*;
+//import java.time.*;
 import java.util.Calendar;
 import java.util.TimeZone;
 import java.util.Locale;
@@ -41,7 +41,8 @@ public class Day {
         Calendar cal = Calendar.getInstance();
         this.month = cal.get(Calendar.DAY_OF_MONTH);
         this.day = cal.get(Calendar.MONTH);
-
+        //TODO: Uncomment (doesn't run as is)
+        /*
         //parse weather data
         JSONObject jObj = new JSONObject(getWeather());
 
@@ -58,6 +59,7 @@ public class Day {
         loc.setSunset(getInt("sunset", sysObj));
         loc.setCity(getString("name", jObj));
         weather.location = loc;
+        */
     }
 
     private String getWeather() {
