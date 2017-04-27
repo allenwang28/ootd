@@ -24,7 +24,6 @@ public class ClothingAdapter extends PagerAdapter {
 
     public ClothingAdapter(Context context, List<Clothing> closet) {
         this.context = context;
-
         this.closet = closet;
     }
 

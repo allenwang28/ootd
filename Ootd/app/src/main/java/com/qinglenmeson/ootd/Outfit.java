@@ -9,17 +9,16 @@ import java.math.*;
 
 public class Outfit {
 
-    public void Outfit(){
+    public void Outfit() {
 
     }
 
-    public static Outfit generate(ArrayList<Clothing> clothes, Day day){
+    public static Outfit generate(ArrayList<Clothing> clothes, Day day) {
         Outfit outfit = new Outfit();
 
-        if (day.rain == true){
+        if (day.rain == true) {
             //rain jacket
-        }
-        else {//no rain
+        } else {//no rain
             if ((day.tempHigh - day.tempLow) >= 30) {
                 if (day.tempHigh >= 70) {
                     //layers
@@ -31,10 +30,8 @@ public class Outfit {
         return outfit;
     }
 
-    private int randomNum(int min, int max){
-        int random = (int )(Math.random() * max + min);
+    private int randomNum(int min, int max) {
+        int random = (int) (Math.random() * max + min);
         return random;
     }
-
-
 }

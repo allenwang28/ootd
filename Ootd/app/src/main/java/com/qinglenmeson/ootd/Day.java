@@ -36,9 +36,7 @@ public class Day {
     boolean rain;
 
 
-
-    public void day()
-    {
+    public void day() {
         //set month and day varibles to current month and day
         Calendar cal = Calendar.getInstance();
         this.month = cal.get(Calendar.DAY_OF_MONTH);
@@ -62,18 +60,17 @@ public class Day {
         weather.location = loc;
     }
 
-    private String getWeather(){
+    private String getWeather() {
 
 
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url("http://samples.openweathermap.org/data/2.5/weather?zip=78705,us&appid=ab6c9e595fe584dc2765d622f3b62da0")
                 .build();
-        try{
+        try {
             Response response = client.newCall(request).execute();
             return response.body().string();
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
