@@ -106,6 +106,14 @@ public class MainActivity extends AppCompatActivity {
         //clothingList.add(new Clothing("Jeans", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
         //clothingList.add(new Clothing("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
         // Set up the recyclerviews
+
+
+
+
+
+
+
+
         clothingListView = (RecyclerView) findViewById(R.id.main_ClothingList);
         clothingListView.setLayoutManager(clothingLayoutManager);
 
