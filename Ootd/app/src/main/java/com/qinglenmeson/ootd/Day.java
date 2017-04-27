@@ -17,6 +17,9 @@ public class Day {
     double tempLow;
     boolean rain;
 
+    boolean cloudy;
+    
+
     String weatherInfo;
 
     public Day(String weatherInfo) {
@@ -44,6 +47,8 @@ public class Day {
             if (mainOBj.has("rain")) {
                 rain = true;
             }
+
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

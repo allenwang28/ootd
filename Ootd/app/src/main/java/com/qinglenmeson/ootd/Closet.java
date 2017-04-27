@@ -21,6 +21,8 @@ import java.util.Map;
 public class Closet {
     private static Closet mInstance = null;
 
+    private String fileName = "CLOSET.txt";
+
     private List<Clothing> mClothingList;
     private Map<Category, List<Clothing>> mClothingMap;
 
@@ -41,12 +43,11 @@ public class Closet {
             mClothingMap.put(c, new ArrayList<Clothing>());
         }
 
-        String filename = "CLOSET.txt";
         StringBuffer sbuff = new StringBuffer("");
         String[] tempSplit;
 
         try {
-            FileInputStream fin = App.getContext().openFileInput(filename);
+            FileInputStream fin = App.getContext().openFileInput(fileName);
             InputStreamReader isr = new InputStreamReader ( fin ) ;
             BufferedReader buffreader = new BufferedReader ( isr ) ;
 
@@ -95,9 +96,8 @@ public class Closet {
     }
 
     private void resetMemory() {
-        String filename = "CLOSET.txt";
         try {
-            FileOutputStream fos = App.getContext().openFileOutput(filename, Context.MODE_PRIVATE);
+            FileOutputStream fos = App.getContext().openFileOutput(fileName, Context.MODE_PRIVATE);
             fos.write("".getBytes());
             fos.close();
         } catch(Exception e) {
@@ -106,17 +106,22 @@ public class Closet {
     }
 
     private void saveClothingToMemory(Clothing clothing) {
-        String filename = "CLOSET.txt";
         String string = clothing.getName() + "/split/" + clothing.getCategory().toString() + "/split/"
                 + clothing.getWarmth().toString() + "/split/" + clothing.getOccasion().toString() + "/split/"
                 + clothing.getCleanliness().toString() + "/split/" + clothing.getColor() + "/split/"
                 + clothing.getPhoto() + "/split/";
         try {
-            FileOutputStream fos = App.getContext().openFileOutput(filename, Context.MODE_APPEND);
+            FileOutputStream fos = App.getContext().openFileOutput(fileName, Context.MODE_APPEND);
             fos.write(string.getBytes());
             fos.close();
         } catch(Exception e) {
             Log.e("ClothingActivity", e.toString());
+        }
+    }
+
+    private void saveAllClothingToMemory() {
+        for (Clothing c : mClothingList) {
+            saveClothingToMemory(c);
         }
     }
 
@@ -151,6 +156,14 @@ public class Closet {
         for (Clothing mC : mClothingList) {
             saveClothingToMemory(mC);
         }
+    }
+
+    public void doLaundry() {
+        resetMemory();
+        for (Clothing c : mClothingList) {
+            c.setTimesWorn(0);
+        }
+        saveAllClothingToMemory();
     }
 
     public void reset() {
