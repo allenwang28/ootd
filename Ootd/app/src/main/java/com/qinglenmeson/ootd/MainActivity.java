@@ -9,9 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -21,8 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView clothingListView;
     private RecyclerView outfitListView;
-
-    private List<Clothing> clothingList;
+    private Closet closet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,89 +28,16 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager clothingLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager outfitLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
-        clothingList = new ArrayList<>();
-        String filename = "CLOSET.txt";
-        StringBuffer sbuff = new StringBuffer("");
-        String[] tempSplit;
-        int c;
+        closet = Closet.getInstance();
 
-
-        // TODO - maybe put all of this into the closet class?
-
-        try {
-            FileInputStream fin = openFileInput(filename);
-            InputStreamReader isr = new InputStreamReader ( fin ) ;
-            BufferedReader buffreader = new BufferedReader ( isr ) ;
-
-            String readString = buffreader.readLine ( ) ;
-            while ( readString != null ) {
-                sbuff.append(readString);
-                readString = buffreader.readLine ( ) ;
-            }
-            fin.close();
-            isr.close () ;
-        } catch ( IOException ioe ) {
-            ioe.printStackTrace ( ) ;
-        }
-            tempSplit = sbuff.toString().trim().split("/split/");
-
-            int words = 0;
-
-            /*
-            for(int i = 0; i < tempSplit.length; i++) {
-                clothingList.add(new Clothing(tempSplit[i], Category.BLOUSE, Warmth.WARM, Occasion.CASUAL));
-            }
-            */
-
-
-            while(words+6 < tempSplit.length) {
-                String name = tempSplit[words];
-                String category = tempSplit[words+1];
-                String warmth = tempSplit[words+2];
-                String occasion = tempSplit[words+3];
-                String cleanliness = tempSplit[words+4];
-                String color = tempSplit[words+5];
-                String photo = tempSplit[words+6];
-                words = words + 7;
-
-                System.out.println("Name: " + name);
-                System.out.println("Category: " + category);
-                System.out.println("Warmth: " + warmth);
-                System.out.println("Occasion: " + occasion);
-                System.out.println("Cleanliness: " + cleanliness);
-                System.out.println("Color: " + color);
-                System.out.println(photo);
-
-                //TODO: Photo take from File.toString
-
-                clothingList.add(new Clothing(name,
-                        Category.fromString(category),
-                        Warmth.fromString(warmth),
-                        Occasion.fromString(occasion),
-                        Cleanliness.fromString(cleanliness),
-                        Integer.parseInt(color),
-                        photo));
-            }
-
-        Closet closet = Closet.getInstance();
-        closet.setClothingList(clothingList);
-
-        //clothingList.add(new Clothing("Blouse", Category.BLOUSE, Warmth.WARM, Occasion.CASUAL));
-        //clothingList.add(new Clothing("Nike Shorts", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
-        //clothingList.add(new Clothing("Pants", Category.PANTS, Warmth.WARM, Occasion.CASUAL));
-        //clothingList.add(new Clothing("Jacket", Category.SWEATER, Warmth.WARM, Occasion.CASUAL));
-        //clothingList.add(new Clothing("Swimming Trunks", Category.SWEATER, Warmth.WARM, Occasion.SWIM));
-        //clothingList.add(new Clothing("Jeans", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
-        //clothingList.add(new Clothing("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", Category.PANTS, Warmth.WARM, Occasion.ATHLETIC));
         // Set up the recyclerviews
         clothingListView = (RecyclerView) findViewById(R.id.main_ClothingList);
         clothingListView.setLayoutManager(clothingLayoutManager);
 
         clothingListView.setNestedScrollingEnabled(false);
 
-        ClothingPreviewAdapter clothingPreviewAdapter = new ClothingPreviewAdapter(this, clothingList);
+        ClothingPreviewAdapter clothingPreviewAdapter = new ClothingPreviewAdapter(this, closet.getClothingList());
         clothingListView.setAdapter(clothingPreviewAdapter);
-
 
         outfitListView = (RecyclerView) findViewById(R.id.main_OutfitList);
         outfitListView.setLayoutManager(outfitLayoutManager);
@@ -142,5 +66,10 @@ public class MainActivity extends AppCompatActivity {
     
     public void openPastOutfits(View view) {
         // TODO
+    }
+
+    public void reset(View view) {
+        closet.reset();
+        // TODO - reset the preview screen
     }
 }
