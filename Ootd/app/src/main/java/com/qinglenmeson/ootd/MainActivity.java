@@ -31,6 +31,14 @@ public class MainActivity extends AppCompatActivity {
         closet = Closet.getInstance();
 
         // Set up the recyclerviews
+
+
+
+
+
+
+
+
         clothingListView = (RecyclerView) findViewById(R.id.main_ClothingList);
         clothingListView.setLayoutManager(clothingLayoutManager);
 

@@ -13,11 +13,15 @@ public class GenerateOutfitActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_outfit);
 
+        //create day object for today
+
         shuffleButton = (Button)findViewById(R.id.generate_outfit_shuffle);
         shuffleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO - fill this in
+                //generate outfit for today;
+                //create new view, show outfit to user
             }
         });
 
