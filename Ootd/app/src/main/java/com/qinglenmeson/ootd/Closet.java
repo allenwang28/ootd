@@ -27,7 +27,7 @@ public class Closet {
     private Map<Category, List<Clothing>> mClothingMap;
 
     private Closet() {
-        Log.d("Closet", "Initializing");
+        System.out.println("Closet Initializing");
     }
 
     private void addClothing(Clothing clothing) {
@@ -179,7 +179,11 @@ public class Closet {
         return mClothingList;
     }
 
-    public void setClothingList(List<Clothing> clothingList) {
-        mClothingList = clothingList;
+    //public void setClothingList(List<Clothing> clothingList) {
+    //    mClothingList = clothingList;
+    //}
+
+    public int size() {
+        return mClothingList.size();
     }
 }
