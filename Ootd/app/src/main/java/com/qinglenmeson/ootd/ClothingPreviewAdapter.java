@@ -1,6 +1,10 @@
 package com.qinglenmeson.ootd;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,9 +80,16 @@ public class ClothingPreviewAdapter extends RecyclerView.Adapter<ClothingPreview
         TextView view = holder.nameTextView;
         view.setText(clothing.getName());
 
+        //TODO: For some reason getPhoto() returns null here while all other fields filled...?
+        //Current solution is a little bit hacky, uses the absolute locations since we know them
         ImageView imageView = holder.imageView;
-        imageView.setImageResource(R.drawable.blue_jeans);
-        // TODO - fill the rest in
+        String photo = Environment.getExternalStorageDirectory().getAbsolutePath()+"/" + clothing.getName() + ".jpg";
+        if(clothing.getName().length() >= 1) {
+            imageView.setImageURI(null);
+            imageView.setImageURI(android.net.Uri.parse(photo));
+        } else {
+            imageView.setImageResource(R.drawable.blue_jeans);
+        }
     }
 
     @Override

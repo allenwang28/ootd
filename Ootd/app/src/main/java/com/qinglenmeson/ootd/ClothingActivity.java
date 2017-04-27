@@ -57,6 +57,7 @@ public class ClothingActivity extends AppCompatActivity {
 
     public void takePicture(View view) {
         Intent intent = new Intent(this, AndroidCameraApi.class);
+        intent.putExtra("clothingName",clothing.getName());
         startActivity(intent);
     }
 

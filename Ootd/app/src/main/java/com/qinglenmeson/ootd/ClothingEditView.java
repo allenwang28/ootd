@@ -152,7 +152,7 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
         setImage.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                File testFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/pic.jpg");
+                File testFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/" + clothing.getName() + ".jpg");
                 if(testFile.toURI() != null) {
                     clothing.setPhoto(testFile.toURI().toString());
                     imageView.setImageURI(android.net.Uri.parse(testFile.toURI().toString()));

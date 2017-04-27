@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 String photo = tempSplit[words+6];
                 words = words + 7;
 
-                System.out.println("Name:" + name);
+                System.out.println("Name: " + name);
                 System.out.println("Category: " + category);
                 System.out.println("Warmth: " + warmth);
                 System.out.println("Occasion: " + occasion);
