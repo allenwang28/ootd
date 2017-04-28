@@ -72,22 +72,22 @@
             android:layout_height="3dp"
             android:background="@android:color/darker_gray"/>
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="+ Clothes"
             android:onClick="openAddClothing" />
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Generate Outfit"
             android:onClick="openGenerateOutfit" />
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Clear Closet"
             android:onClick="reset" />
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Laundry"
             android:onClick="laundry"/>

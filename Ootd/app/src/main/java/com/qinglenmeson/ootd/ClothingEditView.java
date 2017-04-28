@@ -161,7 +161,6 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
         // Shows the color
         colorView = (ImageView) this.findViewById(R.id.clothingedit_Color);
         colorView.setBackgroundColor(clothing.getColor());
-
         colorPickerView = (ColorPickerView) this.findViewById(R.id.colorPickerView);
         colorPickerView.setColorListener(new ColorPickerView.ColorListener() {
             @Override
