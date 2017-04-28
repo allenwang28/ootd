@@ -42,6 +42,6 @@ public class ClothingAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        ((ViewPager)container).removeView((ClothingAddView)object);
+        ((ViewPager)container).removeView((ClothingEditView)object);
     }
 }

@@ -2,6 +2,7 @@ package com.qinglenmeson.ootd;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.PopupMenu;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -21,18 +22,75 @@ import java.util.Map;
 public class Closet {
     private static Closet mInstance = null;
 
-    private String fileName = "CLOSET.txt";
+    private final String CLOTHES_LIST_BASE = "CLOSET-CLOTHES-%s.txt";
+    private final String OUTFIT_LIST_BASE = "CLOSET-OUTFIT-%s.txt";
+    private String userName = "";
 
     private List<Clothing> mClothingList;
     private Map<Category, List<Clothing>> mClothingMap;
+    private List<Outfit> mOutfitList;
 
     private Closet() {
-        System.out.println("Closet Initializing");
+        Log.d("Closet", "Initializing");
+        loadFromMemory();
+    }
+
+    private String getClothesListFileName() {
+        return String.format(CLOTHES_LIST_BASE, userName);
+    }
+
+    private String getOutfitListFileName() {
+        return String.format(OUTFIT_LIST_BASE, userName);
     }
 
     private void addClothing(Clothing clothing) {
+        clothing.setId(mClothingList.size());
         mClothingList.add(clothing);
         mClothingMap.get(clothing.getCategory()).add(clothing);
+    }
+
+    // NOTE - this needs to be run after loading clothing from memory
+    private void loadOutfitsFromMemory() {
+        mOutfitList = new ArrayList<>();
+
+        StringBuffer sBuff = new StringBuffer("");
+        String[] tempSplit;
+
+        try {
+            FileInputStream fin = App.getContext().openFileInput(getOutfitListFileName());
+            InputStreamReader isr = new InputStreamReader ( fin ) ;
+            BufferedReader buffReader = new BufferedReader ( isr ) ;
+
+            String readString = buffReader.readLine ( ) ;
+            while ( readString != null ) {
+                sBuff.append(readString);
+                readString = buffReader.readLine ( ) ;
+            }
+            fin.close();
+            isr.close () ;
+        } catch ( IOException ioe ) {
+            ioe.printStackTrace ( ) ;
+        }
+        tempSplit = sBuff.toString().trim().split("/split/");
+
+        int words = 0;
+
+        int numCategories = Category.values().length;
+
+        while(words + numCategories - 1 < tempSplit.length) {
+            Map<Category, Clothing> newOutfitMap = new HashMap<>();
+            for (int i = 0; i < numCategories; ++i) {
+                String v = tempSplit[i];
+                int val = Integer.valueOf(v);
+                if (val != -1) {
+                    Clothing clothing = mClothingList.get(val);
+                    newOutfitMap.put(clothing.getCategory(), clothing);
+                }
+            }
+            Outfit outfit = new Outfit(newOutfitMap);
+            mOutfitList.add(outfit);
+            words = words + numCategories;
+        }
     }
 
     private void loadClothesFromMemory() {
@@ -47,7 +105,7 @@ public class Closet {
         String[] tempSplit;
 
         try {
-            FileInputStream fin = App.getContext().openFileInput(fileName);
+            FileInputStream fin = App.getContext().openFileInput(getClothesListFileName());
             InputStreamReader isr = new InputStreamReader ( fin ) ;
             BufferedReader buffreader = new BufferedReader ( isr ) ;
 
@@ -65,8 +123,8 @@ public class Closet {
 
         int words = 0;
 
-
         while(words+6 < tempSplit.length) {
+            // TODO - why aren't we saving the number of times worn?
             String name = tempSplit[words];
             String category = tempSplit[words+1];
             String warmth = tempSplit[words+2];
@@ -95,9 +153,14 @@ public class Closet {
         }
     }
 
-    private void resetMemory() {
+    private void loadFromMemory() {
+        loadClothesFromMemory();
+        loadOutfitsFromMemory();
+    }
+
+    private void resetClothingCloset() {
         try {
-            FileOutputStream fos = App.getContext().openFileOutput(fileName, Context.MODE_PRIVATE);
+            FileOutputStream fos = App.getContext().openFileOutput(getClothesListFileName(), Context.MODE_PRIVATE);
             fos.write("".getBytes());
             fos.close();
         } catch(Exception e) {
@@ -105,18 +168,57 @@ public class Closet {
         }
     }
 
+    private void resetOutfitCloset() {
+        try {
+            FileOutputStream fos = App.getContext().openFileOutput(getOutfitListFileName(), Context.MODE_PRIVATE);
+            fos.write("".getBytes());
+            fos.close();
+        } catch(Exception e) {
+            Log.e("ClothingActivity", e.toString());
+        }
+    }
+
+    private void resetMemory() {
+        resetClothingCloset();
+        resetOutfitCloset();
+    }
+
     private void saveClothingToMemory(Clothing clothing) {
+        // TODO - why aren't we saving the number of times worn?
         String string = clothing.getName() + "/split/" + clothing.getCategory().toString() + "/split/"
                 + clothing.getWarmth().toString() + "/split/" + clothing.getOccasion().toString() + "/split/"
                 + clothing.getCleanliness().toString() + "/split/" + clothing.getColor() + "/split/"
                 + clothing.getPhoto() + "/split/";
         try {
-            FileOutputStream fos = App.getContext().openFileOutput(fileName, Context.MODE_APPEND);
+            FileOutputStream fos = App.getContext().openFileOutput(getClothesListFileName(), Context.MODE_APPEND);
             fos.write(string.getBytes());
             fos.close();
         } catch(Exception e) {
             Log.e("ClothingActivity", e.toString());
         }
+    }
+
+    public void saveOutfitToMemory(Outfit outfit) {
+        Map<Category, Clothing> outfitMap = outfit.getClothingMap();
+        StringBuffer strBuff = new StringBuffer();
+
+        for (Category c : Category.values()) {
+            if (outfitMap.containsKey(c)) {
+                 strBuff.append(outfitMap.get(c).getId() + "/split/");
+            } else {
+                 strBuff.append(-1 + "/split/");
+            }
+        }
+
+        String string = strBuff.toString();
+        try {
+            FileOutputStream fos = App.getContext().openFileOutput(getOutfitListFileName(), Context.MODE_APPEND);
+            fos.write(string.getBytes());
+            fos.close();
+        } catch(Exception e) {
+            Log.e("ClothingActivity", e.toString());
+        }
+
     }
 
     private void saveAllClothingToMemory() {
@@ -131,6 +233,12 @@ public class Closet {
         saveClothingToMemory(clothing);
     }
 
+    // Saves an outfit to both internal storage and local lists
+    public void saveOutfit(Outfit outfit) {
+        mOutfitList.add(outfit);
+        saveOutfitToMemory(outfit);
+    }
+
     public List<Clothing> getClothesFromCategory(Category c) {
         return mClothingMap.get(c);
     }
@@ -138,7 +246,6 @@ public class Closet {
     public static Closet getInstance() {
         if (mInstance == null) {
             mInstance = new Closet();
-            mInstance.loadClothesFromMemory();
         }
         return mInstance;
     }
@@ -190,4 +297,5 @@ public class Closet {
     public int size() {
         return mClothingList.size();
     }
+
 }

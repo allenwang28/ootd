@@ -94,43 +94,43 @@ public class OutfitPreview extends LinearLayout {
         Map<Category, Clothing> outfitMap = outfit.getClothingMap();
         setStockViews();
 
-        if (outfitMap.containsKey(Category.TSHIRT) && outfitMap.get(Category.TSHIRT).getPhoto() != "") {
+        if (outfitMap.containsKey(Category.TSHIRT)) {
             String photo = outfitMap.get(Category.TSHIRT).getPhoto();
             if (photo != null) {
                 tshirtImageView.setImageURI(android.net.Uri.parse(photo));
             }
         }
-        if (outfitMap.containsKey(Category.SHIRT) && outfitMap.get(Category.SHIRT).getPhoto() != "") {
+        if (outfitMap.containsKey(Category.SHIRT)) {
             String photo = outfitMap.get(Category.SHIRT).getPhoto();
             if (photo != null) {
                 shirtImageView.setImageURI(android.net.Uri.parse(photo));
             }
         }
-        if (outfitMap.containsKey(Category.SHOES) && outfitMap.get(Category.SHOES).getPhoto() != "") {
+        if (outfitMap.containsKey(Category.SHOES)) {
             String photo = outfitMap.get(Category.SHOES).getPhoto();
             if (photo != null) {
                 shoesImageView.setImageURI(android.net.Uri.parse(photo));
             }
         }
-        if (outfitMap.containsKey(Category.JACKET) && outfitMap.get(Category.JACKET).getPhoto() != "") {
+        if (outfitMap.containsKey(Category.JACKET)) {
             String photo = outfitMap.get(Category.JACKET).getPhoto();
             if (photo != null) {
                 jacketImageView.setImageURI(android.net.Uri.parse(photo));
             }
         }
-        if (outfitMap.containsKey(Category.SWEATER) && outfitMap.get(Category.SWEATER).getPhoto() != "") {
+        if (outfitMap.containsKey(Category.SWEATER)) {
             String photo = outfitMap.get(Category.SWEATER).getPhoto();
             if (photo != null) {
                 sweaterImageView.setImageURI(android.net.Uri.parse(photo));
             }
         }
-        if (outfitMap.containsKey(Category.SOCKS) && outfitMap.get(Category.SOCKS).getPhoto() != "") {
+        if (outfitMap.containsKey(Category.SOCKS)) {
             String photo = outfitMap.get(Category.SOCKS).getPhoto();
             if (photo != null) {
                 socksImageView.setImageURI(android.net.Uri.parse(photo));
             }
         }
-        if (outfitMap.containsKey(Category.PANTS) && outfitMap.get(Category.PANTS).getPhoto() != "") {
+        if (outfitMap.containsKey(Category.PANTS)) {
             String photo = outfitMap.get(Category.PANTS).getPhoto();
             if (photo != null) {
                 pantsImageView.setImageURI(android.net.Uri.parse(photo));

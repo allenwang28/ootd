@@ -16,8 +16,8 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 public class GenerateOutfitActivity extends AppCompatActivity {
-    private Button shuffleButton;
     private OutfitPreview outfitPreview;
+    private Button acceptButton;
     private Day day;
     private Outfit outfit;
 
@@ -46,14 +46,18 @@ public class GenerateOutfitActivity extends AppCompatActivity {
         outfitPreview = (OutfitPreview)findViewById(R.id.generate_outfit_preview);
         outfitPreview.setOutfit(outfit);
 
-        shuffleButton = (Button)findViewById(R.id.generate_outfit_shuffle);
-        shuffleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                outfit = Outfit.generate(day);
-                outfitPreview.setOutfit(outfit);
-            }
-        });
+        acceptButton = (Button)findViewById(R.id.generate_outfit_accept);
+    }
+
+    public void shuffle(View view) {
+        outfit = Outfit.generate(day);
+        outfitPreview.setOutfit(outfit);
+        acceptButton.setVisibility(View.VISIBLE);
+    }
+
+    public void accept(View view) {
+        Closet closet = Closet.getInstance();
+        closet.saveOutfit(outfit);
     }
 }
 

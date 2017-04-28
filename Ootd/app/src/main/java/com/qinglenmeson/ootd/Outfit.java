@@ -31,13 +31,21 @@ public class Outfit {
     }
 
     private Map<Category, Clothing> clothingMap;
+
     public Outfit() {
         clothingMap = new HashMap<>();
     }
 
+    public Outfit(Map<Category, Clothing> clothingMap) {
+        this.clothingMap = clothingMap;
+    }
 
     public Map<Category, Clothing> getClothingMap() {
         return clothingMap;
+    }
+
+    public void setClothingMap(Map<Category, Clothing> clothingMap) {
+        this.clothingMap = clothingMap;
     }
 
     public void incrementWear() {

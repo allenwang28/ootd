@@ -20,12 +20,20 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginBottom="2dp"
-            android:text="Shuffle" />
+            android:text="Shuffle"
+            android:onClick="shuffle" />
         <com.qinglenmeson.ootd.OutfitPreview
             android:id="@+id/generate_outfit_preview"
             android:layout_width="match_parent"
             android:layout_gravity="center"
             android:layout_height="wrap_content"></com.qinglenmeson.ootd.OutfitPreview>
-
+        <Button
+            android:id="@+id/generate_outfit_accept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Accept"
+            android:onClick="accept"
+            android:visibility="gone"
+            />
     </LinearLayout>
 </RelativeLayout>
