@@ -14,7 +14,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Name"/>
-                <EditText android:id="@+id/clothingedit_EditName"
+                <EditText android:id="@+id/clothingadd_EditName"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:paddingRight="40dp"
@@ -26,7 +26,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Cleanliness"/>
-                <Spinner android:id="@+id/clothingedit_ChangeCleanliness"
+                <Spinner android:id="@+id/clothingadd_ChangeCleanliness"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     />
@@ -40,17 +40,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <Button
-                        android:id="@+id/clothingedit_MinusWear"
+                        android:id="@+id/clothingadd_MinusWear"
                         android:layout_width="30dp"
                         android:layout_height="wrap_content"
                         android:text="-"/>
                     <TextView
-                        android:id="@+id/clothingedit_WearIndicator"
+                        android:id="@+id/clothingadd_WearIndicator"
                         android:layout_width="50dp"
                         android:gravity="center"
                         android:layout_height="wrap_content" />
                     <Button
-                        android:id="@+id/clothingedit_PlusWear"
+                        android:id="@+id/clothingadd_PlusWear"
                         android:layout_width="30dp"
                         android:layout_height="wrap_content"
                         android:text="+"/>
@@ -61,7 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Category"/>
-                <Spinner android:id="@+id/clothingedit_ChangeCategory"
+                <Spinner android:id="@+id/clothingadd_ChangeCategory"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     />
@@ -71,11 +71,11 @@
                     android:layout_height="wrap_content"
                     android:text="Image"/>
                 <ImageView
-                    android:id="@+id/clothingedit_Image"
+                    android:id="@+id/clothingadd_Image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <Button
-                    android:id="@+id/clothingedit_SetImage"
+                    android:id="@+id/clothingadd_SetImage"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="Save Image"/>
@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:text="Color"/>
                 <ImageView
-                    android:id="@+id/clothingedit_Color"
+                    android:id="@+id/clothingadd_Color"
                     android:layout_width="50dp"
                     android:layout_height="50dp" />
                 <com.skydoves.colorpickerview.ColorPickerView
@@ -99,7 +99,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Warmth"/>
-                <Spinner android:id="@+id/clothingedit_ChangeWarmth"
+                <Spinner android:id="@+id/clothingadd_ChangeWarmth"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     />
@@ -108,21 +108,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Occasion"/>
-                <Spinner android:id="@+id/clothingedit_ChangeOccasion"
+                <Spinner android:id="@+id/clothingadd_ChangeOccasion"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     />
-                <Button
-                    android:id="@+id/clothingedit_update"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="Update"/>
-                <Button
-                    android:id="@+id/clothingedit_remove"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="Remove"/>
-            </LinearLayout>
+    </LinearLayout>
         </ScrollView>
     </RelativeLayout>
 </merge>

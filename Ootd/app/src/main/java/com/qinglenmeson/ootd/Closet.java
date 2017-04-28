@@ -153,6 +153,28 @@ public class Closet {
         }
     }
 
+    public void removeClothing(String name) {
+        Clothing c = null;
+        for(Clothing clothing : mClothingList) {
+            if(clothing.getName() == name) {
+                c = clothing;
+                break;
+            }
+        }
+        if(c == null) {
+            return;
+        }
+        if (!mClothingMap.get(c.getCategory()).contains(c)) {
+            return;
+        }
+        mClothingList.remove(c);
+        mClothingMap.get(c.getCategory()).remove(c);
+        resetMemory();
+        for (Clothing mC : mClothingList) {
+            saveClothingToMemory(mC);
+        }
+    }
+
     public void reset() {
         resetMemory();
         mClothingList = new ArrayList<>();

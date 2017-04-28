@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class ClothingActivity extends AppCompatActivity {
-    private ClothingEditView clothingEditView;
+    private ClothingAddView clothingAddView;
     private Clothing clothing;
     private Button addButton;
 
@@ -18,15 +18,15 @@ public class ClothingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clothing);
 
-        clothingEditView = (ClothingEditView) findViewById(R.id.clothing_clothing_view);
+        clothingAddView = (ClothingAddView) findViewById(R.id.clothing_clothing_view);
         clothing = new Clothing();
 
-        clothingEditView.setClothing(clothing);
+        clothingAddView.setClothing(clothing);
         addButton = (Button)findViewById(R.id.clothing_add_view);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clothing = clothingEditView.getClothing();
+                clothing = clothingAddView.getClothing();
 
                 Closet closet = Closet.getInstance();
                 closet.saveClothing(clothing);
@@ -34,7 +34,7 @@ public class ClothingActivity extends AppCompatActivity {
                 Log.d("ClothingActivity", String.format("Added clothing %s \n\n Resetting the clothing object now", clothing.toString()));
                 clothing = new Clothing();
                 Log.d("ClothingActivity", String.format("Clothing is now %s", clothing.toString()));
-                clothingEditView.setClothing(clothing);
+                clothingAddView.setClothing(clothing);
                 // Show notification
                 Snackbar.make(findViewById(R.id.clothing_add_view), "Clothing added",
                         Snackbar.LENGTH_SHORT)

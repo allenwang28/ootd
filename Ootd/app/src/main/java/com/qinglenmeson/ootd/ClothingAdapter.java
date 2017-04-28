@@ -1,15 +1,11 @@
 package com.qinglenmeson.ootd;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,6 +42,6 @@ public class ClothingAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        ((ViewPager)container).removeView((ClothingEditView)object);
+        ((ViewPager)container).removeView((ClothingAddView)object);
     }
 }
