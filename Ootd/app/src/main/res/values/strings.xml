@@ -4,14 +4,10 @@
     <string name="take_picture">Take picture</string>
 
     <string name="cleanliness1">Clean</string>
-    <string name="cleanliness2">Dirty1</string>
-    <string name="cleanliness3">Dirty2</string>
-    <string name="cleanliness4">Dirty3</string>
+    <string name="cleanliness2">Dirty</string>
     <string-array name="cleanliness_array">
         <item>@string/cleanliness1</item>
         <item>@string/cleanliness2</item>
-        <item>@string/cleanliness3</item>
-        <item>@string/cleanliness4</item>
     </string-array>
 
     <string name="fit1">Tight</string>
@@ -27,15 +23,21 @@
         <item>@string/fit5</item>
     </string-array>
 
-    <string name="category1">Blouse</string>
-    <string name="category2">Shirt</string>
-    <string name="category3">Sweater</string>
-    <string name="category4">Pants</string>
+    <string name="category1">Shirt</string>
+    <string name="category2">Sweater</string>
+    <string name="category3">Pants</string>
+    <string name="category4">Jacket</string>
+    <string name="category5">Socks</string>
+    <string name="category6">Shoes</string>
+    <string name="category7">Tshirt</string>
     <string-array name="category_array">
         <item>@string/category1</item>
         <item>@string/category2</item>
         <item>@string/category3</item>
         <item>@string/category4</item>
+        <item>@string/category5</item>
+        <item>@string/category6</item>
+        <item>@string/category7</item>
     </string-array>
 
     <string name="warmth1">Cold</string>

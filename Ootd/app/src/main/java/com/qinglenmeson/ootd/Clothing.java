@@ -29,7 +29,8 @@ public class Clothing {
         this.occasion = Occasion.ATHLETIC;
         this.timesWorn = 0;
         this.cleanliness = Cleanliness.CLEAN;
-        this.color = -16777216;
+        //this.color = -16777216;
+        this.color = 0x000000;
     }
 
     public Clothing(String name, Category category, Warmth warmth, Occasion occasion) {

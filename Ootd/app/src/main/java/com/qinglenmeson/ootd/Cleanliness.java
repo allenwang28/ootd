@@ -6,9 +6,8 @@ package com.qinglenmeson.ootd;
  */
 public enum Cleanliness {
     CLEAN(R.string.cleanliness1),
-    DIRTY1(R.string.cleanliness2),
-    DIRTY2(R.string.cleanliness3),
-    DIRTY3(R.string.cleanliness4);
+    DIRTY(R.string.cleanliness2);
+
 
     private int resourceId;
 

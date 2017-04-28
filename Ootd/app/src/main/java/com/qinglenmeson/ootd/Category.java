@@ -7,10 +7,14 @@ package com.qinglenmeson.ootd;
 //We won't use this one, instead I'm making subclasses of clothing that essentially replaces this
 
 public enum Category {
-    BLOUSE(R.string.category1),
-    SHIRT(R.string.category2),
-    SWEATER(R.string.category3),
-    PANTS(R.string.category4);
+    SHIRT(R.string.category1),
+    SWEATER(R.string.category2),
+    PANTS(R.string.category3),
+    JACKET(R.string.category4),
+    SOCKS(R.string.category5),
+    SHOES(R.string.category6),
+    TSHIRT(R.string.category7);
+
     // TODO - add more categories and update strings.xml
 
     private int resourceId;
