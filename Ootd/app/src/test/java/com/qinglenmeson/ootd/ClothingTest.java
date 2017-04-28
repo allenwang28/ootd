@@ -45,12 +45,12 @@ public class ClothingTest {
     // as makes sure the different Objects for Clothing characteristics work well
     @Test
     public void sampleClothingTest() throws Exception {
-        Clothing clothing = new Clothing("pantaloons", Category.PANTS, Warmth.HOT, Occasion.CASUAL, Cleanliness.DIRTY1, Color.RED,  "pantaloons.jpg");
+        Clothing clothing = new Clothing("pantaloons", Category.PANTS, Warmth.HOT, Occasion.CASUAL, Cleanliness.DIRTY, Color.RED,  "pantaloons.jpg");
         assertEquals("pantaloons", clothing.getName());
         assertEquals(Category.PANTS, clothing.getCategory());
         assertEquals(Warmth.HOT, clothing.getWarmth());
         assertEquals(Occasion.CASUAL, clothing.getOccasion());
-        assertEquals(Cleanliness.DIRTY1, clothing.getCleanliness());
+        assertEquals(Cleanliness.DIRTY, clothing.getCleanliness());
         assertEquals(Color.RED, clothing.getColor());
         assertEquals("pantaloons.jpg", clothing.getPhoto());
         assertEquals(0, clothing.getTimesWorn());
@@ -65,19 +65,19 @@ public class ClothingTest {
         assertEquals("firstshirt.jpg", clothing2.getPhoto());
         assertEquals(0, clothing2.getTimesWorn());
 
-        Clothing clothing3 = new Clothing("sweat", Category.SWEATER, Warmth.WARM, Occasion.FORMAL, Cleanliness.DIRTY3, Color.CYAN,  "sweat.jpg");
+        Clothing clothing3 = new Clothing("sweat", Category.SWEATER, Warmth.WARM, Occasion.FORMAL, Cleanliness.DIRTY, Color.CYAN,  "sweat.jpg");
         assertEquals("sweat", clothing3.getName());
         assertEquals(Category.SWEATER, clothing3.getCategory());
         assertEquals(Warmth.WARM, clothing3.getWarmth());
         assertEquals(Occasion.FORMAL, clothing3.getOccasion());
-        assertEquals(Cleanliness.DIRTY3, clothing3.getCleanliness());
+        assertEquals(Cleanliness.DIRTY, clothing3.getCleanliness());
         assertEquals(Color.CYAN, clothing3.getColor());
         assertEquals("sweat.jpg", clothing3.getPhoto());
         assertEquals(0, clothing3.getTimesWorn());
 
-        Clothing clothing4 = new Clothing("la blouse", Category.BLOUSE, Warmth.HOT, Occasion.SWIM);
-        assertEquals("la blouse", clothing4.getName());
-        assertEquals(Category.BLOUSE, clothing4.getCategory());
+        Clothing clothing4 = new Clothing("la pants", Category.PANTS, Warmth.HOT, Occasion.SWIM);
+        assertEquals("la pants", clothing4.getName());
+        assertEquals(Category.PANTS, clothing4.getCategory());
         assertEquals(Warmth.HOT, clothing4.getWarmth());
         assertEquals(Occasion.SWIM, clothing4.getOccasion());
         //Defaults

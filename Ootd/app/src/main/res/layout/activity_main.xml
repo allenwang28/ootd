@@ -86,6 +86,12 @@
             android:layout_height="wrap_content"
             android:text="Clear Closet"
             android:onClick="reset" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Laundry"
+            android:onClick="laundry"/>
         </LinearLayout>
+
 
 </RelativeLayout>

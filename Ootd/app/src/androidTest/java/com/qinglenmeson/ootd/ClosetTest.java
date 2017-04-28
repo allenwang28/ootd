@@ -46,7 +46,7 @@ public class ClosetTest {
 
     @Test
     public void addSingleClothing() {
-        Clothing clothing = new Clothing("pantaloons", Category.PANTS, Warmth.HOT, Occasion.CASUAL, Cleanliness.DIRTY1, Color.RED,  "pantaloons.jpg");
+        Clothing clothing = new Clothing("pantaloons", Category.PANTS, Warmth.HOT, Occasion.CASUAL, Cleanliness.DIRTY, Color.RED,  "pantaloons.jpg");
 
         closet.saveClothing(clothing);
         List<Clothing> list = closet.getClothingList();
@@ -58,7 +58,7 @@ public class ClosetTest {
         assertEquals(Category.PANTS, _clothing.getCategory());
         assertEquals(Warmth.HOT, _clothing.getWarmth());
         assertEquals(Occasion.CASUAL, _clothing.getOccasion());
-        assertEquals(Cleanliness.DIRTY1, _clothing.getCleanliness());
+        assertEquals(Cleanliness.DIRTY, _clothing.getCleanliness());
         assertEquals(Color.RED, _clothing.getColor());
         assertEquals("pantaloons.jpg", _clothing.getPhoto());
         assertEquals(0, _clothing.getTimesWorn());
@@ -66,10 +66,10 @@ public class ClosetTest {
 
     @Test
     public void addMultClothing() {
-        Clothing clothing = new Clothing("pantaloons", Category.PANTS, Warmth.HOT, Occasion.CASUAL, Cleanliness.DIRTY1, Color.RED,  "pantaloons.jpg");
+        Clothing clothing = new Clothing("pantaloons", Category.PANTS, Warmth.HOT, Occasion.CASUAL, Cleanliness.DIRTY, Color.RED,  "pantaloons.jpg");
         Clothing clothing2 = new Clothing("firstshirt", Category.SHIRT, Warmth.COLD, Occasion.FORMAL, Cleanliness.CLEAN, Color.BLUE,  "firstshirt.jpg");
-        Clothing clothing3 = new Clothing("sweat", Category.SWEATER, Warmth.WARM, Occasion.FORMAL, Cleanliness.DIRTY3, Color.CYAN,  "sweat.jpg");
-        Clothing clothing4 = new Clothing("la blouse", Category.BLOUSE, Warmth.HOT, Occasion.SWIM);
+        Clothing clothing3 = new Clothing("sweat", Category.SWEATER, Warmth.WARM, Occasion.FORMAL, Cleanliness.DIRTY, Color.CYAN,  "sweat.jpg");
+        Clothing clothing4 = new Clothing("la pants", Category.PANTS, Warmth.HOT, Occasion.SWIM);
 
         closet.saveClothing(clothing);
         closet.saveClothing(clothing2);
@@ -87,7 +87,7 @@ public class ClosetTest {
         assertEquals(Category.PANTS, _clothing.getCategory());
         assertEquals(Warmth.HOT, _clothing.getWarmth());
         assertEquals(Occasion.CASUAL, _clothing.getOccasion());
-        assertEquals(Cleanliness.DIRTY1, _clothing.getCleanliness());
+        assertEquals(Cleanliness.DIRTY, _clothing.getCleanliness());
         assertEquals(Color.RED, _clothing.getColor());
         assertEquals("pantaloons.jpg", _clothing.getPhoto());
         assertEquals(0, _clothing.getTimesWorn());
@@ -105,13 +105,13 @@ public class ClosetTest {
         assertEquals(Category.SWEATER, _clothing3.getCategory());
         assertEquals(Warmth.WARM, _clothing3.getWarmth());
         assertEquals(Occasion.FORMAL, _clothing3.getOccasion());
-        assertEquals(Cleanliness.DIRTY3, _clothing3.getCleanliness());
+        assertEquals(Cleanliness.DIRTY, _clothing3.getCleanliness());
         assertEquals(Color.CYAN, _clothing3.getColor());
         assertEquals("sweat.jpg", _clothing3.getPhoto());
         assertEquals(0, _clothing3.getTimesWorn());
 
-        assertEquals("la blouse", _clothing4.getName());
-        assertEquals(Category.BLOUSE, _clothing4.getCategory());
+        assertEquals("la pants", _clothing4.getName());
+        assertEquals(Category.PANTS, _clothing4.getCategory());
         assertEquals(Warmth.HOT, _clothing4.getWarmth());
         assertEquals(Occasion.SWIM, _clothing4.getOccasion());
         assertEquals(Color.BLACK, _clothing4.getColor());
@@ -122,10 +122,10 @@ public class ClosetTest {
 
     @Test
     public void removeClothing() {
-        Clothing clothing = new Clothing("pantaloons", Category.PANTS, Warmth.HOT, Occasion.CASUAL, Cleanliness.DIRTY1, Color.RED, "pantaloons.jpg");
+        Clothing clothing = new Clothing("pantaloons", Category.PANTS, Warmth.HOT, Occasion.CASUAL, Cleanliness.DIRTY, Color.RED, "pantaloons.jpg");
         Clothing clothing2 = new Clothing("firstshirt", Category.SHIRT, Warmth.COLD, Occasion.FORMAL, Cleanliness.CLEAN, Color.BLUE, "firstshirt.jpg");
-        Clothing clothing3 = new Clothing("sweat", Category.SWEATER, Warmth.WARM, Occasion.FORMAL, Cleanliness.DIRTY3, Color.CYAN, "sweat.jpg");
-        Clothing clothing4 = new Clothing("la blouse", Category.BLOUSE, Warmth.HOT, Occasion.SWIM);
+        Clothing clothing3 = new Clothing("sweat", Category.SWEATER, Warmth.WARM, Occasion.FORMAL, Cleanliness.DIRTY, Color.CYAN, "sweat.jpg");
+        Clothing clothing4 = new Clothing("la pants", Category.PANTS, Warmth.HOT, Occasion.SWIM);
 
         closet.saveClothing(clothing);
         closet.saveClothing(clothing2);

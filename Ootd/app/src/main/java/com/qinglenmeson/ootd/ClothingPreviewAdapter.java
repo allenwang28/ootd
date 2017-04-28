@@ -84,10 +84,33 @@ public class ClothingPreviewAdapter extends RecyclerView.Adapter<ClothingPreview
         String photo = clothing.getPhoto();
         if(photo != null) {
             System.out.println(photo);
-            imageView.setImageURI(null);
             imageView.setImageURI(android.net.Uri.parse(photo));
         } else {
-            imageView.setImageResource(R.drawable.blue_jeans);
+            switch (clothing.getCategory()) {
+                case SHIRT:
+                    imageView.setImageResource(R.drawable.shirt);
+                    break;
+                case SWEATER:
+                    imageView.setImageResource(R.drawable.sweater);
+                    break;
+                case PANTS:
+                    imageView.setImageResource(R.drawable.pants);
+                    break;
+                case JACKET:
+                    imageView.setImageResource(R.drawable.jacket);
+                    break;
+                case SOCKS:
+                    imageView.setImageResource(R.drawable.socks);
+                    break;
+                case SHOES:
+                    imageView.setImageResource(R.drawable.shoes);
+                    break;
+                case TSHIRT:
+                    imageView.setImageResource(R.drawable.tshirt);
+                    break;
+                default:
+                    imageView.setImageResource(R.drawable.tshirt);
+            }
         }
     }
 

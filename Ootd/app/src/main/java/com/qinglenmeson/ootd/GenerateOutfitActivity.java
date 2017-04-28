@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -16,23 +17,15 @@ import java.util.concurrent.ExecutionException;
 
 public class GenerateOutfitActivity extends AppCompatActivity {
     private Button shuffleButton;
+    private OutfitPreview outfitPreview;
+    private Day day;
+    private Outfit outfit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_outfit);
-
-        //create day object for today
-
-        shuffleButton = (Button)findViewById(R.id.generate_outfit_shuffle);
-        shuffleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO - fill this in
-                //generate outfit for today;
-                //create new view, show outfit to user
-            }
-        });
 
         String weatherInfo = "";
 
@@ -45,11 +38,22 @@ public class GenerateOutfitActivity extends AppCompatActivity {
             Log.e("GenerateOutfitActivity", e.getMessage());
         }
 
-        Day day = new Day(weatherInfo);
-
+        day = new Day(weatherInfo);
         Log.d("GenerateOutfitActivity", day.toString());
 
-        // TODO - add to the XML how we're going to create a preview of the outfit
+        outfit = new Outfit();
+
+        outfitPreview = (OutfitPreview)findViewById(R.id.generate_outfit_preview);
+        outfitPreview.setOutfit(outfit);
+
+        shuffleButton = (Button)findViewById(R.id.generate_outfit_shuffle);
+        shuffleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                outfit = Outfit.generate(day);
+                outfitPreview.setOutfit(outfit);
+            }
+        });
     }
 }
 
