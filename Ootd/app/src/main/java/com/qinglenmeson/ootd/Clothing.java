@@ -124,5 +124,5 @@ public class Clothing {
 
     public String getPhoto() {return photo;}
 
-    //Make this an interface at some point, with a isMatch() function using Jame's algo, implemented by our little subclasses
+    // TODO - Make this an interface at some point, with a isMatch() function using Jame's algo, implemented by our little subclasses
 }

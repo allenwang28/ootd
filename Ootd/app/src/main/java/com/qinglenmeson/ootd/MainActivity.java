@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import java.io.BufferedReader;
@@ -31,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
         closet = Closet.getInstance();
 
         // Set up the recyclerviews
-
-
         clothingListView = (RecyclerView) findViewById(R.id.main_ClothingList);
         clothingListView.setLayoutManager(clothingLayoutManager);
 
@@ -73,5 +72,10 @@ public class MainActivity extends AppCompatActivity {
     public void reset(View view) {
         closet.reset();
         recreate();
+    }
+
+    public void laundry(View view) {
+        closet.doLaundry();
+        Log.d("MainActivity", "Did laundry");
     }
 }
