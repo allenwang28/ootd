@@ -27,6 +27,7 @@ public class ChangeUserActivity extends AppCompatActivity {
         Snackbar.make(findViewById(R.id.changeuser_button), String.format("Changed users to %s", user),
                 Snackbar.LENGTH_SHORT)
                 .show();
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     @Override
