@@ -24,7 +24,7 @@ public class Closet {
 
     private final String CLOTHES_LIST_BASE = "CLOSET-CLOTHES-%s.txt";
     private final String OUTFIT_LIST_BASE = "CLOSET-OUTFIT-%s.txt";
-    private String owner = "";
+    private String userName = "";
 
     private List<Clothing> mClothingList;
     private Map<Category, List<Clothing>> mClothingMap;
@@ -36,11 +36,11 @@ public class Closet {
     }
 
     private String getClothesListFileName() {
-        return String.format(CLOTHES_LIST_BASE, owner);
+        return String.format(CLOTHES_LIST_BASE, userName);
     }
 
     private String getOutfitListFileName() {
-        return String.format(OUTFIT_LIST_BASE, owner);
+        return String.format(OUTFIT_LIST_BASE, userName);
     }
 
     private void addClothing(Clothing clothing) {
@@ -243,18 +243,10 @@ public class Closet {
         return mClothingMap.get(c);
     }
 
-
     public static Closet getInstance() {
-        if(mInstance == null) {
+        if (mInstance == null) {
             mInstance = new Closet();
         }
-        return mInstance;
-    }
-
-    public static Closet getInstance(String string) {
-        owner = string;
-        mInstance = new Closet();
-        mInstance.loadClothesFromMemory();
         return mInstance;
     }
 
@@ -306,11 +298,4 @@ public class Closet {
         return mClothingList.size();
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
 }

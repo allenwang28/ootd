@@ -22,9 +22,10 @@ import java.util.Map;
 public class Closet {
     private static Closet mInstance = null;
 
+<<<<<<< HEAD
     private final String CLOTHES_LIST_BASE = "CLOSET-CLOTHES-%s.txt";
     private final String OUTFIT_LIST_BASE = "CLOSET-OUTFIT-%s.txt";
-    private String owner = "";
+    private String userName = "";
 
     private List<Clothing> mClothingList;
     private Map<Category, List<Clothing>> mClothingMap;
@@ -36,11 +37,22 @@ public class Closet {
     }
 
     private String getClothesListFileName() {
-        return String.format(CLOTHES_LIST_BASE, owner);
+        return String.format(CLOTHES_LIST_BASE, userName);
     }
 
     private String getOutfitListFileName() {
-        return String.format(OUTFIT_LIST_BASE, owner);
+        return String.format(OUTFIT_LIST_BASE, userName);
+=======
+    private String fileName;
+
+    private List<Clothing> mClothingList;
+    private Map<Category, List<Clothing>> mClothingMap;
+    static String owner = "";
+
+    private Closet() {
+        System.out.println("Closet Initializing");
+        fileName = "CLOSET" + owner + ".txt";
+>>>>>>> master
     }
 
     private void addClothing(Clothing clothing) {
@@ -306,6 +318,8 @@ public class Closet {
         return mClothingList.size();
     }
 
+<<<<<<< HEAD
+=======
     public void setOwner(String owner) {
         this.owner = owner;
     }
@@ -313,4 +327,5 @@ public class Closet {
     public String getOwner() {
         return owner;
     }
+>>>>>>> master
 }
