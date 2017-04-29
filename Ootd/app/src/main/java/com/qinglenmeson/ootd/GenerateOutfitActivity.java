@@ -1,6 +1,8 @@
 package com.qinglenmeson.ootd;
 
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,17 +49,27 @@ public class GenerateOutfitActivity extends AppCompatActivity {
         outfitPreview.setOutfit(outfit);
 
         acceptButton = (Button)findViewById(R.id.generate_outfit_accept);
+
     }
 
     public void shuffle(View view) {
         outfit = Outfit.generate(day);
         outfitPreview.setOutfit(outfit);
         acceptButton.setVisibility(View.VISIBLE);
+
     }
 
     public void accept(View view) {
         Closet closet = Closet.getInstance();
         closet.saveOutfit(outfit);
+        Snackbar.make(findViewById(R.id.generate_outfit_accept), "Added a new outfit",
+                Snackbar.LENGTH_SHORT)
+                .show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, MainActivity.class));
     }
 }
 

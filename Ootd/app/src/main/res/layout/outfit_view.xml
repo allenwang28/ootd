@@ -13,21 +13,21 @@
             android:gravity="center"
             android:orientation="vertical">
             <ImageView
-                android:id="@+id/outfitpreview_Tshirt"
+                android:id="@+id/outfitview_Tshirt"
                 android:maxHeight="120dp"
                 android:maxWidth="100dp"
                 android:adjustViewBounds="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView
-                android:id="@+id/outfitpreview_Shirt"
+                android:id="@+id/outfitview_Shirt"
                 android:maxHeight="120dp"
                 android:maxWidth="100dp"
                 android:adjustViewBounds="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView
-                android:id="@+id/outfitpreview_Shoes"
+                android:id="@+id/outfitview_Shoes"
                 android:maxHeight="120dp"
                 android:maxWidth="100dp"
                 android:adjustViewBounds="true"
@@ -40,28 +40,28 @@
             android:gravity="center"
             android:orientation="vertical">
             <ImageView
-                android:id="@+id/outfitpreview_Jacket"
+                android:id="@+id/outfitview_Jacket"
                 android:maxHeight="120dp"
                 android:maxWidth="100dp"
                 android:adjustViewBounds="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView
-                android:id="@+id/outfitpreview_Sweater"
+                android:id="@+id/outfitview_Sweater"
                 android:maxHeight="120dp"
                 android:maxWidth="100dp"
                 android:adjustViewBounds="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView
-                android:id="@+id/outfitpreview_Socks"
+                android:id="@+id/outfitview_Socks"
                 android:maxHeight="120dp"
                 android:maxWidth="100dp"
                 android:adjustViewBounds="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView
-                android:id="@+id/outfitpreview_Pants"
+                android:id="@+id/outfitview_Pants"
                 android:maxHeight="120dp"
                 android:maxWidth="100dp"
                 android:adjustViewBounds="true"

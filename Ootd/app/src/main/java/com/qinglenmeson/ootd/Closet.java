@@ -221,6 +221,12 @@ public class Closet {
 
     }
 
+    private void saveAllOutfitsToMemory() {
+        for (Outfit o: mOutfitList) {
+            saveOutfit(o);
+        }
+    }
+
     private void saveAllClothingToMemory() {
         for (Clothing c : mClothingList) {
             saveClothingToMemory(c);
@@ -248,13 +254,6 @@ public class Closet {
         if(mInstance == null) {
             mInstance = new Closet();
         }
-        return mInstance;
-    }
-
-    public static Closet getInstance(String string) {
-        owner = string;
-        mInstance = new Closet();
-        mInstance.loadClothesFromMemory();
         return mInstance;
     }
 
@@ -287,6 +286,7 @@ public class Closet {
         for (Category c : Category.values()) {
             mClothingMap.put(c, new ArrayList<Clothing>());
         }
+        mOutfitList = new ArrayList<>();
     }
 
     public void update() {
@@ -298,6 +298,9 @@ public class Closet {
         return mClothingList;
     }
 
+    public List<Outfit> getOutfitList() {
+        return mOutfitList;
+    }
     //public void setClothingList(List<Clothing> clothingList) {
     //    mClothingList = clothingList;
     //}
@@ -307,7 +310,13 @@ public class Closet {
     }
 
     public void setOwner(String owner) {
+        // Save everything to memory first
+        resetMemory();
+        saveAllClothingToMemory();
+        saveAllOutfitsToMemory();
+        // Now switch to another closet
         this.owner = owner;
+        loadFromMemory();
     }
 
     public String getOwner() {

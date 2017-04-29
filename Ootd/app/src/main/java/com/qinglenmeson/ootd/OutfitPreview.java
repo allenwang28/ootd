@@ -1,22 +1,12 @@
 package com.qinglenmeson.ootd;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -39,13 +29,13 @@ public class OutfitPreview extends LinearLayout {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.outfit_view, this);
         Log.d("OutfitPreview", "Initialized View");
-        tshirtImageView = (ImageView)findViewById(R.id.outfitpreview_Tshirt);
-        shirtImageView = (ImageView)findViewById(R.id.outfitpreview_Shirt);
-        shoesImageView = (ImageView)findViewById(R.id.outfitpreview_Shoes);
-        jacketImageView = (ImageView)findViewById(R.id.outfitpreview_Jacket);
-        sweaterImageView = (ImageView)findViewById(R.id.outfitpreview_Sweater);
-        socksImageView = (ImageView)findViewById(R.id.outfitpreview_Socks);
-        pantsImageView = (ImageView)findViewById(R.id.outfitpreview_Pants);
+        tshirtImageView = (ImageView)findViewById(R.id.outfitview_Tshirt);
+        shirtImageView = (ImageView)findViewById(R.id.outfitview_Shirt);
+        shoesImageView = (ImageView)findViewById(R.id.outfitview_Shoes);
+        jacketImageView = (ImageView)findViewById(R.id.outfitview_Jacket);
+        sweaterImageView = (ImageView)findViewById(R.id.outfitview_Sweater);
+        socksImageView = (ImageView)findViewById(R.id.outfitview_Socks);
+        pantsImageView = (ImageView)findViewById(R.id.outfitview_Pants);
         setStockViews();
     }
 

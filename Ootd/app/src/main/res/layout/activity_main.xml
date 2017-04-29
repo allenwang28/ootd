@@ -96,16 +96,8 @@
             android:layout_height="wrap_content"
             android:text="Laundry"
             android:onClick="laundry"/>
-        <EditText android:id="@+id/main_editTitle"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingRight="40dp"
-            android:inputType="text"
-            android:maxLines="1"
-            android:imeOptions="actionDone"
-            />
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Change Closet"
             android:onClick="editTitle"/>

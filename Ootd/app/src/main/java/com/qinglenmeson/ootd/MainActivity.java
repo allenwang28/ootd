@@ -33,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager clothingLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager outfitLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
-        closet = Closet.getInstance(owner);
+        closet = Closet.getInstance();
+        owner = closet.getOwner();
 
         //Title
         TextView title = (TextView) findViewById(R.id.main_title);
@@ -54,12 +55,12 @@ public class MainActivity extends AppCompatActivity {
 
         outfitListView = (RecyclerView) findViewById(R.id.main_OutfitList);
         outfitListView.setLayoutManager(outfitLayoutManager);
-
         outfitListView.setNestedScrollingEnabled(false);
 
-        // TODO - fill this in after the Outfit class is created
-        //OutfitPreviewAdapter outfitPreviewAdapter = new OutfitPreviewAdapter(this, outfitList);
-        //
+        List<Outfit> outfitList = closet.getOutfitList();
+        OutfitPreviewAdapter outfitPreviewAdapter = new OutfitPreviewAdapter(this, outfitList);
+        outfitListView.setAdapter(outfitPreviewAdapter);
+
     }
 
     public void openArchives(View view) {
@@ -95,8 +96,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void editTitle(View view) {
-        EditText editTitle = (EditText) findViewById(R.id.main_editTitle);
-        owner = editTitle.getText().toString();
-        recreate();
+        Intent intent = new Intent(this, ChangeUserActivity.class);
+        startActivity(intent);
     }
 }

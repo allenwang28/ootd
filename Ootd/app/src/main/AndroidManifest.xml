@@ -34,8 +34,9 @@
         </activity>
         <activity android:name=".ArchiveActivity" />
         <activity android:name=".ClothingActivity" />
-        <activity android:name=".AndroidCameraApi"></activity>
-        <activity android:name=".GenerateOutfitActivity"></activity>
+        <activity android:name=".AndroidCameraApi" />
+        <activity android:name=".GenerateOutfitActivity" />
+        <activity android:name=".ChangeUserActivity"></activity>
     </application>
 
 </manifest>
