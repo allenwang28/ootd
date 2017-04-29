@@ -21,13 +21,15 @@ import java.util.Map;
 public class Closet {
     private static Closet mInstance = null;
 
-    private String fileName = "CLOSET.txt";
+    private String fileName;
 
     private List<Clothing> mClothingList;
     private Map<Category, List<Clothing>> mClothingMap;
+    static String owner = "";
 
     private Closet() {
         System.out.println("Closet Initializing");
+        fileName = "CLOSET" + owner + ".txt";
     }
 
     private void addClothing(Clothing clothing) {
@@ -135,11 +137,19 @@ public class Closet {
         return mClothingMap.get(c);
     }
 
+
     public static Closet getInstance() {
-        if (mInstance == null) {
+        if(mInstance == null) {
             mInstance = new Closet();
             mInstance.loadClothesFromMemory();
         }
+        return mInstance;
+    }
+
+    public static Closet getInstance(String string) {
+        owner = string;
+        mInstance = new Closet();
+        mInstance.loadClothesFromMemory();
         return mInstance;
     }
 
@@ -189,5 +199,13 @@ public class Closet {
 
     public int size() {
         return mClothingList.size();
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getOwner() {
+        return owner;
     }
 }

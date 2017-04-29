@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -149,11 +150,7 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
         setImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                File testFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/" + clothing.getName() + ".jpg");
-                if(testFile.toURI() != null) {
-                    clothing.setPhoto(testFile.toURI().toString());
-                    imageView.setImageURI(android.net.Uri.parse(testFile.toURI().toString()));
-                }
+                    imageView.setImageURI(android.net.Uri.parse(clothing.getPhoto()));
             }
         });
 
@@ -168,25 +165,6 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
             public void onColorSelected(int color) {
                 clothing.setColor(colorPickerView.getColor());
                 colorView.setBackgroundColor(clothing.getColor());
-            }
-        });
-
-        update = (Button) this.findViewById(R.id.clothingedit_update);
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Closet closet = Closet.getInstance();
-                closet.removeClothing(clothing);
-                closet.saveClothing(clothing);
-            }
-        });
-
-        remove = (Button) this.findViewById(R.id.clothingedit_remove);
-        remove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Closet closet = Closet.getInstance();
-                closet.removeClothing(clothing);
             }
         });
     }

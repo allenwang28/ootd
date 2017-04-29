@@ -143,7 +143,6 @@ public class ClothingAddView extends LinearLayout implements AdapterView.OnItemS
         if(clothing.getPhoto() != null) {
             imageView.setImageURI(android.net.Uri.parse(clothing.getPhoto()));
         }
-        //TODO - Make this real picture's instead of the last taken
         setImage = (Button) this.findViewById(R.id.clothingadd_SetImage);
         setImage.setOnClickListener(new OnClickListener() {
             @Override
@@ -169,8 +168,6 @@ public class ClothingAddView extends LinearLayout implements AdapterView.OnItemS
                 colorView.setBackgroundColor(clothing.getColor());
             }
         });
-
-        //TODO: Update the database for this piece of clothing, similar to Clothing Activity
     }
 
     @TargetApi(Build.VERSION_CODES.CUPCAKE)

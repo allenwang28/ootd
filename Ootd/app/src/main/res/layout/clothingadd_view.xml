@@ -78,7 +78,7 @@
                     android:id="@+id/clothingadd_SetImage"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="Save Image"/>
+                    android:text="Show Image"/>
 
                 <TextView
                     android:layout_width="match_parent"

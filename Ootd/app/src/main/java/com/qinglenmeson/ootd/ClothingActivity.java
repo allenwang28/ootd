@@ -1,7 +1,9 @@
 package com.qinglenmeson.ootd;
 
 import android.content.Intent;
+import android.os.Environment;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,7 +29,7 @@ public class ClothingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 clothing = clothingAddView.getClothing();
-
+                clothing.setPhoto(Environment.getExternalStorageDirectory().getAbsolutePath()+"/" + clothing.getName() + ".jpg");
                 Closet closet = Closet.getInstance();
                 closet.saveClothing(clothing);
 
@@ -39,6 +41,7 @@ public class ClothingActivity extends AppCompatActivity {
                 Snackbar.make(findViewById(R.id.clothing_add_view), "Clothing added",
                         Snackbar.LENGTH_SHORT)
                         .show();
+                goBack();
             }
         });
 
@@ -50,7 +53,7 @@ public class ClothingActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void goBack(View view) {
+    public void goBack() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

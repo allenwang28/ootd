@@ -1,6 +1,7 @@
 package com.qinglenmeson.ootd;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -8,6 +9,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView clothingListView;
     private RecyclerView outfitListView;
     private Closet closet;
+    private static String owner = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +33,15 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager clothingLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager outfitLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
-        closet = Closet.getInstance();
+        closet = Closet.getInstance(owner);
+
+        //Title
+        TextView title = (TextView) findViewById(R.id.main_title);
+        if(owner.equals("")) {
+            title.setText("Default Closet");
+        } else {
+            title.setText(owner + "'s Closet");
+        }
 
         // Set up the recyclerviews
         clothingListView = (RecyclerView) findViewById(R.id.main_ClothingList);
@@ -77,5 +89,14 @@ public class MainActivity extends AppCompatActivity {
     public void laundry(View view) {
         closet.doLaundry();
         Log.d("MainActivity", "Did laundry");
+        Snackbar.make(findViewById(R.id.activity_main), "Laundry Done",
+                Snackbar.LENGTH_SHORT)
+                .show();
+    }
+
+    public void editTitle(View view) {
+        EditText editTitle = (EditText) findViewById(R.id.main_editTitle);
+        owner = editTitle.getText().toString();
+        recreate();
     }
 }
