@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +26,7 @@ public class OutfitPreviewAdapter extends RecyclerView.Adapter<OutfitPreviewAdap
         public ImageView imageViewTop;
         public ImageView imageViewMid;
         public ImageView imageViewLow;
-        public ImageView[] imageViews = {imageViewTop, imageViewMid, imageViewLow};
+        public TextView nameView;
 
 
         // We also create a constructor that accepts the entire item row
@@ -37,19 +39,16 @@ public class OutfitPreviewAdapter extends RecyclerView.Adapter<OutfitPreviewAdap
             imageViewTop = (ImageView) itemView.findViewById(R.id.outfitpreview_top);
             imageViewMid = (ImageView) itemView.findViewById(R.id.outfitpreview_mid);
             imageViewLow = (ImageView) itemView.findViewById(R.id.outfitpreview_low);
+            nameView = (TextView) itemView.findViewById(R.id.outfitpreview_name);
         }
     }
-
-    // List of all clothes
-    private List<Outfit> mOutfitList;
 
     // Store context for easy access
     private Context mContext;
 
     // Adapter constructor
-    public OutfitPreviewAdapter(Context context, List<Outfit> outfitList) {
+    public OutfitPreviewAdapter(Context context) {
         this.mContext = context;
-        this.mOutfitList = outfitList;
     }
 
     // Allows easy access to context for the RecyclerView
@@ -73,7 +72,8 @@ public class OutfitPreviewAdapter extends RecyclerView.Adapter<OutfitPreviewAdap
     public void setImageViewFromClothing(ImageView imageView, Clothing clothing, Category category) {
         if (clothing != null) {
             String photo = clothing.getPhoto();
-            if(photo != null) {
+            File file = new File(photo);
+            if (photo != null && !photo.equals("") && file.exists()) {
                 System.out.println(photo);
                 imageView.setImageURI(android.net.Uri.parse(photo));
                 return;
@@ -110,7 +110,9 @@ public class OutfitPreviewAdapter extends RecyclerView.Adapter<OutfitPreviewAdap
     @Override
     public void onBindViewHolder(OutfitPreviewAdapter.ViewHolder holder, int position) {
         // Get data model based on position
-        Outfit outfit = mOutfitList.get(position);
+        Closet closet = Closet.getInstance();
+        List<Outfit> outfitList = closet.getOutfitList();
+        Outfit outfit = outfitList.get(position);
         Map<Category, Clothing> outfitMap = outfit.getClothingMap();
         // Set item views based on views and data model...
 
@@ -138,10 +140,13 @@ public class OutfitPreviewAdapter extends RecyclerView.Adapter<OutfitPreviewAdap
         } else {
             setImageViewFromClothing(holder.imageViewLow, null, Category.SHOES);
         }
+
+        holder.nameView.setText(outfit.getName());
     }
 
     @Override
     public int getItemCount() {
-        return mOutfitList.size();
+        Closet closet = Closet.getInstance();
+        return closet.outfitListSize();
     }
 }

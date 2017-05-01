@@ -97,7 +97,7 @@ public class AndroidCameraApi extends AppCompatActivity {
         }
         @Override
         public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-            // Transform you image captured size according to the surface width and height
+            // Transform you image captured clothingListSize according to the surface width and height
         }
         @Override
         public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {

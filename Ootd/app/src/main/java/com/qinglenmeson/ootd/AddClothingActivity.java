@@ -3,14 +3,13 @@ package com.qinglenmeson.ootd;
 import android.content.Intent;
 import android.os.Environment;
 import android.support.design.widget.Snackbar;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-public class ClothingActivity extends AppCompatActivity {
+public class AddClothingActivity extends AppCompatActivity {
     private ClothingAddView clothingAddView;
     private Clothing clothing;
     private Button addButton;
@@ -18,13 +17,13 @@ public class ClothingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_clothing);
+        setContentView(R.layout.activity_add_clothing);
 
-        clothingAddView = (ClothingAddView) findViewById(R.id.clothing_clothing_view);
+        clothingAddView = (ClothingAddView) findViewById(R.id.add_clothing_clothing_view);
         clothing = new Clothing();
 
         clothingAddView.setClothing(clothing);
-        addButton = (Button)findViewById(R.id.clothing_add_view);
+        addButton = (Button)findViewById(R.id.add_clothing_add_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,12 +32,12 @@ public class ClothingActivity extends AppCompatActivity {
                 Closet closet = Closet.getInstance();
                 closet.saveClothing(clothing);
 
-                Log.d("ClothingActivity", String.format("Added clothing %s \n\n Resetting the clothing object now", clothing.toString()));
+                Log.d("AddClothingActivity", String.format("Added clothing %s \n\n Resetting the clothing object now", clothing.toString()));
                 clothing = new Clothing();
-                Log.d("ClothingActivity", String.format("Clothing is now %s", clothing.toString()));
+                Log.d("AddClothingActivity", String.format("Clothing is now %s", clothing.toString()));
                 clothingAddView.setClothing(clothing);
                 // Show notification
-                Snackbar.make(findViewById(R.id.clothing_add_view), "Clothing added",
+                Snackbar.make(findViewById(R.id.add_clothing_add_button), "Clothing added",
                         Snackbar.LENGTH_SHORT)
                         .show();
                 goBack();

@@ -1,6 +1,5 @@
 package com.qinglenmeson.ootd;
 
-import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,14 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -58,18 +51,17 @@ public class MainActivity extends AppCompatActivity {
         outfitListView.setNestedScrollingEnabled(false);
 
         List<Outfit> outfitList = closet.getOutfitList();
-        OutfitPreviewAdapter outfitPreviewAdapter = new OutfitPreviewAdapter(this, outfitList);
+        OutfitPreviewAdapter outfitPreviewAdapter = new OutfitPreviewAdapter(this);
         outfitListView.setAdapter(outfitPreviewAdapter);
-
     }
 
     public void openArchives(View view) {
-        Intent intent = new Intent(this, ArchiveActivity.class);
+        Intent intent = new Intent(this, ClothesArchiveActivity.class);
         startActivity(intent);
     }
 
     public void openAddClothing(View view) {
-        Intent intent = new Intent(this, ClothingActivity.class);
+        Intent intent = new Intent(this, AddClothingActivity.class);
         startActivity(intent);
     }
 
@@ -79,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
     }
     
     public void openPastOutfits(View view) {
-        // TODO
+        Intent intent = new Intent(this, OutfitArchiveActivity.class);
+        startActivity(intent);
     }
 
     public void reset(View view) {

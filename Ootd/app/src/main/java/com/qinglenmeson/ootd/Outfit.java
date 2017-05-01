@@ -31,6 +31,7 @@ public class Outfit {
     }
 
     private Map<Category, Clothing> clothingMap;
+    private String name;
 
     public Outfit() {
         clothingMap = new HashMap<>();
@@ -42,6 +43,20 @@ public class Outfit {
 
     public Map<Category, Clothing> getClothingMap() {
         return clothingMap;
+    }
+
+    public String getName()
+    {
+        if (this.name != null) {
+            return this.name;
+        } else {
+            return "";
+        }
+
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setClothingMap(Map<Category, Clothing> clothingMap) {

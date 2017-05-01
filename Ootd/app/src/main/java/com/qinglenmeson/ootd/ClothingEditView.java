@@ -38,7 +38,7 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
     // Views
     private EditText editName;
     private Spinner cleanlinessSpinner;
-    private Spinner categorySpinner;
+    private TextView categoryText;
     private Spinner warmthSpinner;
     private Spinner occasionSpinner;
     private ImageView imageView;
@@ -118,13 +118,8 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
         cleanlinessSpinner.setOnItemSelectedListener(this);
         cleanlinessSpinner.setSelection(clothing.getCleanliness().ordinal());
 
-        // Allows the ability to change the category
-        categorySpinner = (Spinner) this.findViewById(R.id.clothingedit_ChangeCategory);
-        ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(context,
-                R.array.category_array, android.R.layout.simple_spinner_dropdown_item);
-        categorySpinner.setAdapter(categoryAdapter);
-        categorySpinner.setOnItemSelectedListener(this);
-        categorySpinner.setSelection(clothing.getCategory().ordinal());
+        categoryText = (TextView) this.findViewById(R.id.clothingedit_Category);
+        categoryText.setText(clothing.getCategory().toString());
 
         // Allows the ability to change the warmth
         warmthSpinner = (Spinner) this.findViewById(R.id.clothingedit_ChangeWarmth);
@@ -212,13 +207,6 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
                 Log.d("clothingEdit", String.format("Changing Cleanliness of %s from %s to %s",
                         clothing.getName(), clothing.getCleanliness().toString(), newCleanlinessName));
                 clothing.setCleanliness(newCleanliness);
-                break;
-            case R.id.clothingedit_ChangeCategory:
-                String newCategoryName = (String)parent.getItemAtPosition(position);
-                Category newCategory = Category.fromString(newCategoryName);
-                Log.d("clothingEdit", String.format("Changing Category of %s from %s to %s",
-                        clothing.getName(), clothing.getCategory().toString(), newCategoryName));
-                clothing.setCategory(newCategory);
                 break;
             case R.id.clothingedit_ChangeWarmth:
                 String newWarmthName = (String)parent.getItemAtPosition(position);

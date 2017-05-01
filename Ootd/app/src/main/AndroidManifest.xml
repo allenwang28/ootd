@@ -32,10 +32,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ArchiveActivity" />
-        <activity android:name=".ClothingActivity" />
+        <activity android:name=".ClothesArchiveActivity" />
+        <activity android:name=".AddClothingActivity" />
         <activity android:name=".AndroidCameraApi" />
         <activity android:name=".GenerateOutfitActivity" />
+        <activity android:name=".OutfitArchiveActivity" />
         <activity android:name=".ChangeUserActivity"></activity>
     </application>
 

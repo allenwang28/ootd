@@ -55,7 +55,7 @@ public class BasicAddClothesTest {
         appCompatEditText2.perform(pressImeActionButton());
 
         ViewInteraction appCompatButton3 = onView(
-                allOf(withId(R.id.clothing_add_view), withText("+ Add")));
+                allOf(withId(R.id.add_clothing_add_button), withText("+ Add")));
         appCompatButton3.perform(scrollTo(), click());
 
         ViewInteraction appCompatButton4 = onView(

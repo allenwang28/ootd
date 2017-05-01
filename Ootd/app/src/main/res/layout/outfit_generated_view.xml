@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:gravity="center_horizontal"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Name"/>
+            <EditText
+                android:id="@+id/outfit_generated_view_edit_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingRight="40dp"
+                android:inputType="text"
+                android:maxLines="1"
+                android:imeOptions="actionDone"  />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TShirt"
+                android:gravity="center"
+                />
+            <ImageView
+                android:id="@+id/outfit_generated_view_Tshirt"
+                android:maxHeight="120dp"
+                android:maxWidth="100dp"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/outfit_generated_view_Tshirt_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Shirt"
+                android:gravity="center"
+                />
+            <ImageView
+                android:id="@+id/outfit_generated_view_Shirt"
+                android:maxHeight="120dp"
+                android:maxWidth="100dp"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/outfit_generated_view_Shirt_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Shoes"
+                />
+            <ImageView
+                android:id="@+id/outfit_generated_view_Shoes"
+                android:maxHeight="120dp"
+                android:maxWidth="100dp"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/outfit_generated_view_Shoes_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jacket"
+                android:gravity="center"
+                />
+            <ImageView
+                android:id="@+id/outfit_generated_view_Jacket"
+                android:maxHeight="120dp"
+                android:maxWidth="100dp"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/outfit_generated_view_Jacket_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sweater"
+                android:gravity="center"
+                />
+            <ImageView
+                android:id="@+id/outfit_generated_view_Sweater"
+                android:maxHeight="120dp"
+                android:maxWidth="100dp"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/outfit_generated_view_Sweater_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Socks"
+                android:gravity="center"
+                />
+            <ImageView
+                android:id="@+id/outfit_generated_view_Socks"
+                android:maxHeight="120dp"
+                android:maxWidth="100dp"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/outfit_generated_view_Socks_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Pants"
+                />
+            <ImageView
+                android:id="@+id/outfit_generated_view_Pants"
+                android:maxHeight="120dp"
+                android:maxWidth="100dp"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/outfit_generated_view_Pants_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                />
+        </LinearLayout>
+</LinearLayout>

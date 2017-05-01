@@ -28,6 +28,7 @@ public class Closet {
 
     private List<Clothing> mClothingList;
     private Map<Category, List<Clothing>> mClothingMap;
+    private Map<Clothing, List<Outfit>> mClothingOutfitMap;
     private List<Outfit> mOutfitList;
 
     private Closet() {
@@ -47,6 +48,7 @@ public class Closet {
         clothing.setId(mClothingList.size());
         mClothingList.add(clothing);
         mClothingMap.get(clothing.getCategory()).add(clothing);
+        mClothingOutfitMap.put(clothing, new ArrayList<Outfit>());
     }
 
     // NOTE - this needs to be run after loading clothing from memory
@@ -77,10 +79,11 @@ public class Closet {
 
         int numCategories = Category.values().length;
 
-        while(words + numCategories - 1 < tempSplit.length) {
+        while(words + numCategories < tempSplit.length) {
             Map<Category, Clothing> newOutfitMap = new HashMap<>();
-            for (int i = 0; i < numCategories; ++i) {
-                String v = tempSplit[i];
+            String outfitName = tempSplit[words];
+            for (int i = 1; i <= numCategories; ++i) {
+                String v = tempSplit[words + i];
                 int val = Integer.valueOf(v);
                 if (val != -1) {
                     Clothing clothing = mClothingList.get(val);
@@ -88,14 +91,16 @@ public class Closet {
                 }
             }
             Outfit outfit = new Outfit(newOutfitMap);
-            mOutfitList.add(outfit);
-            words = words + numCategories;
+            outfit.setName(outfitName);
+            addOutfit(outfit);
+            words = words + numCategories + 1;
         }
     }
 
     private void loadClothesFromMemory() {
         mClothingList = new ArrayList<>();
         mClothingMap = new HashMap<>();
+        mClothingOutfitMap = new HashMap<>();
 
         for (Category c : Category.values()) {
             mClothingMap.put(c, new ArrayList<Clothing>());
@@ -123,7 +128,7 @@ public class Closet {
 
         int words = 0;
 
-        while(words+6 < tempSplit.length) {
+        while(words+7 < tempSplit.length) {
             // TODO - why aren't we saving the number of times worn?
             String name = tempSplit[words];
             String category = tempSplit[words+1];
@@ -132,23 +137,29 @@ public class Closet {
             String cleanliness = tempSplit[words+4];
             String color = tempSplit[words+5];
             String photo = tempSplit[words+6];
-            words = words + 7;
+            String timesWorn = tempSplit[words+7];
+            words = words + 8;
 
+            // TODO - get rid of these prints
             System.out.println("Name: " + name);
             System.out.println("Category: " + category);
             System.out.println("Warmth: " + warmth);
             System.out.println("Occasion: " + occasion);
             System.out.println("Cleanliness: " + cleanliness);
             System.out.println("Color: " + color);
+            System.out.println("Times Worn: " + timesWorn);
             System.out.println(photo);
 
-            addClothing(new Clothing(name,
+            Clothing clothing = new Clothing(name,
                     Category.fromString(category),
                     Warmth.fromString(warmth),
                     Occasion.fromString(occasion),
                     Cleanliness.fromString(cleanliness),
                     Integer.parseInt(color),
-                    photo));
+                    photo);
+            clothing.setTimesWorn(Integer.parseInt(timesWorn));
+
+            addClothing(clothing);
 
         }
     }
@@ -164,7 +175,7 @@ public class Closet {
             fos.write("".getBytes());
             fos.close();
         } catch(Exception e) {
-            Log.e("ClothingActivity", e.toString());
+            Log.e("AddClothingActivity", e.toString());
         }
     }
 
@@ -174,7 +185,7 @@ public class Closet {
             fos.write("".getBytes());
             fos.close();
         } catch(Exception e) {
-            Log.e("ClothingActivity", e.toString());
+            Log.e("AddClothingActivity", e.toString());
         }
     }
 
@@ -188,13 +199,13 @@ public class Closet {
         String string = clothing.getName() + "/split/" + clothing.getCategory().toString() + "/split/"
                 + clothing.getWarmth().toString() + "/split/" + clothing.getOccasion().toString() + "/split/"
                 + clothing.getCleanliness().toString() + "/split/" + clothing.getColor() + "/split/"
-                + clothing.getPhoto() + "/split/";
+                + clothing.getPhoto() + "/split/" + clothing.getTimesWorn() + "/split/";
         try {
             FileOutputStream fos = App.getContext().openFileOutput(getClothesListFileName(), Context.MODE_APPEND);
             fos.write(string.getBytes());
             fos.close();
         } catch(Exception e) {
-            Log.e("ClothingActivity", e.toString());
+            Log.e("AddClothingActivity", e.toString());
         }
     }
 
@@ -202,6 +213,7 @@ public class Closet {
         Map<Category, Clothing> outfitMap = outfit.getClothingMap();
         StringBuffer strBuff = new StringBuffer();
 
+        strBuff.append(outfit.getName() + "/split/");
         for (Category c : Category.values()) {
             if (outfitMap.containsKey(c)) {
                  strBuff.append(outfitMap.get(c).getId() + "/split/");
@@ -216,7 +228,7 @@ public class Closet {
             fos.write(string.getBytes());
             fos.close();
         } catch(Exception e) {
-            Log.e("ClothingActivity", e.toString());
+            Log.e("AddClothingActivity", e.toString());
         }
 
     }
@@ -239,9 +251,21 @@ public class Closet {
         saveClothingToMemory(clothing);
     }
 
+    public void addOutfit(Outfit outfit) {
+        mOutfitList.add(outfit);
+        Map<Category, Clothing> map = outfit.getClothingMap();
+        for (Category category : Category.values()) {
+            if (map.containsKey(category)) {
+                Clothing clothing = map.get(category);
+                List<Outfit> correspondingOutfitList = mClothingOutfitMap.get(clothing);
+                correspondingOutfitList.add(outfit);
+            }
+        }
+    }
+
     // Saves an outfit to both internal storage and local lists
     public void saveOutfit(Outfit outfit) {
-        mOutfitList.add(outfit);
+        addOutfit(outfit);
         saveOutfitToMemory(outfit);
     }
 
@@ -264,12 +288,27 @@ public class Closet {
         if (!mClothingMap.get(c.getCategory()).contains(c)) {
             return;
         }
+        // If we remove an article of clothing it should be removed from the outfit as well
+        List<Outfit> correspondingOutfits = mClothingOutfitMap.get(c);
+        for (Outfit outfit : correspondingOutfits) {
+            outfit.getClothingMap().remove(c.getCategory());
+        }
+
         mClothingList.remove(c);
         mClothingMap.get(c.getCategory()).remove(c);
-        resetMemory();
+
+        resetClothingCloset();
         for (Clothing mC : mClothingList) {
             saveClothingToMemory(mC);
         }
+    }
+
+    public void removeOutfit(Outfit outfit) {
+        if (!mOutfitList.contains(outfit)) {
+            return;
+        }
+        mOutfitList.remove(outfit);
+
     }
 
     public void doLaundry() {
@@ -286,6 +325,7 @@ public class Closet {
         for (Category c : Category.values()) {
             mClothingMap.put(c, new ArrayList<Clothing>());
         }
+        mClothingOutfitMap = new HashMap<>();
         mOutfitList = new ArrayList<>();
     }
 
@@ -305,9 +345,10 @@ public class Closet {
     //    mClothingList = clothingList;
     //}
 
-    public int size() {
+    public int clothingListSize() {
         return mClothingList.size();
     }
+    public int outfitListSize() { return mOutfitList.size(); }
 
     public void setOwner(String owner) {
         // Save everything to memory first

@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -18,7 +17,7 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 public class GenerateOutfitActivity extends AppCompatActivity {
-    private OutfitPreview outfitPreview;
+    private OutfitGeneratedView outfitGeneratedView;
     private Button acceptButton;
     private Day day;
     private Outfit outfit;
@@ -45,8 +44,8 @@ public class GenerateOutfitActivity extends AppCompatActivity {
 
         outfit = new Outfit();
 
-        outfitPreview = (OutfitPreview)findViewById(R.id.generate_outfit_preview);
-        outfitPreview.setOutfit(outfit);
+        outfitGeneratedView = (OutfitGeneratedView)findViewById(R.id.generate_outfit_preview);
+        outfitGeneratedView.setOutfit(outfit);
 
         acceptButton = (Button)findViewById(R.id.generate_outfit_accept);
 
@@ -54,17 +53,20 @@ public class GenerateOutfitActivity extends AppCompatActivity {
 
     public void shuffle(View view) {
         outfit = Outfit.generate(day);
-        outfitPreview.setOutfit(outfit);
+        outfitGeneratedView.setOutfit(outfit);
         acceptButton.setVisibility(View.VISIBLE);
-
     }
 
     public void accept(View view) {
         Closet closet = Closet.getInstance();
         closet.saveOutfit(outfit);
+
         Snackbar.make(findViewById(R.id.generate_outfit_accept), "Added a new outfit",
                 Snackbar.LENGTH_SHORT)
                 .show();
+        outfit = new Outfit();
+        outfitGeneratedView.setOutfit(outfit);
+        acceptButton.setVisibility(View.INVISIBLE);
     }
 
     @Override

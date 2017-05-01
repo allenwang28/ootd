@@ -4,31 +4,33 @@
     android:id="@+id/activity_archive"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/blueback"
-    tools:context="com.qinglenmeson.ootd.ArchiveActivity">
+    tools:context="com.qinglenmeson.ootd.OutfitArchiveActivity">
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
+        android:id="@+id/outfit_archive_activity_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <Button
-        android:id="@+id/archive_backToMain"
+        android:id="@+id/outfit_archive_activity_backToMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="Update Clothing"
+        android:text="Update Outfit"
         />
     <Button
-        android:id="@+id/archive_remove"
+        android:id="@+id/outfit_archive_activity_remove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="Remove Clothing"
+        android:text="Remove Outfit"
         />
 </RelativeLayout>
