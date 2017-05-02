@@ -12,7 +12,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/blueback"
     tools:context="com.qinglenmeson.ootd.MainActivity">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,6 +25,49 @@
             android:layout_height="wrap_content"
             android:id="@+id/main_title"
             />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@android:color/darker_gray"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_weather"
+            />
+        <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+            <ImageView
+                android:id="@+id/main_weatherImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:id="@+id/main_dayLow"
+                    />
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                android:id="@+id/main_dayHigh"
+                />
+            </LinearLayout>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@android:color/darker_gray"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,7 +77,7 @@
             <com.qinglenmeson.ootd.RotatedButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dip"
+                android:padding="10dip"
                 android:gravity="center"
                 android:text="Past Outfits"
                 android:onClick="openPastOutfits"
@@ -59,7 +104,7 @@
             <com.qinglenmeson.ootd.RotatedButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dip"
+                android:padding="10dip"
                 android:gravity="center"
                 android:text="Archives"
                 android:onClick="openArchives"
@@ -103,5 +148,11 @@
             android:layout_height="wrap_content"
             android:text="Change Closet"
             android:onClick="editTitle"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Edit Zip Code"
+            android:onClick="editZip"/>
         </LinearLayout>
+</ScrollView>
 </RelativeLayout>

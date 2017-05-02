@@ -39,7 +39,7 @@ public class GenerateOutfitActivity extends AppCompatActivity {
             Log.e("GenerateOutfitActivity", e.getMessage());
         }
 
-        day = new Day(weatherInfo);
+        day = Day.getInstance(weatherInfo);
         Log.d("GenerateOutfitActivity", day.toString());
 
         outfit = new Outfit();
@@ -81,7 +81,7 @@ class GetWeatherInfo extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://samples.openweathermap.org/data/2.5/weather?zip=78705,us&appid=ab6c9e595fe584dc2765d622f3b62da0")
+                .url("http://api.openweathermap.org/data/2.5/weather?zip=" + MainActivity.getZip() + "&appid=9a996c75660f7f7c743f3a78e5e1769e")
                 .build();
 
         Response response = null;

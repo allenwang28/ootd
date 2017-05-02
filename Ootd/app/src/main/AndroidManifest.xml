@@ -37,6 +37,7 @@
         <activity android:name=".AndroidCameraApi" />
         <activity android:name=".GenerateOutfitActivity" />
         <activity android:name=".OutfitArchiveActivity" />
+        <activity android:name=".ChangeZipActivity" />
         <activity android:name=".ChangeUserActivity"></activity>
     </application>
 

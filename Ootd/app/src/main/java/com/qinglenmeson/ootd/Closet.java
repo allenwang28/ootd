@@ -98,6 +98,7 @@ public class Closet {
     }
 
     private void loadClothesFromMemory() {
+        //resetClothingCloset();
         mClothingList = new ArrayList<>();
         mClothingMap = new HashMap<>();
         mClothingOutfitMap = new HashMap<>();
