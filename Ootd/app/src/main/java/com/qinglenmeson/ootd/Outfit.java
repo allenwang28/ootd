@@ -92,4 +92,7 @@ public class Outfit {
             clothingMap.put(cat, clothingArray.get(0));
         }
     }
+
+
+
 }
