@@ -78,7 +78,7 @@ public class Outfit {
         }
     }
 
-    public Outfit generate(Day day) {
+    public static Outfit generate(Day day) {
         Outfit outfit = new Outfit();
         int tempLow = day.getTempLow();
         int tempHigh = day.getTempHigh();
@@ -95,7 +95,8 @@ public class Outfit {
             outfit.setClothing(Category.TSHIRT);
 
             tolerance = defaultTolerance;
-            while (!doesItMatch(clothingMap.get(Category.PANTS).getColor(), clothingMap.get(Category.TSHIRT).getColor(),tolerance)){
+            // TODO - check that these actually exist first
+            while (!doesItMatch(outfit.clothingMap.get(Category.PANTS).getColor(), outfit.clothingMap.get(Category.TSHIRT).getColor(),tolerance)){
                 outfit.setClothing(Category.TSHIRT);
                 tolerance += 500000;
             }
@@ -111,7 +112,7 @@ public class Outfit {
             outfit.setClothing(Category.TSHIRT);
 
             tolerance = defaultTolerance;
-            while (!doesItMatch(clothingMap.get(Category.PANTS).getColor(), clothingMap.get(Category.TSHIRT).getColor(),tolerance)){
+            while (!doesItMatch(outfit.clothingMap.get(Category.PANTS).getColor(), outfit.clothingMap.get(Category.TSHIRT).getColor(),tolerance)){
                 outfit.setClothing(Category.TSHIRT);
                 tolerance += 500000;
             }
@@ -149,7 +150,7 @@ public class Outfit {
         return (0xFFFFFF - color);
     }
 
-    private boolean doesItMatch (int color1, int color2, int tolerance){
+    private static boolean doesItMatch (int color1, int color2, int tolerance){
         if(Math.abs(color2 - color1) < tolerance){
             return true;
         }

@@ -277,7 +277,7 @@ public class Closet {
 
         String string = strBuff.toString();
         try {
-            FileOutputStream fos = App.getContext().openFileOutput(getOutfitListFileName(), Context.MODE_APPEND);
+            FileOutputStream fos = App.getContext().openFileOutput(getTodaysOutfitFileName(), Context.MODE_APPEND);
             fos.write(string.getBytes());
             fos.close();
         } catch(Exception e) {
@@ -373,10 +373,11 @@ public class Closet {
         }
         if (outfit == todaysOutfit) {
             resetTodaysOutfit();
-            todaysOutfit = null;
+            todaysOutfit = new Outfit();
         }
         mOutfitList.remove(outfit);
-
+        resetOutfitCloset();
+        saveAllOutfitsToMemory();
     }
 
     public void doLaundry() {
