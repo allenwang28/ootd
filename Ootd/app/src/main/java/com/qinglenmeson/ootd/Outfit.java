@@ -94,16 +94,18 @@ public class Outfit {
             outfit.setClothing(Category.PANTS);
             outfit.setClothing(Category.TSHIRT);
 
-            tolerance = defaultTolerance;
             // TODO - check that these actually exist first
-            while (!doesItMatch(outfit.clothingMap.get(Category.PANTS).getColor(), outfit.clothingMap.get(Category.TSHIRT).getColor(),tolerance)){
-                outfit.setClothing(Category.TSHIRT);
-                tolerance += 500000;
+            if((outfit.clothingMap.get(Category.PANTS) != null) && (outfit.clothingMap.get(Category.TSHIRT) != null)){
+                tolerance = defaultTolerance;
+                while (!doesItMatch(outfit.clothingMap.get(Category.PANTS).getColor(), outfit.clothingMap.get(Category.TSHIRT).getColor(),tolerance)){
+                    outfit.setClothing(Category.TSHIRT);
+                    tolerance += 500000;
+                }
             }
-
             if (tempLow < 50){
                 outfit.setClothing(Category.SHIRT);
             }
+
         }
         else {//no rain
             outfit.setClothing(Category.SOCKS);
@@ -111,12 +113,13 @@ public class Outfit {
             outfit.setClothing(Category.PANTS);
             outfit.setClothing(Category.TSHIRT);
 
-            tolerance = defaultTolerance;
-            while (!doesItMatch(outfit.clothingMap.get(Category.PANTS).getColor(), outfit.clothingMap.get(Category.TSHIRT).getColor(),tolerance)){
-                outfit.setClothing(Category.TSHIRT);
-                tolerance += 500000;
+            if((outfit.clothingMap.get(Category.PANTS) != null) && (outfit.clothingMap.get(Category.TSHIRT) != null)){
+                tolerance = defaultTolerance;
+                while (!doesItMatch(outfit.clothingMap.get(Category.PANTS).getColor(), outfit.clothingMap.get(Category.TSHIRT).getColor(),tolerance)){
+                    outfit.setClothing(Category.TSHIRT);
+                    tolerance += 500000;
+                }
             }
-
             if(tempLow < 60){
                 outfit.setClothing(Category.JACKET);
             }
