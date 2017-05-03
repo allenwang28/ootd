@@ -71,30 +71,52 @@ public class Outfit {
         }
     }
 
-    public static Outfit generate(Day day) {
+    public Outfit generate(Day day) {
         Outfit outfit = new Outfit();
+        int tempLow = day.getTempLow();
+        int tempHigh = day.getTempHigh();
+        int tempDif = tempHigh - tempLow;
+
+        int defaultTolerance = 2000000;
+        int tolerance = defaultTolerance;
 
         if (day.rain == true) {
-            outfit.setClothing(Category.SHIRT);
             outfit.setClothing(Category.JACKET);
-            outfit.setClothing(Category.PANTS);
             outfit.setClothing(Category.SOCKS);
             outfit.setClothing(Category.SHOES);
+            outfit.setClothing(Category.PANTS);
+            outfit.setClothing(Category.TSHIRT);
+
+            tolerance = defaultTolerance;
+            while (!doesItMatch(clothingMap.get(Category.PANTS).getColor(), clothingMap.get(Category.TSHIRT).getColor(),tolerance)){
+                outfit.setClothing(Category.TSHIRT);
+                tolerance += 500000;
+            }
+
+            if (tempLow < 50){
+                outfit.setClothing(Category.SHIRT);
+            }
         }
         else {//no rain
-            outfit.setClothing(Category.TSHIRT);
-            outfit.setClothing(Category.PANTS);
             outfit.setClothing(Category.SOCKS);
             outfit.setClothing(Category.SHOES);
-            if(day.tempLow < 60){
+            outfit.setClothing(Category.PANTS);
+            outfit.setClothing(Category.TSHIRT);
+
+            tolerance = defaultTolerance;
+            while (!doesItMatch(clothingMap.get(Category.PANTS).getColor(), clothingMap.get(Category.TSHIRT).getColor(),tolerance)){
+                outfit.setClothing(Category.TSHIRT);
+                tolerance += 500000;
+            }
+
+            if(tempLow < 60){
                 outfit.setClothing(Category.JACKET);
+            }
+            if(tempLow < 50){
+                outfit.setClothing(Category.SHIRT);
             }
         }
         return outfit;
-    }
-
-    private int compColor(int color){
-        return color+180%360;
     }
 
     private int randomNum(int min, int max) {
@@ -114,6 +136,44 @@ public class Outfit {
         if (!clothingMap.containsKey(cat) && clothingArray.size() != 0) {
             clothingMap.put(cat, clothingArray.get(0));
         }
+    }
+
+    private int compColor (int color){
+        return (0xFFFFFF - color);
+    }
+
+    private boolean doesItMatch (int color1, int color2, int tolerance){
+        if(Math.abs(color2 - color1) < tolerance){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    private int hex2Decimal(String s) {
+        String digits = "0123456789ABCDEF";
+        s = s.toUpperCase();
+        int val = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            int d = digits.indexOf(c);
+            val = 16*val + d;
+        }
+        return val;
+    }
+
+    // precondition:  d is a nonnegative integer
+    private String decimal2Hex(int d) {
+        String digits = "0123456789ABCDEF";
+        if (d == 0) return "0";
+        String hex = "";
+        while (d > 0) {
+            int digit = d % 16;                // rightmost digit
+            hex = digits.charAt(digit) + hex;  // string concatenation
+            d = d / 16;
+        }
+        return hex;
     }
 
 
