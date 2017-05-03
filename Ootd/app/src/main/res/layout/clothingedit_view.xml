@@ -1,6 +1,7 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <RelativeLayout android:layout_width="match_parent"
+    <RelativeLayout android:id="@+id/clothingedit_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ScrollView
             android:layout_width="match_parent"
@@ -61,10 +62,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Category"/>
-                <Spinner android:id="@+id/clothingedit_ChangeCategory"
+                <TextView android:id="@+id/clothingedit_Category"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     />
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -78,7 +82,7 @@
                     android:id="@+id/clothingedit_SetImage"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="Save Image"/>
+                    android:text="Show Image"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -112,16 +116,9 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     />
-                <Button
-                    android:id="@+id/clothingedit_update"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="Update"/>
-                <Button
-                    android:id="@+id/clothingedit_remove"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="Remove"/>
+                <Space
+                    android:layout_width="1dp"
+                    android:layout_height="50dp"/>
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>

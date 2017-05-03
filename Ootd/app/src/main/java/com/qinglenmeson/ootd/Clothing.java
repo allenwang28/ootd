@@ -15,6 +15,7 @@ public class Clothing {
     private Occasion occasion;
     private String photo;
     private int color;
+    private int id;
 
     private int timesWorn;
     private Cleanliness cleanliness;
@@ -52,6 +53,14 @@ public class Clothing {
         this.cleanliness = cleanliness;
         this.color = color;
         this.photo = photo;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void minusWear() {

@@ -1,12 +1,13 @@
 package com.qinglenmeson.ootd;
 
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -16,8 +17,8 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 public class GenerateOutfitActivity extends AppCompatActivity {
-    private Button shuffleButton;
-    private OutfitPreview outfitPreview;
+    private OutfitGeneratedView outfitGeneratedView;
+    private Button acceptButton;
     private Day day;
     private Outfit outfit;
 
@@ -38,22 +39,39 @@ public class GenerateOutfitActivity extends AppCompatActivity {
             Log.e("GenerateOutfitActivity", e.getMessage());
         }
 
-        day = new Day(weatherInfo);
+        day = Day.getInstance(weatherInfo);
         Log.d("GenerateOutfitActivity", day.toString());
 
         outfit = new Outfit();
 
-        outfitPreview = (OutfitPreview)findViewById(R.id.generate_outfit_preview);
-        outfitPreview.setOutfit(outfit);
+        outfitGeneratedView = (OutfitGeneratedView)findViewById(R.id.generate_outfit_preview);
+        outfitGeneratedView.setOutfit(outfit);
 
-        shuffleButton = (Button)findViewById(R.id.generate_outfit_shuffle);
-        shuffleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                outfit = Outfit.generate(day);
-                outfitPreview.setOutfit(outfit);
-            }
-        });
+        acceptButton = (Button)findViewById(R.id.generate_outfit_accept);
+
+    }
+
+    public void shuffle(View view) {
+        outfit = Outfit.generate(day);
+        outfitGeneratedView.setOutfit(outfit);
+        acceptButton.setVisibility(View.VISIBLE);
+    }
+
+    public void accept(View view) {
+        Closet closet = Closet.getInstance();
+        closet.saveOutfit(outfit);
+
+        Snackbar.make(findViewById(R.id.generate_outfit_accept), "Added a new outfit",
+                Snackbar.LENGTH_SHORT)
+                .show();
+        outfit = new Outfit();
+        outfitGeneratedView.setOutfit(outfit);
+        acceptButton.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, MainActivity.class));
     }
 }
 
@@ -63,7 +81,7 @@ class GetWeatherInfo extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://samples.openweathermap.org/data/2.5/weather?zip=78705,us&appid=ab6c9e595fe584dc2765d622f3b62da0")
+                .url("http://api.openweathermap.org/data/2.5/weather?zip=" + MainActivity.getZip() + "&appid=9a996c75660f7f7c743f3a78e5e1769e")
                 .build();
 
         Response response = null;

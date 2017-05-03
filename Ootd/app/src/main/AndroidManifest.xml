@@ -19,7 +19,7 @@
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/tshirt"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -32,10 +32,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ArchiveActivity" />
-        <activity android:name=".ClothingActivity" />
-        <activity android:name=".AndroidCameraApi"></activity>
-        <activity android:name=".GenerateOutfitActivity"></activity>
+        <activity android:name=".ClothesArchiveActivity" />
+        <activity android:name=".AddClothingActivity" />
+        <activity android:name=".AndroidCameraApi" />
+        <activity android:name=".GenerateOutfitActivity" />
+        <activity android:name=".OutfitArchiveActivity" />
+        <activity android:name=".ChangeZipActivity" />
+        <activity android:name=".ChangeUserActivity"></activity>
     </application>
 
 </manifest>

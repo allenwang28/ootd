@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -82,7 +83,10 @@ public class ClothingPreviewAdapter extends RecyclerView.Adapter<ClothingPreview
 
         ImageView imageView = holder.imageView;
         String photo = clothing.getPhoto();
-        if(photo != null) {
+
+        File file = new File(photo);
+
+        if(photo != null && !photo.equals("") && file.exists()) {
             System.out.println(photo);
             imageView.setImageURI(android.net.Uri.parse(photo));
         } else {

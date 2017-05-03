@@ -86,7 +86,7 @@ public class IncrementDirtyAndLaundryTest {
         appCompatButton11.perform(scrollTo(), click());
 
         ViewInteraction appCompatButton12 = onView(
-                allOf(withId(R.id.clothing_add_view), withText("+ Add")));
+                allOf(withId(R.id.add_clothing_add_button), withText("+ Add")));
         appCompatButton12.perform(scrollTo(), click());
 
         ViewInteraction appCompatButton13 = onView(

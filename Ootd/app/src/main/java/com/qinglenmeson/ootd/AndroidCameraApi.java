@@ -36,6 +36,7 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -71,6 +72,7 @@ public class AndroidCameraApi extends AppCompatActivity {
     private boolean mFlashSupported;
     private Handler mBackgroundHandler;
     private HandlerThread mBackgroundThread;
+    private String location = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +97,7 @@ public class AndroidCameraApi extends AppCompatActivity {
         }
         @Override
         public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-            // Transform you image captured size according to the surface width and height
+            // Transform you image captured clothingListSize according to the surface width and height
         }
         @Override
         public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
@@ -176,7 +178,8 @@ public class AndroidCameraApi extends AppCompatActivity {
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
             Intent thisIntent = getIntent();
             String name = thisIntent.getStringExtra("clothingName");
-            final File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/" + name + ".jpg");
+            location = Environment.getExternalStorageDirectory().getAbsolutePath()+"/" + name + ".jpg";
+            final File file = new File(location);
             ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
                 @Override
                 public void onImageAvailable(ImageReader reader) {

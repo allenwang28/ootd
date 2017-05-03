@@ -12,20 +12,19 @@ import java.util.List;
  * Created by Allen Wang on 3/21/2017.
  */
 
-public class ClothingAdapter extends PagerAdapter {
+public class OutfitAdapter extends PagerAdapter {
 
     private Context context;
+    Closet closet;
 
-    private List<Clothing> closet;
-
-    public ClothingAdapter(Context context, List<Clothing> closet) {
+    public OutfitAdapter(Context context) {
         this.context = context;
-        this.closet = closet;
+        closet = Closet.getInstance();
     }
 
     @Override
     public int getCount() {
-        return closet.size();
+        return closet.outfitListSize();
     }
 
     @Override
@@ -35,13 +34,13 @@ public class ClothingAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        ClothingEditView clothingView = new ClothingEditView(context, closet.get(position));
-        ((ViewPager)container).addView(clothingView);
-        return clothingView;
+        OutfitEditView outfitView = new OutfitEditView(context, closet.getOutfitList().get(position));
+        ((ViewPager)container).addView(outfitView);
+        return outfitView;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        ((ViewPager)container).removeView((ClothingEditView)object);
+        ((ViewPager)container).removeView((OutfitEditView)object);
     }
 }

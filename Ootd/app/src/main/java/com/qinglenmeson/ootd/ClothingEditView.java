@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -37,7 +38,7 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
     // Views
     private EditText editName;
     private Spinner cleanlinessSpinner;
-    private Spinner categorySpinner;
+    private TextView categoryText;
     private Spinner warmthSpinner;
     private Spinner occasionSpinner;
     private ImageView imageView;
@@ -117,13 +118,8 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
         cleanlinessSpinner.setOnItemSelectedListener(this);
         cleanlinessSpinner.setSelection(clothing.getCleanliness().ordinal());
 
-        // Allows the ability to change the category
-        categorySpinner = (Spinner) this.findViewById(R.id.clothingedit_ChangeCategory);
-        ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(context,
-                R.array.category_array, android.R.layout.simple_spinner_dropdown_item);
-        categorySpinner.setAdapter(categoryAdapter);
-        categorySpinner.setOnItemSelectedListener(this);
-        categorySpinner.setSelection(clothing.getCategory().ordinal());
+        categoryText = (TextView) this.findViewById(R.id.clothingedit_Category);
+        categoryText.setText(clothing.getCategory().toString());
 
         // Allows the ability to change the warmth
         warmthSpinner = (Spinner) this.findViewById(R.id.clothingedit_ChangeWarmth);
@@ -149,11 +145,7 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
         setImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                File testFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/" + clothing.getName() + ".jpg");
-                if(testFile.toURI() != null) {
-                    clothing.setPhoto(testFile.toURI().toString());
-                    imageView.setImageURI(android.net.Uri.parse(testFile.toURI().toString()));
-                }
+                    imageView.setImageURI(android.net.Uri.parse(clothing.getPhoto()));
             }
         });
 
@@ -161,32 +153,12 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
         // Shows the color
         colorView = (ImageView) this.findViewById(R.id.clothingedit_Color);
         colorView.setBackgroundColor(clothing.getColor());
-
         colorPickerView = (ColorPickerView) this.findViewById(R.id.colorPickerView);
         colorPickerView.setColorListener(new ColorPickerView.ColorListener() {
             @Override
             public void onColorSelected(int color) {
                 clothing.setColor(colorPickerView.getColor());
                 colorView.setBackgroundColor(clothing.getColor());
-            }
-        });
-
-        update = (Button) this.findViewById(R.id.clothingedit_update);
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Closet closet = Closet.getInstance();
-                closet.removeClothing(clothing);
-                closet.saveClothing(clothing);
-            }
-        });
-
-        remove = (Button) this.findViewById(R.id.clothingedit_remove);
-        remove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Closet closet = Closet.getInstance();
-                closet.removeClothing(clothing);
             }
         });
     }
@@ -235,13 +207,6 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
                 Log.d("clothingEdit", String.format("Changing Cleanliness of %s from %s to %s",
                         clothing.getName(), clothing.getCleanliness().toString(), newCleanlinessName));
                 clothing.setCleanliness(newCleanliness);
-                break;
-            case R.id.clothingedit_ChangeCategory:
-                String newCategoryName = (String)parent.getItemAtPosition(position);
-                Category newCategory = Category.fromString(newCategoryName);
-                Log.d("clothingEdit", String.format("Changing Category of %s from %s to %s",
-                        clothing.getName(), clothing.getCategory().toString(), newCategoryName));
-                clothing.setCategory(newCategory);
                 break;
             case R.id.clothingedit_ChangeWarmth:
                 String newWarmthName = (String)parent.getItemAtPosition(position);

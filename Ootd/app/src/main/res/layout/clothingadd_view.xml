@@ -1,6 +1,7 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <RelativeLayout android:layout_width="match_parent"
+    <RelativeLayout android:id="@+id/clothingadd_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ScrollView
             android:layout_width="match_parent"
@@ -78,7 +79,7 @@
                     android:id="@+id/clothingadd_SetImage"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="Save Image"/>
+                    android:text="Show Image"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -112,7 +113,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     />
-    </LinearLayout>
+            </LinearLayout>
         </ScrollView>
     </RelativeLayout>
 </merge>

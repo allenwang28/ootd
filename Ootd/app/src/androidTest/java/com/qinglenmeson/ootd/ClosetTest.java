@@ -41,7 +41,7 @@ public class ClosetTest {
 
     @Test
     public void emptyTest() {
-        assertEquals(0, closet.size());
+        assertEquals(0, closet.clothingListSize());
     }
 
     @Test
