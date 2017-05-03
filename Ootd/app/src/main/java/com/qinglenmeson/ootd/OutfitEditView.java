@@ -30,9 +30,6 @@ public class OutfitEditView extends LinearLayout {
     private Outfit outfit;
 
     // Views
-
-    // TODO - make clothing type unchangeable
-
     private OutfitGeneratedView outfitGeneratedView;
 
     public OutfitEditView(Context context, Outfit outfit) {

@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.Button;
 
 public class OutfitArchiveActivity extends AppCompatActivity {
-    Button backToMain;
-    Button remove;
+    private Button setTodaysOutfit;
+    private Button remove;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +23,8 @@ public class OutfitArchiveActivity extends AppCompatActivity {
         OutfitAdapter outfitAdapter = new OutfitAdapter(this);
         viewPager.setAdapter(outfitAdapter);
 
-        backToMain = (Button)findViewById(R.id.outfit_archive_activity_backToMain);
-        backToMain.setOnClickListener(new View.OnClickListener() {
+        setTodaysOutfit = (Button)findViewById(R.id.outfit_archive_activity_setTodaysOutfit);
+        setTodaysOutfit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Closet closet = Closet.getInstance();
@@ -36,11 +36,12 @@ public class OutfitArchiveActivity extends AppCompatActivity {
                     closet.removeOutfit(outfit);
                     closet.saveOutfit(outfit);
 
+                    closet.saveTodaysOutfit(outfit);
+
                     outfit = new Outfit();
                     outfitEditView.setOutfit(outfit);
                     // Show notification
-                    //TODO: Show this? view_pager doesn't make it show
-                    Snackbar.make(findViewById(R.id.outfit_archive_activity_view_pager), "Outfit Edited",
+                    Snackbar.make(findViewById(R.id.outfit_archive_activity_view_pager), "Today's Outfit Updated",
                             Snackbar.LENGTH_SHORT)
                             .show();
                 }

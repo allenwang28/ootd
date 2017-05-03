@@ -63,6 +63,13 @@ public class Outfit {
         this.clothingMap = clothingMap;
     }
 
+    public void decrementWear() {
+        for (Clothing c : clothingMap.values()) {
+            if (c != null) {
+                c.minusWear();
+            }
+        }
+    }
     public void incrementWear() {
         for (Clothing c : clothingMap.values()) {
             if (c != null) {

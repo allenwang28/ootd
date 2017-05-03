@@ -30,15 +30,23 @@ public class Day {
     String weatherInfo;
 
     public static Day getInstance() {
+        if (today == null) {
+            today = new Day();
+        }
         return today;
     }
 
     public static Day getInstance(String weatherInfo) {
         if(today == null) {
-            return new Day(weatherInfo);
-        } else {
-            return today;
+            today = new Day(weatherInfo);
         }
+        return today;
+    }
+
+    private Day() {
+        Calendar cal = Calendar.getInstance();
+        this.day = cal.get(Calendar.DAY_OF_MONTH);
+        this.month = cal.get(Calendar.MONTH) + 1;
     }
 
     private Day(String weatherInfo) {

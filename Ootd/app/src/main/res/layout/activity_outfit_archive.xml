@@ -18,12 +18,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <Button
-        android:id="@+id/outfit_archive_activity_backToMain"
+        android:id="@+id/outfit_archive_activity_setTodaysOutfit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="Update Outfit"
+        android:text="Set Today's Outfit"
         />
     <Button
         android:id="@+id/outfit_archive_activity_remove"
@@ -33,4 +33,5 @@
         android:layout_alignParentLeft="true"
         android:text="Remove Outfit"
         />
+
 </RelativeLayout>

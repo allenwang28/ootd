@@ -24,12 +24,15 @@ public class Closet {
 
     private final String CLOTHES_LIST_BASE = "CLOSET-CLOTHES-%s.txt";
     private final String OUTFIT_LIST_BASE = "CLOSET-OUTFIT-%s.txt";
+    private final String TODAYS_OUTFIT_BASE = "CLOSET-TODAY-%s.txt";
     private String owner = "";
 
     private List<Clothing> mClothingList;
     private Map<Category, List<Clothing>> mClothingMap;
     private Map<Clothing, List<Outfit>> mClothingOutfitMap;
     private List<Outfit> mOutfitList;
+
+    private Outfit todaysOutfit;
 
     private Closet() {
         Log.d("Closet", "Initializing");
@@ -42,6 +45,10 @@ public class Closet {
 
     private String getOutfitListFileName() {
         return String.format(OUTFIT_LIST_BASE, owner);
+    }
+
+    private String getTodaysOutfitFileName() {
+        return String.format(TODAYS_OUTFIT_BASE, owner);
     }
 
     private void addClothing(Clothing clothing) {
@@ -98,7 +105,6 @@ public class Closet {
     }
 
     private void loadClothesFromMemory() {
-        //resetClothingCloset();
         mClothingList = new ArrayList<>();
         mClothingMap = new HashMap<>();
         mClothingOutfitMap = new HashMap<>();
@@ -130,7 +136,6 @@ public class Closet {
         int words = 0;
 
         while(words+7 < tempSplit.length) {
-            // TODO - why aren't we saving the number of times worn?
             String name = tempSplit[words];
             String category = tempSplit[words+1];
             String warmth = tempSplit[words+2];
@@ -140,16 +145,6 @@ public class Closet {
             String photo = tempSplit[words+6];
             String timesWorn = tempSplit[words+7];
             words = words + 8;
-
-            // TODO - get rid of these prints
-            System.out.println("Name: " + name);
-            System.out.println("Category: " + category);
-            System.out.println("Warmth: " + warmth);
-            System.out.println("Occasion: " + occasion);
-            System.out.println("Cleanliness: " + cleanliness);
-            System.out.println("Color: " + color);
-            System.out.println("Times Worn: " + timesWorn);
-            System.out.println(photo);
 
             Clothing clothing = new Clothing(name,
                     Category.fromString(category),
@@ -161,13 +156,44 @@ public class Closet {
             clothing.setTimesWorn(Integer.parseInt(timesWorn));
 
             addClothing(clothing);
+        }
+    }
 
+    private void loadTodaysOutfitFromMemory() {
+        todaysOutfit = new Outfit();
+        StringBuffer sbuff = new StringBuffer("");
+        String[] tempSplit;
+
+        try {
+            FileInputStream fin = App.getContext().openFileInput(getTodaysOutfitFileName());
+            InputStreamReader isr = new InputStreamReader ( fin ) ;
+            BufferedReader buffreader = new BufferedReader ( isr ) ;
+
+            String readString = buffreader.readLine ( ) ;
+            while ( readString != null ) {
+                sbuff.append(readString);
+                readString = buffreader.readLine ( ) ;
+            }
+            fin.close();
+            isr.close () ;
+        } catch ( IOException ioe ) {
+            ioe.printStackTrace ( ) ;
+        }
+        tempSplit = sbuff.toString().trim().split("/split/");
+        if (tempSplit.length < 3) { return; }
+        Day dayObject = Day.getInstance();
+        int month = Integer.parseInt(tempSplit[0]);
+        int day = Integer.parseInt(tempSplit[1]);
+        int idx = Integer.parseInt(tempSplit[2]);
+        if (month == dayObject.getMonth() && day == dayObject.getDay()) {
+            todaysOutfit = mOutfitList.get(idx);
         }
     }
 
     private void loadFromMemory() {
         loadClothesFromMemory();
         loadOutfitsFromMemory();
+        loadTodaysOutfitFromMemory();
     }
 
     private void resetClothingCloset() {
@@ -176,7 +202,7 @@ public class Closet {
             fos.write("".getBytes());
             fos.close();
         } catch(Exception e) {
-            Log.e("AddClothingActivity", e.toString());
+            Log.e("Closet", e.toString());
         }
     }
 
@@ -186,17 +212,27 @@ public class Closet {
             fos.write("".getBytes());
             fos.close();
         } catch(Exception e) {
-            Log.e("AddClothingActivity", e.toString());
+            Log.e("Closet", e.toString());
+        }
+    }
+
+    private void resetTodaysOutfit() {
+        try {
+            FileOutputStream fos = App.getContext().openFileOutput(getTodaysOutfitFileName(), Context.MODE_PRIVATE);
+            fos.write("".getBytes());
+            fos.close();
+        } catch(Exception e) {
+            Log.e("Closet", e.toString());
         }
     }
 
     private void resetMemory() {
         resetClothingCloset();
         resetOutfitCloset();
+        resetTodaysOutfit();
     }
 
     private void saveClothingToMemory(Clothing clothing) {
-        // TODO - why aren't we saving the number of times worn?
         String string = clothing.getName() + "/split/" + clothing.getCategory().toString() + "/split/"
                 + clothing.getWarmth().toString() + "/split/" + clothing.getOccasion().toString() + "/split/"
                 + clothing.getCleanliness().toString() + "/split/" + clothing.getColor() + "/split/"
@@ -206,7 +242,7 @@ public class Closet {
             fos.write(string.getBytes());
             fos.close();
         } catch(Exception e) {
-            Log.e("AddClothingActivity", e.toString());
+            Log.e("Closet", e.toString());
         }
     }
 
@@ -229,9 +265,24 @@ public class Closet {
             fos.write(string.getBytes());
             fos.close();
         } catch(Exception e) {
-            Log.e("AddClothingActivity", e.toString());
+            Log.e("Closet", e.toString());
         }
+    }
+    
+    public void saveTodaysOutfitToMemory(Outfit outfit) {
+        resetTodaysOutfit();
+        StringBuffer strBuff = new StringBuffer();
+        Day day = Day.getInstance();
+        strBuff.append(day.getMonth() + "/split/" + day.getDay() + "/split/" + mOutfitList.indexOf(outfit));
 
+        String string = strBuff.toString();
+        try {
+            FileOutputStream fos = App.getContext().openFileOutput(getOutfitListFileName(), Context.MODE_APPEND);
+            fos.write(string.getBytes());
+            fos.close();
+        } catch(Exception e) {
+            Log.e("Closet", e.toString());
+        }
     }
 
     private void saveAllOutfitsToMemory() {
@@ -270,10 +321,22 @@ public class Closet {
         saveOutfitToMemory(outfit);
     }
 
+    public Outfit getTodaysOutfit() {
+        return todaysOutfit;
+    }
+
+    public void saveTodaysOutfit(Outfit outfit) {
+        if (todaysOutfit != null) {
+            todaysOutfit.decrementWear();
+        }
+        outfit.incrementWear();
+        todaysOutfit = outfit;
+        saveTodaysOutfitToMemory(outfit);
+    }
+
     public List<Clothing> getClothesFromCategory(Category c) {
         return mClothingMap.get(c);
     }
-
 
     public static Closet getInstance() {
         if(mInstance == null) {
@@ -307,6 +370,10 @@ public class Closet {
     public void removeOutfit(Outfit outfit) {
         if (!mOutfitList.contains(outfit)) {
             return;
+        }
+        if (outfit == todaysOutfit) {
+            resetTodaysOutfit();
+            todaysOutfit = null;
         }
         mOutfitList.remove(outfit);
 
@@ -342,9 +409,6 @@ public class Closet {
     public List<Outfit> getOutfitList() {
         return mOutfitList;
     }
-    //public void setClothingList(List<Clothing> clothingList) {
-    //    mClothingList = clothingList;
-    //}
 
     public int clothingListSize() {
         return mClothingList.size();

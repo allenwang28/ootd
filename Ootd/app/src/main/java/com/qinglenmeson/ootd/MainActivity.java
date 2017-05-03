@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     Day day;
     private static boolean zipChange = false;
 
+    private OutfitPreviewView todaysOutfit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +86,9 @@ public class MainActivity extends AppCompatActivity {
         List<Outfit> outfitList = closet.getOutfitList();
         OutfitPreviewAdapter outfitPreviewAdapter = new OutfitPreviewAdapter(this);
         outfitListView.setAdapter(outfitPreviewAdapter);
+
+        todaysOutfit = (OutfitPreviewView)findViewById(R.id.main_todaysoutfit);
+        todaysOutfit.setOutfit(closet.getTodaysOutfit());
     }
 
     public void openArchives(View view) {

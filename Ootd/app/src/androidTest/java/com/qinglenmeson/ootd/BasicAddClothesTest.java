@@ -58,9 +58,11 @@ public class BasicAddClothesTest {
                 allOf(withId(R.id.add_clothing_add_button), withText("+ Add")));
         appCompatButton3.perform(scrollTo(), click());
 
+        /*
         ViewInteraction appCompatButton4 = onView(
                 allOf(withId(R.id.clothing_goBack), withText("Go Back")));
         appCompatButton4.perform(scrollTo(), click());
+        */
 
         ViewInteraction rotatedButton = onView(
                 allOf(withText("Archives"), isDisplayed()));

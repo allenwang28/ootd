@@ -89,10 +89,12 @@ public class IncrementDirtyAndLaundryTest {
                 allOf(withId(R.id.add_clothing_add_button), withText("+ Add")));
         appCompatButton12.perform(scrollTo(), click());
 
+        /*
         ViewInteraction appCompatButton13 = onView(
                 allOf(withId(R.id.clothing_goBack), withText("Go Back")));
         appCompatButton13.perform(scrollTo(), click());
 
+    */
         ViewInteraction rotatedButton = onView(
                 allOf(withText("Archives"), isDisplayed()));
         rotatedButton.perform(click());
