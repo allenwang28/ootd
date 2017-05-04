@@ -47,14 +47,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         day = Day.getInstance();
-        if(day == null || zipChange == true) {
-            //TODO: Make this work for multiple zip codes
+        if(day.weatherInfo == null || zipChange == true) {
             try {
                 weatherInfo = new GetWeatherInfo().execute().get();
                 day = Day.getInstance(weatherInfo);
                 zipChange = false;
             } catch (Exception e) {
-
+                System.out.println("Main_weather_fail");
             }
         }
 
