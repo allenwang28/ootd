@@ -157,8 +157,11 @@ public class ClothingEditView extends LinearLayout implements AdapterView.OnItem
         colorPickerView.setColorListener(new ColorPickerView.ColorListener() {
             @Override
             public void onColorSelected(int color) {
-                clothing.setColor(colorPickerView.getColor());
-                colorView.setBackgroundColor(clothing.getColor());
+                int newColor = colorPickerView.getColor();
+                if (newColor != -65539) {
+                    clothing.setColor(colorPickerView.getColor());
+                    colorView.setBackgroundColor(clothing.getColor());
+                }
             }
         });
     }

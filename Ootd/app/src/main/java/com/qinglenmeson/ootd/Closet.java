@@ -269,11 +269,11 @@ public class Closet {
         }
     }
     
-    public void saveTodaysOutfitToMemory(Outfit outfit) {
+    public void saveTodaysOutfitToMemory() {
         resetTodaysOutfit();
         StringBuffer strBuff = new StringBuffer();
         Day day = Day.getInstance();
-        strBuff.append(day.getMonth() + "/split/" + day.getDay() + "/split/" + mOutfitList.indexOf(outfit));
+        strBuff.append(day.getMonth() + "/split/" + day.getDay() + "/split/" + mOutfitList.indexOf(todaysOutfit));
 
         String string = strBuff.toString();
         try {
@@ -331,7 +331,7 @@ public class Closet {
         }
         outfit.incrementWear();
         todaysOutfit = outfit;
-        saveTodaysOutfitToMemory(outfit);
+        saveTodaysOutfitToMemory();
     }
 
     public List<Clothing> getClothesFromCategory(Category c) {
@@ -421,6 +421,7 @@ public class Closet {
         resetMemory();
         saveAllClothingToMemory();
         saveAllOutfitsToMemory();
+        saveTodaysOutfitToMemory();
         // Now switch to another closet
         this.owner = owner;
         loadFromMemory();
