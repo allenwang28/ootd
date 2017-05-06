@@ -133,6 +133,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void clearTodaysOutfit(View view) {
+        closet.clearTodaysOutfit();
+    }
+
     private int KtoF(int K) {
         return (int) (K*9/5 - 459.67);
     }

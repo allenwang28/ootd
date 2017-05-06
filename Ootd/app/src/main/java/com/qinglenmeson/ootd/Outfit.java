@@ -1,5 +1,6 @@
 package com.qinglenmeson.ootd;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -79,7 +80,9 @@ public class Outfit {
         }
     }
 
-    public static Outfit generate(Day day) {
+    public static Outfit generate() {
+        Day day = Day.getInstance();
+
         Outfit outfit = new Outfit();
         int tempLow = day.getTempLow();
         int tempHigh = day.getTempHigh();

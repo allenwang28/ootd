@@ -28,13 +28,16 @@ public class OutfitArchiveActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Closet closet = Closet.getInstance();
-                if(closet.outfitListSize() > 0) {
+
+                if (closet.outfitListSize() > 0) {
                     ViewPager viewPager = (ViewPager) findViewById(R.id.outfit_archive_activity_view_pager);
                     OutfitAdapter adapter = (OutfitAdapter) viewPager.getAdapter();
                     OutfitEditView outfitEditView = (OutfitEditView) adapter.instantiateItem(viewPager, viewPager.getCurrentItem());
                     Outfit outfit = outfitEditView.getOutfit();
+                    /*
                     closet.removeOutfit(outfit);
                     closet.saveOutfit(outfit);
+                    */
 
                     closet.saveTodaysOutfit(outfit);
 
