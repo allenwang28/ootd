@@ -7,7 +7,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.Assert.assertEquals;
@@ -19,6 +21,68 @@ import static junit.framework.Assert.assertEquals;
 public class ClosetTest {
     Context context;
     Closet closet;
+
+    private Outfit createOutfit() {
+        Clothing pants = new Clothing("pantaloons", Category.PANTS, Warmth.HOT, Occasion.CASUAL, Cleanliness.DIRTY, Color.RED, "pantaloons.jpg");
+        Clothing shirt = new Clothing("firstshirt", Category.SHIRT, Warmth.COLD, Occasion.FORMAL, Cleanliness.CLEAN, Color.BLUE, "firstshirt.jpg");
+        Outfit outfit = new Outfit();
+        Map<Category, Clothing> clothingMap = new HashMap<>();
+        clothingMap.put(Category.PANTS, pants);
+        clothingMap.put(Category.SHIRT, shirt);
+        outfit.setClothingMap(clothingMap);
+        return outfit;
+    }
+
+    private Boolean clothesAreEqual(Clothing c1, Clothing c2) {
+        if (!c1.getName().equals(c2.getName())) {
+            return false;
+        }
+        if (c1.getTimesWorn() != c2.getTimesWorn()) {
+            return false;
+        }
+        if (c1.getCategory() != c2.getCategory()) {
+            return false;
+        }
+        if (c1.getCleanliness() != c2.getCleanliness()) {
+            return false;
+        }
+        if (c1.getOccasion() != c2.getOccasion()) {
+            return false;
+        }
+        if (c1.getWarmth() != c2.getWarmth()) {
+            return false;
+        }
+        if (c1.getColor() != c2.getColor()) {
+            return false;
+        }
+        if (!(c1.getPhoto().equals(c2.getPhoto()))) {
+            return false;
+        }
+        return true;
+    }
+
+    private Boolean outfitsAreEqual(Outfit o1, Outfit o2) {
+        Map<Category, Clothing> clothingMap1 = o1.getClothingMap();
+        Map<Category, Clothing> clothingMap2 = o2.getClothingMap();
+        for (Category c : Category.values()) {
+            Clothing clothing1, clothing2;
+            if (clothingMap1.containsKey(c)) {
+                // Clothing exists for 1 but not 2
+                if (!clothingMap2.containsKey(c)) { return false; }
+                clothing1 = clothingMap1.get(c);
+            } else {
+                // In this case the clothing exists for outfit 2 but not 1
+                if (clothingMap2.containsKey(c)) { return false; }
+                // Here this means that neither clothing exists
+                continue;
+            }
+            clothing2 = clothingMap2.get(c);
+            if (!clothesAreEqual(clothing1, clothing2)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -146,4 +210,18 @@ public class ClosetTest {
         closet.removeClothing(clothing4);
         assertTrue(list.size() == 0);
     }
+
+    @Test
+    public void addSingleOutfit() {
+        Outfit outfit = createOutfit();
+        closet.addOutfit(outfit);
+        assertEquals(closet.outfitListSize(), 1);
+        assertTrue(outfitsAreEqual(outfit, closet.getOutfitList().get(0)));
     }
+
+    @Test
+    public void addMultipleOutfits() {
+
+    }
+
+}
