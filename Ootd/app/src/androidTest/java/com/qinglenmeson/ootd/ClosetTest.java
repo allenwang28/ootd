@@ -7,7 +7,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.Assert.assertEquals;
@@ -19,6 +21,82 @@ import static junit.framework.Assert.assertEquals;
 public class ClosetTest {
     Context context;
     Closet closet;
+
+    private Outfit createOutfit() {
+        String weatherInfo = "{\"coord\":{\"lon\":-122.08,\"lat\":37.39},\"weather\":[{\"id\":500,\"main\":\"Rain\",\"description\":\"light rain\",\"icon\":\"10n\"}],\"base\":\"stations\",\"main\":{\"temp\":277.14,\"pressure\":1025,\"humidity\":86,\"temp_min\":275.15,\"temp_max\":279.15},\"visibility\":16093,\"wind\":{\"speed\":1.67,\"deg\":53.0005},\"clouds\":{\"all\":1},\"dt\":1485788160,\"sys\":{\"type\":1,\"id\":471,\"message\":0.0116,\"country\":\"US\",\"sunrise\":1485789140,\"sunset\":1485826300},\"id\":5375480,\"name\":\"Mountain View\",\"cod\":200}";
+        Day d = Day.getInstance(weatherInfo);
+
+        Clothing pants = new Clothing("pantaloons", Category.PANTS, Warmth.HOT, Occasion.CASUAL, Cleanliness.DIRTY, Color.RED, "pantaloons.jpg");
+        Clothing shirt = new Clothing("firstshirt", Category.SHIRT, Warmth.COLD, Occasion.FORMAL, Cleanliness.CLEAN, Color.BLUE, "firstshirt.jpg");
+        closet.saveClothing(pants);
+        closet.saveClothing(shirt);
+
+        Outfit outfit = Outfit.generate();
+        return outfit;
+    }
+
+    private Boolean clothesAreEqual(Clothing c1, Clothing c2) {
+        if (!c1.getName().equals(c2.getName())) {
+            return false;
+        }
+        if (c1.getTimesWorn() != c2.getTimesWorn()) {
+            return false;
+        }
+        if (c1.getCategory() != c2.getCategory()) {
+            return false;
+        }
+        if (c1.getCleanliness() != c2.getCleanliness()) {
+            return false;
+        }
+        if (c1.getOccasion() != c2.getOccasion()) {
+            return false;
+        }
+        if (c1.getWarmth() != c2.getWarmth()) {
+            return false;
+        }
+        if (c1.getColor() != c2.getColor()) {
+            return false;
+        }
+        if (!(c1.getPhoto().equals(c2.getPhoto()))) {
+            return false;
+        }
+        return true;
+    }
+
+    private Boolean outfitsAreEqual(Outfit o1, Outfit o2) {
+        Map<Category, Clothing> clothingMap1 = o1.getClothingMap();
+        Map<Category, Clothing> clothingMap2 = o2.getClothingMap();
+        for (Category c : Category.values()) {
+            Clothing clothing1, clothing2;
+            if (clothingMap1.containsKey(c)) {
+                // Clothing exists for 1 but not 2
+                if (!clothingMap2.containsKey(c)) { return false; }
+                clothing1 = clothingMap1.get(c);
+            } else {
+                // In this case the clothing exists for outfit 2 but not 1
+                if (clothingMap2.containsKey(c)) { return false; }
+                // Here this means that neither clothing exists
+                continue;
+            }
+            clothing2 = clothingMap2.get(c);
+            if (!clothesAreEqual(clothing1, clothing2)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void populateClosetWithClothing() {
+        Clothing clothing = new Clothing("pantaloons", Category.PANTS, Warmth.HOT, Occasion.CASUAL, Cleanliness.DIRTY, Color.RED,  "pantaloons.jpg");
+        Clothing clothing2 = new Clothing("firstshirt", Category.SHIRT, Warmth.COLD, Occasion.FORMAL, Cleanliness.CLEAN, Color.BLUE,  "firstshirt.jpg");
+        Clothing clothing3 = new Clothing("sweat", Category.SWEATER, Warmth.WARM, Occasion.FORMAL, Cleanliness.DIRTY, Color.CYAN,  "sweat.jpg");
+        Clothing clothing4 = new Clothing("la pants", Category.PANTS, Warmth.HOT, Occasion.SWIM);
+
+        closet.saveClothing(clothing);
+        closet.saveClothing(clothing2);
+        closet.saveClothing(clothing3);
+        closet.saveClothing(clothing4);
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -146,4 +224,119 @@ public class ClosetTest {
         closet.removeClothing(clothing4);
         assertTrue(list.size() == 0);
     }
+
+    @Test
+    public void massiveClothingNumberTest() {
+        int LARGE_NUM = 10000;
+        Clothing c = new Clothing("pantaloons", Category.PANTS, Warmth.HOT, Occasion.CASUAL, Cleanliness.DIRTY, Color.RED, "pantaloons.jpg");
+        for (int i = 0; i < LARGE_NUM; ++i) {
+            closet.saveClothing(new Clothing("pantaloons", Category.PANTS, Warmth.HOT, Occasion.CASUAL, Cleanliness.DIRTY, Color.RED, "pantaloons.jpg"));
+        }
+        assertEquals(closet.clothingListSize(), LARGE_NUM);
+        for (int i = 0; i < LARGE_NUM; ++i) {
+            assertTrue(clothesAreEqual(c, closet.getClothingList().get(i)));
+        }
     }
+
+    @Test
+    public void addSingleOutfitTest() {
+        Outfit outfit = createOutfit();
+        closet.saveOutfit(outfit);
+        assertEquals(closet.outfitListSize(), 1);
+        assertTrue(outfitsAreEqual(outfit, closet.getOutfitList().get(0)));
+    }
+
+    @Test
+    public void massiveOutfitNumberTest() {
+        int LARGE_NUM = 1000;
+        // should always create the same outfit since there's only 2 clothes elements
+        Outfit o = createOutfit();
+        for (int i = 0; i < LARGE_NUM; ++i) {
+            closet.saveOutfit(createOutfit());
+        }
+        assertEquals(closet.outfitListSize(), LARGE_NUM);
+        for (int i = 0; i < LARGE_NUM; ++i) {
+            assertTrue(outfitsAreEqual(o, closet.getOutfitList().get(i)));
+        }
+    }
+
+    @Test
+    public void todaysOutfitTest1() {
+        Outfit o = createOutfit();
+
+        for (Clothing c : o.getClothingMap().values()) {
+            assertEquals(c.getTimesWorn(), 0);
+        }
+
+        closet.saveTodaysOutfit(o);
+
+        for (Clothing c : o.getClothingMap().values()) {
+            assertEquals(c.getTimesWorn(), 1);
+        }
+
+        closet.clearTodaysOutfit();
+
+        for (Clothing c : o.getClothingMap().values()) {
+            assertEquals(c.getTimesWorn(), 0);
+        }
+   }
+
+    @Test
+    public void todaysOutfitTest2() {
+        Outfit o1 = createOutfit();
+        Outfit o2 = createOutfit();
+
+        for (Clothing c : o1.getClothingMap().values()) {
+            assertEquals(c.getTimesWorn(), 0);
+        }
+        for (Clothing c : o2.getClothingMap().values()) {
+            assertEquals(c.getTimesWorn(), 0);
+        }
+
+        closet.saveTodaysOutfit(o1);
+
+        for (Clothing c : o1.getClothingMap().values()) {
+            assertEquals(c.getTimesWorn(), 1);
+        }
+        for (Clothing c : o2.getClothingMap().values()) {
+            assertEquals(c.getTimesWorn(), 0);
+        }
+
+        closet.saveTodaysOutfit(o2);
+        for (Clothing c : o1.getClothingMap().values()) {
+            assertEquals(c.getTimesWorn(), 0);
+        }
+        for (Clothing c : o2.getClothingMap().values()) {
+            assertEquals(c.getTimesWorn(), 1);
+        }
+
+        closet.clearTodaysOutfit();
+
+        for (Clothing c : o1.getClothingMap().values()) {
+            assertEquals(c.getTimesWorn(), 0);
+        }
+        for (Clothing c : o2.getClothingMap().values()) {
+            assertEquals(c.getTimesWorn(), 0);
+        }
+    }
+
+    @Test
+    public void testMultipleUsers() {
+        String defaultUserName = "";
+        String userName1 = "1";
+
+        closet.setOwner(defaultUserName);
+        closet.reset();
+
+        populateClosetWithClothing();
+        assertEquals(closet.clothingListSize(), 4);
+
+        closet.setOwner(userName1);
+        assertEquals(closet.clothingListSize(), 0);
+
+        closet.setOwner(defaultUserName);
+        assertEquals(closet.clothingListSize(), 4);
+    }
+
+
+}

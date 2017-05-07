@@ -1,5 +1,7 @@
 package com.qinglenmeson.ootd;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,7 +80,9 @@ public class Outfit {
         }
     }
 
-    public static Outfit generate(Day day) {
+    public static Outfit generate() {
+        Day day = Day.getInstance();
+
         Outfit outfit = new Outfit();
         int tempLow = day.getTempLow();
         int tempHigh = day.getTempHigh();
@@ -94,7 +98,6 @@ public class Outfit {
             outfit.setClothing(Category.PANTS);
             outfit.setClothing(Category.TSHIRT);
 
-            // TODO - check that these actually exist first
             if((outfit.clothingMap.get(Category.PANTS) != null) && (outfit.clothingMap.get(Category.TSHIRT) != null)){
                 tolerance = defaultTolerance;
                 while (!doesItMatch(outfit.clothingMap.get(Category.PANTS).getColor(), outfit.clothingMap.get(Category.TSHIRT).getColor(),tolerance)){
@@ -186,7 +189,4 @@ public class Outfit {
         }
         return hex;
     }
-
-
-
 }

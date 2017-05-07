@@ -72,11 +72,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Today's Outfit"/>
-        <com.qinglenmeson.ootd.OutfitPreviewView
-            android:id="@+id/main_todaysoutfit"
-            android:gravity="center"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+                <com.qinglenmeson.ootd.RotatedButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dip"
+                    android:gravity="center"
+                    android:text="Clear"
+                    android:onClick="clearTodaysOutfit"
+                    android:layout_alignParentRight="true" />
+                <com.qinglenmeson.ootd.OutfitPreviewView
+                android:id="@+id/main_todaysoutfit"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"

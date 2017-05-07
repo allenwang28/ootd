@@ -2,7 +2,6 @@ package com.qinglenmeson.ootd;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.PopupMenu;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -186,8 +185,12 @@ public class Closet {
         int day = Integer.parseInt(tempSplit[1]);
         int idx = Integer.parseInt(tempSplit[2]);
         if (month == dayObject.getMonth() && day == dayObject.getDay()) {
-            todaysOutfit = mOutfitList.get(idx);
+            if (idx >= 0 && idx < mOutfitList.size()) {
+                todaysOutfit = mOutfitList.get(idx);
+                return;
+            }
         }
+        todaysOutfit = new Outfit();
     }
 
     private void loadFromMemory() {
@@ -216,7 +219,7 @@ public class Closet {
         }
     }
 
-    private void resetTodaysOutfit() {
+    private void resetTodaysOutfitFromMemory() {
         try {
             FileOutputStream fos = App.getContext().openFileOutput(getTodaysOutfitFileName(), Context.MODE_PRIVATE);
             fos.write("".getBytes());
@@ -229,7 +232,7 @@ public class Closet {
     private void resetMemory() {
         resetClothingCloset();
         resetOutfitCloset();
-        resetTodaysOutfit();
+        resetTodaysOutfitFromMemory();
     }
 
     private void saveClothingToMemory(Clothing clothing) {
@@ -269,11 +272,11 @@ public class Closet {
         }
     }
     
-    public void saveTodaysOutfitToMemory(Outfit outfit) {
-        resetTodaysOutfit();
+    public void saveTodaysOutfitToMemory() {
+        resetTodaysOutfitFromMemory();
         StringBuffer strBuff = new StringBuffer();
         Day day = Day.getInstance();
-        strBuff.append(day.getMonth() + "/split/" + day.getDay() + "/split/" + mOutfitList.indexOf(outfit));
+        strBuff.append(day.getMonth() + "/split/" + day.getDay() + "/split/" + mOutfitList.indexOf(todaysOutfit));
 
         String string = strBuff.toString();
         try {
@@ -283,6 +286,12 @@ public class Closet {
         } catch(Exception e) {
             Log.e("Closet", e.toString());
         }
+    }
+
+    public void clearTodaysOutfit() {
+        todaysOutfit.decrementWear();
+        todaysOutfit = new Outfit();
+        resetTodaysOutfitFromMemory();
     }
 
     private void saveAllOutfitsToMemory() {
@@ -331,7 +340,7 @@ public class Closet {
         }
         outfit.incrementWear();
         todaysOutfit = outfit;
-        saveTodaysOutfitToMemory(outfit);
+        saveTodaysOutfitToMemory();
     }
 
     public List<Clothing> getClothesFromCategory(Category c) {
@@ -372,7 +381,7 @@ public class Closet {
             return;
         }
         if (outfit == todaysOutfit) {
-            resetTodaysOutfit();
+            resetTodaysOutfitFromMemory();
             todaysOutfit = new Outfit();
         }
         mOutfitList.remove(outfit);
@@ -396,6 +405,7 @@ public class Closet {
         }
         mClothingOutfitMap = new HashMap<>();
         mOutfitList = new ArrayList<>();
+
     }
 
     public void update() {
@@ -421,6 +431,7 @@ public class Closet {
         resetMemory();
         saveAllClothingToMemory();
         saveAllOutfitsToMemory();
+        saveTodaysOutfitToMemory();
         // Now switch to another closet
         this.owner = owner;
         loadFromMemory();

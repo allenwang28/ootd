@@ -53,7 +53,7 @@ public class GenerateOutfitActivity extends AppCompatActivity {
 
     public void shuffle(View view) {
         Outfit o = new Outfit();
-        outfit = o.generate(day);
+        outfit = o.generate();
         outfitGeneratedView.setOutfit(outfit);
         acceptButton.setVisibility(View.VISIBLE);
     }
