@@ -168,6 +168,8 @@ public class Day {
         return (int) tempHigh;
     }
 
+    public String getIcon() { return icon; }
+
     private int KtoF(double K) {
         return (int) (K*1.8 - 459.67);
     }

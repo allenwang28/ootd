@@ -40,7 +40,6 @@ public class ClothesArchiveActivity extends AppCompatActivity {
                     clothing = new Clothing();
                     clothingEditView.setClothing(clothing);
                     // Show notification
-                    //TODO: Show this? view_pager doesn't make it show
                     Snackbar.make(findViewById(R.id.clothing_archive_activity_view_pager), "Clothing Edited",
                             Snackbar.LENGTH_SHORT)
                             .show();

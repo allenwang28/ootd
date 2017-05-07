@@ -15,8 +15,6 @@ public enum Category {
     SHOES(R.string.category6),
     TSHIRT(R.string.category7);
 
-    // TODO - add more categories and update strings.xml
-
     private int resourceId;
 
     Category(int id) {
