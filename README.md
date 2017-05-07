@@ -1,5 +1,3 @@
-# ootd
-
 <h1>OOTD (Outfit of the Day)</h1>
 
 
@@ -19,16 +17,16 @@ based off of a name. The app displayss the weather information as well on the ma
 While the application is mostly self-explanatory to use, here are a few tips for best results:
 
 
--When entering text, click the enter/check button after completion to confirm that the text will be recorded.
+  -When entering text, click the enter/check button after completion to confirm that the text will be recorded.
 
 
--To show an updated picture in the clothing add and edit views, click the "Show Image" button. However, even if not clicked, the correct picture will be recorded in the clothing object.
+  -To show an updated picture in the clothing add and edit views, click the "Show Image" button. However, even if not clicked, the correct picture will be recorded in the clothing object.
 
 
--To update an item, click the update item button. Otherwise, it will be assumed that changes have been discarded.
+  -To update an item, click the update item button. Otherwise, it will be assumed that changes have been discarded.
 
 
--To add an outfit, the shuffle button must be clicked first in order for the accept button to appear.
+  -To add an outfit, the shuffle button must be clicked first in order for the accept button to appear.
 
 
--Clear closet will permanently remove all outfits and clothing articles in that closet. Be careful before clicking this!
+  -Clear closet will permanently remove all outfits and clothing articles in that closet. Be careful before clicking this!
