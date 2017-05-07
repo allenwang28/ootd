@@ -74,15 +74,6 @@ public class ClothesArchiveActivity extends AppCompatActivity {
 
     }
 
-    //TODO: ADD CAMERA
-
-    /*
-    public void backToMain(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-    */
-
 
     public void goBack() {
         Intent intent = new Intent(this, MainActivity.class);

@@ -37,9 +37,7 @@ public class Day {
     }
 
     public static Day getInstance(String weatherInfo) {
-        if(today.weatherInfo == null) {
             today = new Day(weatherInfo);
-        }
         return today;
     }
 
