@@ -11,7 +11,7 @@ capable of adding and storing multiple generated outfits. From this list, the us
 which outfit they wore for the day. Furthermore, the user has the ability to have multiple closets
 based off of a name. The app displayss the weather information as well on the main screen.
 
-<h1>Usage of the Application:</h1> 
+<h1>Usage of the Application</h1> 
 
 
 While the application is mostly self-explanatory to use, here are a few tips for best results:
