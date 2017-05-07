@@ -1,6 +1,7 @@
 # ootd
 
-<h1>OOTD (Outfit of the Day)<h1>
+<h1>OOTD (Outfit of the Day)</h1>
+
 
 The user has the ability to add, edit, view, and remove clothing that they own. For each article of clothing, it has information 
 about the type of clothing, the name of the clothing, the color of the clothing, and a picture of the
@@ -12,7 +13,9 @@ capable of adding and storing multiple generated outfits. From this list, the us
 which outfit they wore for the day. Furthermore, the user has the ability to have multiple closets
 based off of a name. The app displayss the weather information as well on the main screen.
 
-<h1>Usage of the Application:<h1> 
+<h1>Usage of the Application:</h1> 
+
+
 While the application is mostly self-explanatory to use, here are a few tips for best results:
 
 
